@@ -1,0 +1,289 @@
+/* ================================
+   Final Polish and Fixes
+   ================================ */
+
+/* Update Navigation Colors */
+.navbar {
+  background: rgba(255, 255, 255, 0.98);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.navbar-scrolled {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.navbar-brand {
+  color: var(--brand-dark);
+}
+
+.navbar-link {
+  color: #495057;
+}
+
+.navbar-link:hover {
+  color: var(--brand-primary);
+}
+
+.brand-icon {
+  color: var(--brand-primary);
+}
+
+/* Update Hero Background */
+.hero-section {
+  background: var(--gradient-dark);
+  min-height: calc(100vh - 80px);
+  margin-top: 80px;
+}
+
+/* Service Cards Enhancement */
+.service-card {
+  height: 100%;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+.service-card:hover {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+.service-card-blue .service-icon {
+  background: linear-gradient(135deg, #3b82f6, #2563eb);
+}
+
+.service-card-purple .service-icon {
+  background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+}
+
+.service-card-green .service-icon {
+  background: var(--gradient-primary);
+}
+
+.service-card-orange .service-icon {
+  background: linear-gradient(135deg, #f59e0b, #f97316);
+}
+
+/* Testimonial Cards Polish */
+.testimonial-card {
+  position: relative;
+  overflow: visible;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.testimonial-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12);
+}
+
+.testimonial-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--gradient-primary);
+  opacity: 0;
+  transition: opacity 0.3s;
+  border-radius: inherit;
+  z-index: -1;
+}
+
+.testimonial-card:hover::before {
+  opacity: 0.05;
+}
+
+/* Portfolio Items Enhancement */
+.portfolio-item {
+  cursor: pointer;
+  overflow: hidden;
+  position: relative;
+}
+
+.portfolio-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--gradient-primary);
+  opacity: 0;
+  transition: opacity 0.3s;
+  z-index: 1;
+}
+
+.portfolio-item:hover::before {
+  opacity: 0.1;
+}
+
+/* CTA Section Background */
+.cta-section {
+  background: var(--gradient-primary);
+  position: relative;
+  overflow: hidden;
+}
+
+.cta-section::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+  animation: rotate-slow 30s linear infinite;
+}
+
+@keyframes rotate-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Footer Enhancement */
+.footer {
+  background: var(--brand-dark);
+  color: white;
+}
+
+.footer-link {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.footer-link:hover {
+  color: var(--brand-accent);
+}
+
+.footer-social-link {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.footer-social-link:hover {
+  background: var(--gradient-primary);
+  border-color: transparent;
+  transform: translateY(-3px) rotate(5deg);
+}
+
+/* Animation Improvements */
+.section {
+  position: relative;
+  z-index: 1;
+}
+
+.section-header {
+  animation: fadeInUp 0.8s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Smooth Hover Transitions */
+a, button {
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Mobile Menu Enhancement */
+.navbar-mobile {
+  background: white;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-mobile-link {
+  position: relative;
+  overflow: hidden;
+}
+
+.navbar-mobile-link::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 3px;
+  background: var(--gradient-primary);
+  transform: translateX(-100%);
+  transition: transform 0.3s;
+}
+
+.navbar-mobile-link:hover::before {
+  transform: translateX(0);
+}
+
+
+
+/* Final Touch - Micro Interactions */
+.btn {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.btn:active::after {
+  width: 300px;
+  height: 300px;
+}
+
+/* Loading Animation for Async Content */
+.loading-skeleton {
+  background: linear-gradient(
+    90deg,
+    #f0f0f0 25%,
+    #e0e0e0 50%,
+    #f0f0f0 75%
+  );
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* Accessibility Improvements */
+.btn:focus-visible,
+.navbar-link:focus-visible,
+.card:focus-visible {
+  outline: 3px solid var(--brand-primary);
+  outline-offset: 2px;
+}
+
+/* Print Styles */
+@media print {
+  .navbar,
+  .chat-bubble-button,
+  .footer {
+    display: none;
+  }
+  
+  .hero-section {
+    min-height: auto;
+    background: white;
+    color: black;
+  }
+}

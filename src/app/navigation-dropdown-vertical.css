@@ -1,0 +1,87 @@
+/* Vertical Dropdown Menu Styles */
+.dropdown-menu-vertical {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0.25rem !important;
+  padding: 0.75rem !important;
+  background: rgba(10, 46, 31, 0.98) !important;
+  backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(184, 233, 45, 0.15) !important;
+  border-radius: 12px !important;
+  box-shadow: 
+    0 20px 40px rgba(0, 0, 0, 0.6),
+    0 0 60px rgba(184, 233, 45, 0.05),
+    inset 0 1px 0 rgba(184, 233, 45, 0.1) !important;
+  min-width: 280px !important;
+  width: 280px !important;
+  max-width: 280px !important;
+}
+
+/* Ensure dropdown items stack vertically */
+.dropdown-menu-vertical .dropdown-item {
+  display: flex !important;
+  align-items: center !important;
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 0.875rem 1.25rem !important;
+  border-radius: 0.625rem !important;
+  background: transparent !important;
+  transition: all 0.2s ease !important;
+  text-decoration: none !important;
+  color: rgba(255, 255, 255, 0.9) !important;
+  white-space: nowrap !important;
+}
+
+.dropdown-menu-vertical .dropdown-item:hover {
+  background: linear-gradient(135deg, rgba(184, 233, 45, 0.1), rgba(230, 255, 92, 0.05)) !important;
+  transform: translateX(8px) !important;
+  box-shadow: 
+    0 4px 12px rgba(184, 233, 45, 0.15),
+    inset 0 1px 0 rgba(184, 233, 45, 0.2) !important;
+  color: #B8E92D !important;
+}
+
+/* Override any conflicting styles */
+.navbar-dropdown {
+  position: relative !important;
+}
+
+/* Icon styles in dropdown */
+.dropdown-menu-vertical .dropdown-item-icon {
+  width: 20px !important;
+  height: 20px !important;
+  margin-right: 0.75rem !important;
+  color: #B8E92D !important;
+  flex-shrink: 0 !important;
+}
+
+/* Animation refinements */
+.dropdown-menu-vertical {
+  transform-origin: top center;
+}
+
+/* Force vertical layout */
+.dropdown-menu.dropdown-menu-vertical {
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+/* Ensure proper spacing between items */
+.dropdown-menu-vertical > a {
+  display: block !important;
+  width: 100% !important;
+  margin-bottom: 0.25rem !important;
+}
+
+.dropdown-menu-vertical > a:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .dropdown-menu-vertical {
+    position: static !important;
+    width: 100% !important;
+    margin-top: 0.5rem;
+  }
+}

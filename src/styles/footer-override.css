@@ -1,0 +1,78 @@
+/* ================================
+   Footer Override Styles
+   Fix any background color issues
+   ================================ */
+
+/* Ensure no blue backgrounds anywhere */
+body {
+  background-color: #0A2E1F !important;
+}
+
+/* Remove any potential gaps between sections */
+main,
+section,
+div[class*="content"],
+div[class*="container"] {
+  background-color: transparent;
+}
+
+/* Ensure footer has correct background */
+footer,
+.footer-modern,
+footer.footer-modern {
+  background-color: #0A2E1F !important;
+  background: #0A2E1F !important;
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+/* Remove any unwanted spacing before footer */
+footer::before,
+.footer-modern::before {
+  display: none !important;
+}
+
+/* Ensure main content flows into footer */
+main:last-child,
+section:last-of-type {
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+/* Fix any container issues */
+.main-content {
+  background-color: #0A2E1F !important;
+  margin-bottom: 0 !important;
+}
+
+/* Ensure newsletter section has correct background */
+.footer-newsletter {
+  background-color: #0F4C3A !important;
+  margin-top: 0 !important;
+}
+
+/* Fix any gaps between sections */
+* + footer,
+* + .footer-modern {
+  margin-top: 0 !important;
+}
+
+/* Remove any default spacing */
+html,
+body,
+#__next,
+main {
+  background-color: #0A2E1F !important;
+}
+
+/* Ensure no blue colors in dark mode */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-background: #0A2E1F !important;
+    --color-surface: #0F4C3A !important;
+  }
+  
+  body {
+    background-color: #0A2E1F !important;
+  }
+}

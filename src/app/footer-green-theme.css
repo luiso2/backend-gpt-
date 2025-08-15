@@ -1,0 +1,277 @@
+/* Footer Enhanced Styles with Consistent Green Theme */
+
+.footer-modern {
+  background: #0A2E1F !important; /* MERCATOP dark green */
+  border-top: 1px solid rgba(184, 233, 45, 0.1);
+}
+
+/* Newsletter Section with Green Theme */
+.footer-newsletter {
+  background: #0F4C3A !important; /* MERCATOP medium green */
+  background-image: linear-gradient(135deg, rgba(184, 233, 45, 0.08) 0%, rgba(230, 255, 92, 0.03) 100%);
+  border-bottom: 1px solid rgba(184, 233, 45, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.footer-newsletter::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, rgba(34, 197, 94, 0.05) 0%, transparent 70%);
+  animation: pulse-bg 8s ease-in-out infinite;
+}
+
+/* CTA Section Above Footer */
+.cta-section-footer {
+  background: #0A2E1F !important; /* MERCATOP dark green */
+  padding: 80px 0;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.cta-section-footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 20% 50%, rgba(34, 197, 94, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 50%, rgba(22, 163, 74, 0.1) 0%, transparent 50%);
+}
+
+.cta-badge {
+  display: inline-block;
+  padding: 8px 24px;
+  background: rgba(34, 197, 94, 0.1);
+  border: 1px solid rgba(34, 197, 94, 0.3);
+  border-radius: 30px;
+  color: #22c55e;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 24px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.cta-title-footer {
+  font-size: 48px;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 20px;
+  line-height: 1.2;
+}
+
+.cta-subtitle-footer {
+  font-size: 20px;
+  color: rgba(255, 255, 255, 0.7);
+  max-width: 600px;
+  margin: 0 auto 40px;
+  line-height: 1.6;
+}
+
+.cta-buttons-footer {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 60px;
+}
+
+.btn-cta-primary {
+  background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+  color: white;
+  padding: 16px 32px;
+  border-radius: 12px;
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 20px rgba(34, 197, 94, 0.3);
+}
+
+.btn-cta-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(34, 197, 94, 0.4);
+}
+
+.btn-cta-secondary {
+  background: transparent;
+  color: rgba(255, 255, 255, 0.8);
+  padding: 16px 32px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.btn-cta-secondary:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(34, 197, 94, 0.5);
+  color: #22c55e;
+}
+
+.cta-stats-footer {
+  display: flex;
+  justify-content: center;
+  gap: 80px;
+  margin-top: 60px;
+}
+
+.cta-stat-footer {
+  text-align: center;
+}
+
+.cta-stat-value-footer {
+  font-size: 48px;
+  font-weight: 700;
+  color: #22c55e;
+  margin-bottom: 8px;
+  background: linear-gradient(135deg, #22c55e 0%, #86efac 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.cta-stat-label-footer {
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.6);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Footer Adjustments */
+.footer-main {
+  background: transparent;
+  position: relative;
+}
+
+.footer-bottom {
+  background: #051815 !important; /* Darker MERCATOP green */
+  border-top: 1px solid rgba(184, 233, 45, 0.1);
+}
+
+/* Social Links with Green Theme */
+.social-link {
+  background: rgba(34, 197, 94, 0.05);
+  border: 1px solid rgba(34, 197, 94, 0.1);
+}
+
+.social-link:hover {
+  background: rgba(34, 197, 94, 0.15);
+  border-color: rgba(34, 197, 94, 0.3);
+  color: #22c55e;
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(34, 197, 94, 0.2);
+}
+
+/* Newsletter Button Green */
+.newsletter-button {
+  background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+  box-shadow: 0 4px 20px rgba(34, 197, 94, 0.3);
+}
+
+.newsletter-button:hover {
+  box-shadow: 0 8px 30px rgba(34, 197, 94, 0.4);
+  background: linear-gradient(135deg, #2dd665 0%, #1bb550 100%);
+}
+
+/* Links Hover Green */
+.footer-link:hover,
+.footer-contact-item:hover,
+.legal-link:hover {
+  color: #22c55e;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .cta-section-footer {
+    padding: 60px 20px;
+  }
+
+  .cta-title-footer {
+    font-size: 32px;
+  }
+
+  .cta-subtitle-footer {
+    font-size: 18px;
+  }
+
+  .cta-buttons-footer {
+    flex-direction: column;
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto 40px;
+  }
+
+  .btn-cta-primary,
+  .btn-cta-secondary {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .cta-stats-footer {
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  .cta-stat-value-footer {
+    font-size: 36px;
+  }
+}
+
+/* Pattern overlay for footer */
+.footer-modern::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 35px,
+      rgba(34, 197, 94, 0.01) 35px,
+      rgba(34, 197, 94, 0.01) 70px
+    );
+  pointer-events: none;
+}
+
+/* Subtle animations */
+@keyframes pulse-bg {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.8;
+  }
+}
+
+/* Logo styles */
+.footer-logo-icon {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+  border-radius: 8px;
+  background: white;
+  padding: 2px;
+  transition: transform 0.3s ease;
+  filter: none;
+}
+
+.footer-logo-link:hover .footer-logo-icon {
+  transform: scale(1.05);
+}

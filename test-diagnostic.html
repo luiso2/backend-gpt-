@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test - Growth Diagnostic</title>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            padding: 20px;
+            background: #0A2E1F;
+            color: white;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .test-link {
+            display: inline-block;
+            padding: 15px 30px;
+            background: linear-gradient(135deg, #B8E92D, #7FD858);
+            color: #0A2E1F;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 18px;
+            margin: 10px;
+            transition: all 0.3s;
+        }
+        .test-link:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(184, 233, 45, 0.5);
+        }
+        .info {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        h1 {
+            color: #B8E92D;
+        }
+        .feature-list {
+            list-style: none;
+            padding: 0;
+        }
+        .feature-list li {
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(184, 233, 45, 0.2);
+        }
+        .feature-list li:before {
+            content: "✓ ";
+            color: #B8E92D;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 Mercatop - Growth Diagnostic Landing Page</h1>
+        
+        <div class="info">
+            <h2>Página de Diagnóstico Interactivo</h2>
+            <p>Landing page con flujo interactivo paso a paso para capturar y calificar leads.</p>
+        </div>
+
+        <a href="http://localhost:3000/growth-diagnostic" class="test-link" target="_blank">
+            Abrir Growth Diagnostic →
+        </a>
+
+        <div class="info">
+            <h3>Características Implementadas:</h3>
+            <ul class="feature-list">
+                <li>Flujo interactivo de 7 pasos</li>
+                <li>Integración con OpenAI (opcional)</li>
+                <li>Sistema de tracking del journey completo</li>
+                <li>Cálculo de pérdida de revenue</li>
+                <li>Lead scoring automático</li>
+                <li>Propuestas personalizadas</li>
+                <li>Animaciones con Framer Motion</li>
+                <li>Estilos coherentes con el tema verde de Mercatop</li>
+            </ul>
+        </div>
+
+        <div class="info">
+            <h3>Flujo del Usuario:</h3>
+            <ol>
+                <li><strong>Pantalla de Bienvenida:</strong> CTA bloqueante</li>
+                <li><strong>Pregunta 1:</strong> ¿Cuál es tu mayor frustración?</li>
+                <li><strong>Pregunta 2:</strong> ¿Cuánto facturas mensualmente?</li>
+                <li><strong>Pregunta 3:</strong> ¿Qué has intentado para crecer?</li>
+                <li><strong>Análisis:</strong> Procesamiento con IA</li>
+                <li><strong>Resultados:</strong> Revenue perdido + diagnóstico</li>
+                <li><strong>Soluciones:</strong> Selector de servicios</li>
+                <li><strong>Propuesta Final:</strong> Comparación + formulario</li>
+            </ol>
+        </div>
+
+        <div class="info">
+            <h3>Opciones:</h3>
+            <p><strong>Sin API Key:</strong> Funciona con datos de demostración</p>
+            <p><strong>Con API Key:</strong> Click en "Activar IA ✨" para diagnósticos personalizados con GPT-4</p>
+        </div>
+    </div>
+</body>
+</html>

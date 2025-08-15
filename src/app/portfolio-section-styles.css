@@ -1,0 +1,164 @@
+/* Portfolio Section Styles - Used for Services and Portfolio */
+
+.portfolio-section {
+  padding: 80px 0;
+  background: var(--fintech-bg-primary);
+  position: relative;
+  overflow: hidden;
+}
+
+.portfolio-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* Portfolio Header */
+.portfolio-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.portfolio-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(184, 233, 45, 0.1);
+  border: 1px solid rgba(184, 233, 45, 0.2);
+  padding: 8px 20px;
+  border-radius: 50px;
+  margin-bottom: 24px;
+  font-size: 0.875rem;
+  color: #B8E92D;
+  font-weight: 500;
+}
+
+.badge-icon {
+  width: 16px;
+  height: 16px;
+  color: #B8E92D;
+}
+
+.portfolio-title {
+  font-size: 3rem;
+  font-weight: 700;
+  color: white;
+  margin: 0 0 16px 0;
+  letter-spacing: -1px;
+  line-height: 1.2;
+}
+
+.text-gradient {
+  background: linear-gradient(135deg, #B8E92D 0%, #4ADE80 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.portfolio-subtitle {
+  font-size: 1.25rem;
+  color: rgba(255, 255, 255, 0.7);
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* Category Pills */
+.portfolio-categories {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 48px;
+  flex-wrap: wrap;
+}
+
+.category-pill {
+  position: relative;
+  background: transparent;
+  border: 1px solid rgba(184, 233, 45, 0.2);
+  padding: 10px 24px;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  overflow: hidden;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.category-pill:hover {
+  border-color: rgba(184, 233, 45, 0.4);
+  transform: translateY(-2px);
+}
+
+.category-pill.active {
+  background: rgba(184, 233, 45, 0.1);
+  border-color: rgba(184, 233, 45, 0.3);
+  color: #B8E92D;
+}
+
+.category-pill::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: radial-gradient(circle, rgba(184, 233, 45, 0.3) 0%, transparent 70%);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s ease, height 0.6s ease;
+  border-radius: 50%;
+}
+
+.category-pill:hover::before {
+  width: 100px;
+  height: 100px;
+}
+
+.pill-text {
+  position: relative;
+  z-index: 1;
+}
+
+/* Most Popular Badge */
+.most-popular-badge {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  background: linear-gradient(135deg, #FFD700, #FFA500);
+  color: #0A2E1F;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(255, 215, 0, 0.4);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  z-index: 10;
+}
+
+.popular-icon {
+  width: 14px;
+  height: 14px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .portfolio-title {
+    font-size: 2rem;
+  }
+  
+  .portfolio-subtitle {
+    font-size: 1.1rem;
+  }
+  
+  .portfolio-categories {
+    padding: 0 20px;
+  }
+  
+  .category-pill {
+    padding: 8px 20px;
+    font-size: 0.85rem;
+  }
+}

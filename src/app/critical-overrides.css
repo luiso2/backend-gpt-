@@ -1,0 +1,197 @@
+/* MERCATOP CRITICAL STYLES - FINAL OVERRIDE */
+/* This file MUST be loaded LAST to resolve ALL conflicts */
+
+/* ========================================
+   GLOBAL RESETS - HIGHEST PRIORITY
+   ======================================== */
+
+/* Prevent any parent transforms from affecting fixed positioned elements */
+html, body, #__next, main, .main-content {
+  transform: none !important;
+  transform-style: flat !important;
+}
+
+/* Remove any transforms from containers that might have portals */
+body > div:not(#__next) {
+  transform: none !important;
+  position: static !important;
+}
+
+/* ========================================
+   AI PANEL - FORCE ABSOLUTE CENTER
+   ======================================== */
+
+/* Backdrop */
+.ai-panel-backdrop {
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: 99998 !important;
+  background: rgba(0, 0, 0, 0.7) !important;
+  backdrop-filter: blur(12px) !important;
+}
+
+/* Panel - Multiple centering methods for maximum compatibility */
+.ai-panel {
+  /* Method 1: Fixed + Transform */
+  position: fixed !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  
+  /* Method 2: Ensure no margin auto interference */
+  margin: 0 !important;
+  
+  /* Method 3: Explicit dimensions */
+  width: min(95vw, 1200px) !important;
+  height: min(95vh, 900px) !important;
+  
+  /* Visual styles */
+  background: linear-gradient(135deg, 
+    rgba(10, 46, 31, 0.98) 0%, 
+    rgba(10, 46, 31, 0.95) 50%,
+    rgba(15, 55, 40, 0.98) 100%
+  ) !important;
+  border: 1px solid rgba(184, 233, 45, 0.2) !important;
+  border-radius: 24px !important;
+  box-shadow: 
+    0 25px 50px -12px rgba(0, 0, 0, 0.5),
+    0 0 100px rgba(184, 233, 45, 0.1) !important;
+  z-index: 99999 !important;
+  overflow: hidden !important;
+  display: flex !important;
+  flex-direction: column !important;
+  backdrop-filter: blur(20px) saturate(180%) !important;
+}
+
+/* Override ANY inline styles from animations */
+.ai-panel[style*="transform"] {
+  transform: translate(-50%, -50%) !important;
+}
+
+.ai-panel[style*="top"] {
+  top: 50% !important;
+}
+
+.ai-panel[style*="left"] {
+  left: 50% !important;
+}
+
+/* ========================================
+   NAVIGATION DROPDOWN - DYNAMIC POSITION
+   ======================================== */
+
+/* Dropdown container */
+.navbar-dropdown {
+  position: relative !important;
+  display: inline-block !important;
+}
+
+/* Portal root - must not interfere */
+#portal-root {
+  pointer-events: none !important;
+}
+
+#portal-root > * {
+  pointer-events: auto !important;
+}
+
+/* Dropdown menu - let JavaScript set position */
+.dropdown-menu,
+.dropdown-menu-vertical {
+  position: fixed !important;
+  /* Remove ANY inherited left: 0 */
+  left: auto !important;
+  right: auto !important;
+  /* Visual styles */
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0.25rem !important;
+  padding: 0.75rem !important;
+  background: rgba(10, 46, 31, 0.98) !important;
+  backdrop-filter: blur(20px) saturate(180%) !important;
+  border: 1px solid rgba(184, 233, 45, 0.15) !important;
+  border-radius: 12px !important;
+  box-shadow: 
+    0 20px 40px rgba(0, 0, 0, 0.6),
+    0 0 60px rgba(184, 233, 45, 0.05) !important;
+  width: 280px !important;
+  z-index: 99999 !important;
+}
+
+/* ========================================
+   MOBILE OVERRIDES
+   ======================================== */
+
+@media (max-width: 768px) {
+  .ai-panel {
+    width: 100vw !important;
+    height: 100vh !important;
+    border-radius: 0 !important;
+  }
+  
+  .dropdown-menu,
+  .dropdown-menu-vertical {
+    position: absolute !important;
+    top: 100% !important;
+    left: 0 !important;
+    width: 100% !important;
+  }
+}
+
+/* ========================================
+   EXTREME SPECIFICITY FIXES
+   ======================================== */
+
+/* Use attribute selectors for even higher specificity */
+[class*="ai-panel"]:not([class*="backdrop"]) {
+  position: fixed !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+}
+
+[class*="dropdown-menu"] {
+  left: auto !important;
+}
+
+/* ========================================
+   REMOVE PROBLEMATIC INHERITED STYLES
+   ======================================== */
+
+/* Kill any left: 0 from parent selectors */
+* > .dropdown-menu {
+  left: auto !important;
+}
+
+div[style*="left: 0"] > .dropdown-menu {
+  left: auto !important;
+}
+
+/* ========================================
+   DEBUG MODE - Uncomment to troubleshoot
+   ======================================== */
+/*
+.ai-panel::after {
+  content: "AI PANEL: Should be centered" !important;
+  position: absolute !important;
+  top: 10px !important;
+  left: 10px !important;
+  background: red !important;
+  color: white !important;
+  padding: 10px !important;
+  font-size: 14px !important;
+  z-index: 999999 !important;
+}
+
+.dropdown-menu::after {
+  content: "DROPDOWN: Should be under Services" !important;
+  position: absolute !important;
+  top: -25px !important;
+  left: 10px !important;
+  background: blue !important;
+  color: white !important;
+  padding: 5px !important;
+  font-size: 12px !important;
+  z-index: 999999 !important;
+}
+*/

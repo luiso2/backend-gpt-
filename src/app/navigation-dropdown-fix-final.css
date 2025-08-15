@@ -1,0 +1,102 @@
+/* Navigation Dropdown Position Fix */
+
+/* Ensure dropdown container is relative */
+.navbar-dropdown {
+  position: relative !important;
+  display: inline-block;
+}
+
+/* Dropdown trigger button */
+.navbar-dropdown-trigger {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Dropdown icon animation */
+.dropdown-icon {
+  transition: transform 0.3s ease;
+  width: 16px;
+  height: 16px;
+}
+
+.dropdown-icon.rotate {
+  transform: rotate(180deg);
+}
+
+/* Dropdown menu positioning will be handled by JavaScript */
+.dropdown-menu {
+  position: fixed !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0.25rem !important;
+  padding: 0.75rem !important;
+  background: rgba(10, 46, 31, 0.98) !important;
+  backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(184, 233, 45, 0.15) !important;
+  border-radius: 12px !important;
+  box-shadow: 
+    0 20px 40px rgba(0, 0, 0, 0.6),
+    0 0 60px rgba(184, 233, 45, 0.05),
+    inset 0 1px 0 rgba(184, 233, 45, 0.1) !important;
+  min-width: 280px !important;
+  width: 280px !important;
+  max-width: 280px !important;
+  z-index: 99999 !important;
+}
+
+/* Dropdown items */
+.dropdown-menu .dropdown-item {
+  display: flex !important;
+  align-items: center !important;
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 0.875rem 1.25rem !important;
+  border-radius: 0.625rem !important;
+  background: transparent !important;
+  transition: all 0.2s ease !important;
+  text-decoration: none !important;
+  color: rgba(255, 255, 255, 0.9) !important;
+  white-space: nowrap !important;
+}
+
+.dropdown-menu .dropdown-item:hover {
+  background: linear-gradient(135deg, rgba(184, 233, 45, 0.1), rgba(230, 255, 92, 0.05)) !important;
+  transform: translateX(8px) !important;
+  box-shadow: 
+    0 4px 12px rgba(184, 233, 45, 0.15),
+    inset 0 1px 0 rgba(184, 233, 45, 0.2) !important;
+  color: #B8E92D !important;
+}
+
+/* Icon styles in dropdown */
+.dropdown-menu .dropdown-item-icon {
+  width: 20px !important;
+  height: 20px !important;
+  margin-right: 0.75rem !important;
+  color: #B8E92D !important;
+  flex-shrink: 0 !important;
+}
+
+/* Remove any left: 0 styles that might be inherited */
+.navbar-dropdown .dropdown-menu {
+  left: auto !important;
+}
+
+/* Portal container should not affect positioning */
+.portal-root {
+  position: static !important;
+}
+
+/* Mobile styles */
+@media (max-width: 768px) {
+  .dropdown-menu {
+    position: absolute !important;
+    top: 100% !important;
+    left: 0 !important;
+    width: 100% !important;
+    max-width: none !important;
+    margin-top: 0.5rem;
+  }
+}

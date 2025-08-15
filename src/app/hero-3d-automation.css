@@ -1,0 +1,362 @@
+/* Hero Section 3D Automation Styles */
+
+/* Animated Icons */
+.floating-icon {
+  width: 24px;
+  height: 24px;
+  color: var(--fintech-accent);
+  filter: drop-shadow(0 0 10px rgba(59, 130, 246, 0.5));
+}
+
+.trust-item-icon {
+  width: 16px;
+  height: 16px;
+  color: var(--fintech-success);
+  margin-right: 8px;
+  flex-shrink: 0;
+}
+
+.animated-icon {
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Workflow Icon in Header */
+.workflow-icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 8px;
+  color: var(--fintech-accent);
+}
+
+.automation-logo {
+  display: flex;
+  align-items: center;
+  font-weight: 600;
+  color: var(--fintech-text);
+}
+
+/* Pulse Animation for Status */
+.pulse {
+  animation: pulse-glow 2s infinite;
+}
+
+@keyframes pulse-glow {
+  0% {
+    box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(34, 197, 94, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(34, 197, 94, 0);
+  }
+}
+
+/* Improved Node Icons */
+.node-icon-svg {
+  width: 24px;
+  height: 24px;
+  color: white;
+}
+
+.node-icon-wrapper {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  margin-bottom: 8px;
+}
+
+/* Animated Flow Connection */
+.animated-flow {
+  position: relative;
+  overflow: hidden;
+}
+
+.flow-particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: var(--fintech-accent);
+  border-radius: 50%;
+  top: 50%;
+  left: -4px;
+  transform: translateY(-50%);
+  animation: flow 2s linear infinite;
+}
+
+@keyframes flow {
+  to {
+    left: 100%;
+  }
+}
+
+/* Pulse Dot for Node Status */
+.pulse-dot {
+  width: 8px;
+  height: 8px;
+  background: #22c55e;
+  border-radius: 50%;
+  animation: pulse-dot 2s infinite;
+}
+
+@keyframes pulse-dot {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.5);
+    opacity: 0.5;
+  }
+}
+
+/* Enhanced 3D Stats Cards */
+.automation-stats-enhanced {
+  display: flex;
+  gap: 12px;
+  margin-top: 24px;
+  justify-content: space-between;
+}
+
+.stat-card-small {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  transform-style: preserve-3d;
+  position: relative;
+  overflow: hidden;
+}
+
+.stat-card-small::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, transparent 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.stat-card-small:hover::before {
+  opacity: 1;
+}
+
+.stat-card-small:hover {
+  transform: translateY(-2px) translateZ(10px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.stat-icon-svg {
+  width: 20px;
+  height: 20px;
+  color: var(--fintech-accent);
+  flex-shrink: 0;
+}
+
+.stat-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.stat-card-small .stat-value {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--fintech-text);
+  line-height: 1;
+}
+
+.stat-card-small .stat-label {
+  font-size: 11px;
+  color: var(--fintech-text-secondary);
+  opacity: 0.8;
+  line-height: 1;
+}
+
+/* 3D Transform for Automation Mockup */
+.automation-mockup-enhanced {
+  transform-style: preserve-3d;
+  perspective: 1000px;
+  animation: float3d 6s ease-in-out infinite;
+}
+
+@keyframes float3d {
+  0%, 100% {
+    transform: translateY(0) rotateX(0) rotateY(0);
+  }
+  25% {
+    transform: translateY(-10px) rotateX(2deg) rotateY(-2deg);
+  }
+  50% {
+    transform: translateY(0) rotateX(0) rotateY(0);
+  }
+  75% {
+    transform: translateY(-5px) rotateX(-2deg) rotateY(2deg);
+  }
+}
+
+/* Enhanced Workflow Nodes with 3D Effect */
+.workflow-node-enhanced {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 16px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  transform-style: preserve-3d;
+  position: relative;
+}
+
+.workflow-node-enhanced::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, var(--node-color, #3b82f6) 0%, transparent 50%);
+  opacity: 0.3;
+  z-index: -1;
+  transition: opacity 0.3s ease;
+}
+
+.workflow-node-trigger {
+  --node-color: #3b82f6;
+}
+
+.workflow-node-action {
+  --node-color: #8b5cf6;
+}
+
+.workflow-node-output {
+  --node-color: #22c55e;
+}
+
+.workflow-node-enhanced:hover::before {
+  opacity: 0.6;
+}
+
+.workflow-node-enhanced:hover {
+  transform: translateZ(20px) scale(1.05);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+/* Improved Connection Lines */
+.workflow-connection-enhanced {
+  flex: 1;
+  height: 2px;
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    rgba(59, 130, 246, 0.3) 20%, 
+    rgba(59, 130, 246, 0.5) 50%, 
+    rgba(59, 130, 246, 0.3) 80%, 
+    transparent 100%
+  );
+  position: relative;
+  margin: 0 8px;
+}
+
+/* Mobile Responsive Adjustments */
+@media (max-width: 768px) {
+  .automation-stats-enhanced {
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .stat-card-small {
+    padding: 10px;
+  }
+  
+  .workflow-node-enhanced {
+    padding: 12px;
+  }
+  
+  .node-icon-wrapper {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .node-icon-svg {
+    width: 20px;
+    height: 20px;
+  }
+  
+  .stat-card-small .stat-value {
+    font-size: 14px;
+  }
+  
+  .stat-card-small .stat-label {
+    font-size: 10px;
+  }
+}
+
+/* Additional Visual Enhancements */
+.hero-automation-visual {
+  position: relative;
+  z-index: 1;
+}
+
+.hero-automation-visual::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle at center, rgba(59, 130, 246, 0.1) 0%, transparent 70%);
+  animation: rotate-slow 20s linear infinite;
+  z-index: -1;
+}
+
+@keyframes rotate-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Glowing Effect for Active Elements */
+.automation-status {
+  background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+  color: white;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  box-shadow: 0 0 20px rgba(34, 197, 94, 0.5);
+}

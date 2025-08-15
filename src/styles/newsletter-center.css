@@ -1,0 +1,82 @@
+/* ================================
+   Newsletter Section Center Alignment
+   ================================ */
+
+/* Force center alignment for newsletter section */
+.footer-newsletter {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  width: 100% !important;
+}
+
+.footer-newsletter .container-footer {
+  width: 100% !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+
+.newsletter-content {
+  width: 100% !important;
+  max-width: 800px !important;
+  margin: 0 auto !important;
+  padding: 45px 20px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  gap: 20px !important;
+}
+
+.newsletter-text {
+  width: 100% !important;
+  max-width: 600px !important;
+  margin: 0 auto !important;
+  text-align: center !important;
+}
+
+.newsletter-title {
+  text-align: center !important;
+  margin: 0 auto 12px !important;
+  width: 100% !important;
+  line-height: 1.2 !important;
+}
+
+.newsletter-subtitle {
+  text-align: center !important;
+  margin: 0 auto 8px !important;
+  width: 100% !important;
+  line-height: 1.5 !important;
+}
+
+.newsletter-button {
+  margin: 0 auto !important;
+  display: inline-flex !important;
+}
+
+/* Ensure button icon alignment */
+.button-icon {
+  margin-left: 4px !important;
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .newsletter-content {
+    padding: 40px 20px !important;
+  }
+  
+  .newsletter-title {
+    font-size: 22px !important;
+  }
+  
+  .newsletter-subtitle {
+    font-size: 14px !important;
+  }
+  
+  .newsletter-button {
+    font-size: 14px !important;
+    padding: 12px 24px !important;
+  }
+}

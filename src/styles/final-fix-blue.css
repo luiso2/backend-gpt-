@@ -1,0 +1,159 @@
+/* ================================
+   FINAL FIX - Remove all blue backgrounds
+   This file must be loaded last
+   ================================ */
+
+/* Force green background on EVERYTHING */
+* {
+  --background: #0A2E1F !important;
+  --bg-primary: #0A2E1F !important;
+  --bg-secondary: #0F4C3A !important;
+}
+
+/* Remove all potential blue backgrounds */
+html,
+body,
+#__next,
+#root,
+div,
+section,
+main,
+footer,
+header,
+aside,
+article {
+  background-color: transparent !important;
+}
+
+/* Set body background */
+body {
+  background-color: #0A2E1F !important;
+  background: #0A2E1F !important;
+}
+
+/* Main content background */
+.main-content,
+main.main-content,
+main {
+  background-color: #0A2E1F !important;
+  background: #0A2E1F !important;
+}
+
+/* Remove ANY blue color anywhere */
+*[style*="0a0f1b"],
+*[style*="0f172a"],
+*[style*="1e293b"],
+*[style*="blue"],
+*[class*="blue"] {
+  background-color: #0A2E1F !important;
+  background: #0A2E1F !important;
+}
+
+/* Ensure footer has no gaps */
+footer.footer-modern {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+  background: #0A2E1F !important;
+  background-color: #0A2E1F !important;
+}
+
+/* Fix any sections that might have wrong background */
+section {
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
+/* Remove margins that might cause gaps */
+main > *:last-child,
+.main-content > *:last-child,
+section:last-of-type,
+div:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* Fix newsletter section */
+.footer-newsletter {
+  background: #0F4C3A !important;
+  background-color: #0F4C3A !important;
+  margin-top: 0 !important;
+}
+
+/* Fix bottom bar */
+.footer-bottom {
+  background: #051815 !important;
+  background-color: #051815 !important;
+}
+
+/* Remove all box shadows that might show blue */
+* {
+  box-shadow: none !important;
+}
+
+/* Add back only green shadows for interactive elements */
+.btn:hover,
+.button:hover,
+.card:hover,
+.social-link:hover {
+  box-shadow: 0 4px 20px rgba(184, 233, 45, 0.2) !important;
+}
+
+/* Fix any NextJS default styles */
+[data-nextjs-scroll-focus-boundary] {
+  background: transparent !important;
+}
+
+/* Fix any theme-ui or styled-components backgrounds */
+[data-theme],
+[class*="theme-"] {
+  background-color: transparent !important;
+}
+
+/* Ensure smooth transition between sections */
+* + footer {
+  margin-top: 0 !important;
+}
+
+/* Remove any padding that might show background */
+body > div:first-child {
+  padding-top: 0 !important;
+}
+
+/* Fix any container backgrounds */
+.container,
+[class*="container"] {
+  background: transparent !important;
+}
+
+/* Override any media query styles */
+@media screen and (max-width: 9999px) {
+  body {
+    background: #0A2E1F !important;
+  }
+  
+  .footer-modern {
+    background: #0A2E1F !important;
+  }
+}
+
+/* Fix dark mode */
+@media (prefers-color-scheme: dark) {
+  :root,
+  html,
+  body {
+    background: #0A2E1F !important;
+    background-color: #0A2E1F !important;
+  }
+}
+
+/* Last resort - use !important on everything */
+html body {
+  background-color: #0A2E1F !important;
+}
+
+html body main {
+  background-color: #0A2E1F !important;
+}
+
+html body footer {
+  background-color: #0A2E1F !important;
+}

@@ -1,0 +1,346 @@
+/* ================================
+   HERO AUTOMATION NODES - ESTILO n8n
+   Visualización de automatizaciones con nodos
+   ================================ */
+
+/* Canvas de automatización */
+.hero-automation-canvas {
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+  height: 400px;
+  background: linear-gradient(135deg, rgba(15, 58, 47, 0.4), rgba(26, 84, 70, 0.3));
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(127, 216, 88, 0.2);
+  border-radius: 20px;
+  padding: 3rem;
+  box-shadow: 
+    0 20px 60px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(127, 216, 88, 0.1);
+  overflow: hidden;
+}
+
+/* Contenedor del flujo */
+.automation-flow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  position: relative;
+}
+
+/* Nodos base */
+.flow-node {
+  background: linear-gradient(135deg, #1A5446, #2B6B57);
+  border: 2px solid #7FD858;
+  border-radius: 16px;
+  padding: 1.5rem;
+  width: 140px;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+.flow-node:hover {
+  transform: translateY(-5px) scale(1.05);
+  box-shadow: 0 12px 32px rgba(127, 216, 88, 0.3);
+}
+
+/* Iconos de nodos */
+.node-icon {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+  display: block;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+}
+
+/* Título del nodo */
+.node-title {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #FFFFFF;
+  margin-bottom: 0.25rem;
+}
+
+/* Tipo de nodo */
+.node-type {
+  font-size: 0.75rem;
+  color: #7FD858;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+/* Tipos específicos de nodos */
+.node-trigger {
+  background: linear-gradient(135deg, #2B6B57, #3A8A6E);
+  border-color: #B8E92D;
+}
+
+.node-ai {
+  background: linear-gradient(135deg, #1A5446, #7FD858);
+  border-color: #B8E92D;
+  position: relative;
+  overflow: hidden;
+}
+
+.node-ai::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(45deg, transparent, rgba(184, 233, 45, 0.1), transparent);
+  animation: ai-shimmer 3s ease-in-out infinite;
+}
+
+@keyframes ai-shimmer {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.node-output {
+  background: linear-gradient(135deg, #3A8A6E, #4AAE8C);
+  border-color: #7FD858;
+}
+
+/* Conexiones */
+.flow-connection {
+  flex: 1;
+  height: 3px;
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    rgba(127, 216, 88, 0.2) 10%,
+    rgba(127, 216, 88, 0.4) 50%,
+    rgba(127, 216, 88, 0.2) 90%,
+    transparent 100%
+  );
+  position: relative;
+  margin: 0 -20px;
+  z-index: 1;
+}
+
+/* Pulso de conexión */
+.connection-pulse {
+  position: absolute;
+  top: -4px;
+  left: 0;
+  width: 20px;
+  height: 10px;
+  background: radial-gradient(circle, #B8E92D, transparent);
+  border-radius: 50%;
+  filter: blur(2px);
+}
+
+/* Nodos ramificados */
+.branch-node {
+  position: absolute;
+  background: linear-gradient(135deg, #1A5446, #2B6B57);
+  border: 2px solid rgba(127, 216, 88, 0.5);
+  border-radius: 12px;
+  padding: 0.75rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+  color: #FFFFFF;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+}
+
+.branch-top {
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.branch-bottom {
+  bottom: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.branch-node .node-icon {
+  font-size: 1.25rem;
+  margin: 0;
+}
+
+/* Etiqueta de automatización */
+.automation-label {
+  position: absolute;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(127, 216, 88, 0.1);
+  color: #7FD858;
+  padding: 0.5rem 1.5rem;
+  border-radius: 20px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  border: 1px solid rgba(127, 216, 88, 0.3);
+  backdrop-filter: blur(10px);
+}
+
+/* Líneas conectoras para nodos ramificados */
+.automation-flow::before,
+.automation-flow::after {
+  content: '';
+  position: absolute;
+  width: 2px;
+  height: 60px;
+  background: linear-gradient(to bottom, transparent, rgba(127, 216, 88, 0.4), transparent);
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.automation-flow::before {
+  top: 25%;
+}
+
+.automation-flow::after {
+  bottom: 25%;
+}
+
+/* Partículas decorativas */
+@keyframes float-particle {
+  0% {
+    transform: translateY(0) translateX(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100px) translateX(50px);
+    opacity: 0;
+  }
+}
+
+.hero-automation-canvas::before,
+.hero-automation-canvas::after {
+  content: '✨';
+  position: absolute;
+  font-size: 1.5rem;
+  animation: float-particle 6s ease-in-out infinite;
+}
+
+.hero-automation-canvas::before {
+  top: 10%;
+  left: 10%;
+  animation-delay: 0s;
+}
+
+.hero-automation-canvas::after {
+  top: 80%;
+  right: 10%;
+  animation-delay: 3s;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .hero-automation-canvas {
+    max-width: 100%;
+    height: 500px;
+    padding: 2rem 1rem;
+  }
+
+  .automation-flow {
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .flow-node {
+    width: 120px;
+    padding: 1rem;
+  }
+
+  .flow-connection {
+    width: 3px;
+    height: 40px;
+    margin: -10px 0;
+    background: linear-gradient(to bottom, 
+      transparent 0%, 
+      rgba(127, 216, 88, 0.2) 10%,
+      rgba(127, 216, 88, 0.4) 50%,
+      rgba(127, 216, 88, 0.2) 90%,
+      transparent 100%
+    );
+  }
+
+  .connection-pulse {
+    top: 0;
+    left: -4px;
+    width: 10px;
+    height: 20px;
+    animation-name: pulse-vertical;
+  }
+
+  @keyframes pulse-vertical {
+    from { transform: translateY(0); }
+    to { transform: translateY(40px); }
+  }
+
+  .branch-top {
+    top: 35%;
+    right: 10px;
+    left: auto;
+    transform: none;
+  }
+
+  .branch-bottom {
+    bottom: 35%;
+    left: 10px;
+    transform: none;
+  }
+
+  .automation-flow::before,
+  .automation-flow::after {
+    display: none;
+  }
+}
+
+/* Animación de entrada escalonada */
+.flow-node {
+  animation: node-entry 0.6s ease-out backwards;
+}
+
+.flow-node:nth-child(1) { animation-delay: 0.2s; }
+.flow-node:nth-child(3) { animation-delay: 0.4s; }
+.flow-node:nth-child(5) { animation-delay: 0.6s; }
+
+@keyframes node-entry {
+  from {
+    opacity: 0;
+    transform: scale(0.8) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* Efecto de brillo en hover */
+.flow-node::after {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, #7FD858, #B8E92D, #7FD858);
+  border-radius: 16px;
+  opacity: 0;
+  z-index: -1;
+  transition: opacity 0.3s ease;
+}
+
+.flow-node:hover::after {
+  opacity: 0.5;
+  filter: blur(8px);
+}

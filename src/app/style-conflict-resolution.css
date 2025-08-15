@@ -1,0 +1,321 @@
+/* MERCATOP Style Conflict Resolution - Master Override File */
+/* This file must be loaded LAST to resolve all style conflicts */
+
+/* ========================================
+   CRITICAL RESETS - HIGHEST PRIORITY
+   ======================================== */
+
+/* Remove ALL transforms from parent containers that might affect positioning */
+body * {
+  transform-style: flat !important;
+}
+
+/* Reset Portal/Teleport containers */
+body > div:not(#__next) {
+  position: static !important;
+  transform: none !important;
+  left: auto !important;
+  top: auto !important;
+}
+
+/* ========================================
+   AI PANEL - ABSOLUTE CENTERING
+   ======================================== */
+
+/* AI Panel Backdrop - Full Coverage */
+.ai-panel-backdrop {
+  position: fixed !important;
+  inset: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  background: rgba(0, 0, 0, 0.7) !important;
+  backdrop-filter: blur(12px) !important;
+  z-index: 99998 !important;
+  transform: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  left: 0 !important;
+  top: 0 !important;
+}
+
+/* AI Panel - Force Center with Multiple Methods */
+.ai-panel {
+  /* Positioning */
+  position: fixed !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  
+  /* Dimensions */
+  width: min(95vw, 1200px) !important;
+  height: min(95vh, 900px) !important;
+  
+  /* Reset any conflicts */
+  margin: 0 !important;
+  padding: 0 !important;
+  right: auto !important;
+  bottom: auto !important;
+  
+  /* Styling */
+  background: linear-gradient(135deg, 
+    rgba(10, 46, 31, 0.98) 0%, 
+    rgba(10, 46, 31, 0.95) 50%,
+    rgba(15, 55, 40, 0.98) 100%
+  ) !important;
+  border: 1px solid rgba(184, 233, 45, 0.2) !important;
+  border-radius: 24px !important;
+  box-shadow: 
+    0 25px 50px -12px rgba(0, 0, 0, 0.5),
+    0 0 100px rgba(184, 233, 45, 0.1) !important;
+  z-index: 99999 !important;
+  overflow: hidden !important;
+  display: flex !important;
+  flex-direction: column !important;
+  backdrop-filter: blur(20px) saturate(180%) !important;
+}
+
+/* Override any inline styles from Framer Motion */
+.ai-panel[style] {
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+}
+
+/* Ensure content inside panel is properly contained */
+.ai-panel > * {
+  position: relative !important;
+  transform: none !important;
+}
+
+/* ========================================
+   NAVIGATION DROPDOWN - DYNAMIC POSITIONING
+   ======================================== */
+
+/* Parent container */
+.navbar-dropdown {
+  position: relative !important;
+  display: inline-block !important;
+  transform: none !important;
+  z-index: auto !important;
+}
+
+/* Dropdown trigger */
+.navbar-dropdown-trigger {
+  position: relative !important;
+  z-index: auto !important;
+  transform: none !important;
+}
+
+/* Dropdown Menu - Let JS handle positioning */
+.dropdown-menu,
+.dropdown-menu-vertical {
+  /* Critical resets */
+  position: fixed !important;
+  margin: 0 !important;
+  transform: none !important;
+  
+  /* Remove any inherited positioning */
+  left: auto !important;
+  right: auto !important;
+  top: auto !important;
+  bottom: auto !important;
+  
+  /* Styling */
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0.25rem !important;
+  padding: 0.75rem !important;
+  background: rgba(10, 46, 31, 0.98) !important;
+  backdrop-filter: blur(20px) saturate(180%) !important;
+  border: 1px solid rgba(184, 233, 45, 0.15) !important;
+  border-radius: 12px !important;
+  box-shadow: 
+    0 20px 40px rgba(0, 0, 0, 0.6),
+    0 0 60px rgba(184, 233, 45, 0.05) !important;
+  min-width: 280px !important;
+  width: 280px !important;
+  max-width: 280px !important;
+  z-index: 99999 !important;
+}
+
+/* Dropdown items */
+.dropdown-item {
+  position: relative !important;
+  transform: none !important;
+  display: flex !important;
+  align-items: center !important;
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 0.875rem 1.25rem !important;
+  text-decoration: none !important;
+  color: rgba(255, 255, 255, 0.9) !important;
+  background: transparent !important;
+  border-radius: 0.625rem !important;
+  transition: all 0.2s ease !important;
+}
+
+.dropdown-item:hover {
+  background: linear-gradient(135deg, rgba(184, 233, 45, 0.1), rgba(230, 255, 92, 0.05)) !important;
+  transform: translateX(8px) !important;
+  color: #B8E92D !important;
+}
+
+/* ========================================
+   NAVIGATION BAR - FIXED POSITIONING
+   ======================================== */
+
+.navbar {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  width: 100% !important;
+  z-index: 1000 !important;
+  transform: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* ========================================
+   PREVENT PARENT TRANSFORMS
+   ======================================== */
+
+/* Main containers */
+#__next,
+.main-content,
+body {
+  transform: none !important;
+  transform-style: flat !important;
+  position: relative !important;
+}
+
+/* Hero section */
+.hero-fintech,
+.hero-pattern-grid,
+.hero-orb,
+.hero-particles {
+  transform-style: flat !important;
+}
+
+/* Ensure 3D transforms don't affect positioning */
+*:has(> .ai-panel),
+*:has(> .dropdown-menu) {
+  transform-style: flat !important;
+  transform: none !important;
+}
+
+/* ========================================
+   FRAMER MOTION OVERRIDES
+   ======================================== */
+
+/* Prevent Framer from overriding critical positioning */
+[data-projection-id] {
+  transform-style: flat !important;
+}
+
+/* AnimatePresence containers */
+[data-framer-portal] {
+  position: static !important;
+  transform: none !important;
+}
+
+/* ========================================
+   MOBILE RESPONSIVE OVERRIDES
+   ======================================== */
+
+@media (max-width: 768px) {
+  /* AI Panel - Full screen on mobile */
+  .ai-panel {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    transform: none !important;
+    margin: 0 !important;
+    border-radius: 0 !important;
+  }
+  
+  /* Dropdown - Below trigger on mobile */
+  .dropdown-menu,
+  .dropdown-menu-vertical {
+    position: absolute !important;
+    top: 100% !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    max-width: none !important;
+    margin-top: 0.5rem !important;
+  }
+}
+
+/* ========================================
+   EXTREME SPECIFICITY OVERRIDES
+   ======================================== */
+
+/* Use ID selectors for maximum specificity if needed */
+body .ai-panel-backdrop,
+html body .ai-panel-backdrop {
+  position: fixed !important;
+  left: 0 !important;
+  top: 0 !important;
+}
+
+body .ai-panel,
+html body .ai-panel {
+  position: fixed !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+}
+
+/* ========================================
+   INLINE STYLE OVERRIDES
+   ======================================== */
+
+/* Override any inline styles */
+[style*="left: 0"] .dropdown-menu {
+  left: auto !important;
+}
+
+[style*="transform"] .ai-panel {
+  transform: translate(-50%, -50%) !important;
+}
+
+/* ========================================
+   DEBUG MODE (uncomment to troubleshoot)
+   ======================================== */
+/*
+.ai-panel {
+  outline: 5px solid red !important;
+  background: rgba(255, 0, 0, 0.1) !important;
+}
+
+.ai-panel::before {
+  content: "AI PANEL - Should be centered" !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  background: red !important;
+  color: white !important;
+  padding: 10px !important;
+  z-index: 999999 !important;
+}
+
+.dropdown-menu {
+  outline: 5px solid blue !important;
+  background: rgba(0, 0, 255, 0.1) !important;
+}
+
+.dropdown-menu::before {
+  content: "DROPDOWN - Should be below Services" !important;
+  position: absolute !important;
+  top: -30px !important;
+  left: 0 !important;
+  background: blue !important;
+  color: white !important;
+  padding: 5px !important;
+  z-index: 999999 !important;
+  white-space: nowrap !important;
+}
+*/

@@ -1,0 +1,175 @@
+/* ================================
+   CORRECCIONES FINALES NAVBAR - MERCATOP
+   Toggle móvil y posición dropdown
+   ================================ */
+
+/* =========================
+   1. NAVBAR TOGGLE - SOLO MÓVIL
+   ========================= */
+.navbar-toggle {
+  display: none !important; /* Oculto en desktop */
+  width: 40px;
+  height: 40px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  position: relative;
+  transition: all 0.3s ease;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+/* Líneas del menú hamburguesa */
+.navbar-toggle span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 2px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+
+/* Hover effect */
+.navbar-toggle:hover span {
+  background: #B8E92D;
+}
+
+/* Icono X cuando está abierto */
+.navbar-toggle svg {
+  color: white;
+  transition: color 0.3s ease;
+}
+
+.navbar-toggle:hover svg {
+  color: #B8E92D;
+}
+
+/* =========================
+   2. MEDIA QUERY - MOSTRAR TOGGLE SOLO EN MÓVIL
+   ========================= */
+@media (max-width: 768px) {
+  .navbar-toggle {
+    display: flex !important; /* Visible en móvil */
+  }
+  
+  .navbar-desktop {
+    display: none !important;
+  }
+  
+  /* Ajustar padding del navbar en móvil */
+  .navbar-content {
+    padding: 0 1rem !important;
+  }
+}
+
+/* =========================
+   3. DROPDOWN POSITION FIX
+   ========================= */
+/* Acercar el dropdown al navbar */
+.dropdown-menu[style*="position: fixed"] {
+  /* El top se calcula dinámicamente, pero podemos ajustar con margin */
+  margin-top: -6px !important;
+}
+
+/* Flecha indicadora ajustada para la nueva posición */
+.dropdown-menu::after {
+  content: '';
+  position: absolute;
+  top: -7px;
+  left: 50%;
+  width: 14px;
+  height: 14px;
+  background: #0A2E1F;
+  border-top: 2px solid rgba(184, 233, 45, 0.25);
+  border-left: 2px solid rgba(184, 233, 45, 0.25);
+  transform: translateX(-50%) rotate(45deg);
+  z-index: 2;
+  box-shadow: -2px -2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* =========================
+   4. ASEGURAR VISIBILIDAD
+   ========================= */
+/* Desktop only */
+@media (min-width: 769px) {
+  .navbar {
+    overflow: visible !important;
+  }
+  
+  .navbar-content,
+  .navbar-desktop,
+  .navbar-links,
+  .container {
+    overflow: visible !important;
+  }
+}
+
+/* =========================
+   5. ANIMACIONES MEJORADAS
+   ========================= */
+/* Animación del menú móvil */
+@media (max-width: 768px) {
+  .navbar-mobile {
+    background: #0A2E1F !important;
+    border-bottom: 1px solid rgba(184, 233, 45, 0.1) !important;
+  }
+  
+  /* Animación suave para el menú móvil */
+  .navbar-mobile[style*="height: auto"] {
+    animation: mobileMenuSlide 0.3s ease-out forwards;
+  }
+  
+  @keyframes mobileMenuSlide {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+/* =========================
+   6. FOCUS STATES
+   ========================= */
+.navbar-toggle:focus {
+  outline: 2px solid rgba(184, 233, 45, 0.5);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+.navbar-toggle:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* =========================
+   7. TRANSICIONES DEL TOGGLE
+   ========================= */
+/* Animación de hamburguesa a X */
+.navbar-toggle span:nth-child(1) {
+  transform-origin: left center;
+}
+
+.navbar-toggle span:nth-child(3) {
+  transform-origin: left center;
+}
+
+/* Cuando el menú está abierto (si decides animar las líneas) */
+.navbar-toggle.is-open span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, -5px);
+}
+
+.navbar-toggle.is-open span:nth-child(2) {
+  opacity: 0;
+  transform: translateX(20px);
+}
+
+.navbar-toggle.is-open span:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, 5px);
+}

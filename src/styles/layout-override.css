@@ -1,0 +1,91 @@
+/* ================================
+   Layout Override Styles
+   Ensure consistent green theme throughout
+   ================================ */
+
+/* Force green background on all major containers */
+html,
+body,
+#__next,
+#root,
+.app,
+main,
+div[class*="layout"],
+div[class*="container"],
+div[class*="wrapper"] {
+  background-color: #0A2E1F !important;
+}
+
+/* Remove any gaps between sections */
+section + section,
+div + footer,
+main + footer,
+section + footer {
+  margin-top: 0 !important;
+}
+
+/* Ensure all sections have transparent or green backgrounds */
+section {
+  background-color: transparent !important;
+}
+
+/* Remove any default NextJS blue backgrounds */
+div[style*="#0a0f1b"],
+div[style*="rgb(10, 15, 27)"],
+div[style*="background: #0a0f1b"],
+div[style*="background-color: #0a0f1b"] {
+  background-color: #0A2E1F !important;
+}
+
+/* Override any theme colors that might be blue */
+[class*="bg-blue"],
+[class*="background-blue"],
+[style*="background-color: blue"],
+[style*="background: blue"] {
+  background-color: #0A2E1F !important;
+}
+
+/* Ensure footer flows seamlessly */
+footer {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+  background-color: #0A2E1F !important;
+}
+
+/* Remove any padding/margin that could cause gaps */
+main > *:last-child {
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+/* Fix any container that might have blue background */
+.container,
+.container-fluid,
+.main-container,
+.content-container {
+  background-color: transparent !important;
+}
+
+/* Override any dark theme blue colors */
+@media (prefers-color-scheme: dark) {
+  * {
+    --background: #0A2E1F !important;
+    --foreground: #FFFFFF !important;
+  }
+  
+  body {
+    background: #0A2E1F !important;
+  }
+}
+
+/* Remove any box shadows that might show blue */
+* {
+  box-shadow: none !important;
+}
+
+/* Re-add only green-tinted shadows where needed */
+.card,
+.button:hover,
+.btn:hover {
+  box-shadow: 0 4px 20px rgba(184, 233, 45, 0.1) !important;
+}

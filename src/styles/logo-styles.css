@@ -1,0 +1,59 @@
+/* ================================
+   Logo Styles for Navigation and Footer
+   ================================ */
+
+/* Navigation Logo */
+.navbar-brand .brand-icon,
+.brand-content .brand-icon {
+  width: 40px !important;
+  height: 40px !important;
+  object-fit: cover;
+  border-radius: 10px;
+  background: white;
+  padding: 3px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+/* Footer Logo */
+.footer-logo-icon {
+  width: 40px !important;
+  height: 40px !important;
+  object-fit: cover;
+  border-radius: 10px;
+  background: white;
+  padding: 3px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  filter: none !important; /* Remove the green filter that was for the icon */
+  transition: all 0.3s ease;
+}
+
+/* Hover effects */
+.navbar-brand:hover .brand-icon,
+.footer-logo-link:hover .footer-logo-icon {
+  transform: scale(1.1) rotate(5deg);
+  box-shadow: 0 4px 16px rgba(184, 233, 45, 0.3);
+}
+
+/* Remove any green tint from images */
+.brand-icon img,
+.footer-logo-icon img {
+  filter: none !important;
+}
+
+/* Ensure proper spacing */
+.brand-content,
+.footer-logo-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  .navbar-brand .brand-icon,
+  .footer-logo-icon {
+    width: 32px !important;
+    height: 32px !important;
+  }
+}

@@ -1,0 +1,111 @@
+/* ================================
+   CENTRADO PERFECTO DEL DROPDOWN - MERCATOP
+   Última corrección para alineación exacta
+   ================================ */
+
+/* Reset completo para el dropdown */
+.dropdown-menu {
+  /* Reset de márgenes y transforms */
+  margin: 0 !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  transform: none !important;
+  left: auto !important;
+  right: auto !important;
+}
+
+/* El dropdown cuando tiene position: fixed aplicado inline */
+.dropdown-menu[style*="position: fixed"] {
+  /* Usar los valores del style inline sin interferir */
+  margin: 0 !important;
+  transform: none !important;
+}
+
+/* Asegurar que el portal no agregue estilos adicionales */
+#portal-root {
+  margin: 0 !important;
+  padding: 0 !important;
+  transform: none !important;
+}
+
+#portal-root > * {
+  margin: 0 !important;
+  transform: none !important;
+}
+
+/* El botón Services debe tener un ancho consistente */
+.navbar-dropdown {
+  min-width: 100px !important; /* Ancho mínimo para el contenedor */
+}
+
+.navbar-dropdown-trigger {
+  padding-left: 16px !important;
+  padding-right: 16px !important;
+  min-width: 100px !important;
+  justify-content: center !important;
+}
+
+/* Asegurar que el icono del dropdown no afecte el centrado */
+.dropdown-icon {
+  margin-left: 6px !important;
+  flex-shrink: 0 !important;
+}
+
+/* Estado activo del dropdown */
+.navbar-dropdown.dropdown-open .navbar-dropdown-trigger {
+  color: #B8E92D !important;
+}
+
+.navbar-dropdown.dropdown-open .dropdown-icon {
+  transform: rotate(180deg) !important;
+  color: #B8E92D !important;
+}
+
+/* Flecha indicadora del dropdown centrada */
+.dropdown-menu::after {
+  content: '';
+  position: absolute;
+  top: -7px;
+  left: 50%;
+  width: 14px;
+  height: 14px;
+  background: #0A2E1F;
+  border-top: 2px solid rgba(184, 233, 45, 0.25);
+  border-left: 2px solid rgba(184, 233, 45, 0.25);
+  transform: translateX(-50%) rotate(45deg);
+  z-index: 1;
+}
+
+/* Debug: Visualizar el centro (descomenta para ver) */
+/*
+.navbar-dropdown {
+  position: relative;
+  background: rgba(255, 0, 0, 0.1);
+}
+
+.navbar-dropdown::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 2px;
+  height: 200%;
+  background: red;
+  z-index: 99999;
+  pointer-events: none;
+}
+
+.dropdown-menu::before {
+  content: '';
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  width: 2px;
+  height: 20px;
+  background: blue;
+  z-index: 99999;
+  pointer-events: none;
+}
+*/

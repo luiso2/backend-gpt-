@@ -1,0 +1,220 @@
+/* ================================
+   Footer Override Styles - Final Fixes
+   Ensure proper alignment and colors
+   ================================ */
+
+/* Ensure footer has correct background throughout */
+.footer-modern,
+footer.footer-modern {
+  background-color: #0A2E1F !important;
+  background: #0A2E1F !important;
+  margin-top: 0 !important;
+  border-top: 1px solid rgba(184, 233, 45, 0.1) !important;
+}
+
+/* Newsletter section styling */
+.footer-newsletter {
+  background: #0F4C3A !important;
+  background-image: linear-gradient(135deg, rgba(184, 233, 45, 0.06) 0%, rgba(230, 255, 92, 0.02) 100%) !important;
+  border-bottom: 1px solid rgba(184, 233, 45, 0.1) !important;
+}
+
+/* Main footer section */
+.footer-main {
+  background: #0A2E1F !important;
+  padding: 50px 0 40px !important;
+}
+
+/* Footer grid adjustments */
+.footer-grid {
+  grid-template-columns: 2fr 1fr 1fr 1.2fr !important;
+  gap: 40px !important;
+}
+
+/* Column titles with lime green */
+.footer-column-title {
+  color: #B8E92D !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.8px !important;
+  margin-bottom: 18px !important;
+}
+
+/* Footer links styling */
+.footer-link,
+.footer-contact-item {
+  color: rgba(255, 255, 255, 0.75) !important;
+  font-size: 14px !important;
+  line-height: 1.8 !important;
+}
+
+.footer-link:hover,
+.footer-contact-item:hover {
+  color: #E6FF5C !important;
+}
+
+/* Contact icons */
+.contact-icon {
+  color: #B8E92D !important;
+  width: 18px !important;
+  height: 18px !important;
+}
+
+/* Social links styling */
+.social-link {
+  width: 40px !important;
+  height: 40px !important;
+  background: rgba(26, 95, 72, 0.4) !important;
+  border: 1px solid rgba(184, 233, 45, 0.15) !important;
+  border-radius: 10px !important;
+  transition: all 0.3s ease !important;
+}
+
+.social-link:hover {
+  background: rgba(184, 233, 45, 0.15) !important;
+  border-color: rgba(184, 233, 45, 0.4) !important;
+  transform: translateY(-2px) !important;
+}
+
+.social-icon {
+  color: rgba(255, 255, 255, 0.8) !important;
+  width: 18px !important;
+  height: 18px !important;
+}
+
+.social-link:hover .social-icon {
+  color: #B8E92D !important;
+}
+
+/* Footer logo text gradient */
+.footer-logo-text {
+  background: linear-gradient(135deg, #B8E92D 0%, #E6FF5C 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+  font-size: 22px !important;
+  font-weight: 700 !important;
+}
+
+/* Footer tagline */
+.footer-tagline {
+  color: rgba(255, 255, 255, 0.75) !important;
+  font-size: 14px !important;
+  line-height: 1.7 !important;
+  margin-bottom: 20px !important;
+}
+
+/* Links list spacing */
+.footer-links-list {
+  gap: 10px !important;
+}
+
+.footer-links-list li {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Contact list spacing */
+.footer-contact-list {
+  gap: 10px !important;
+}
+
+/* Bottom bar */
+.footer-bottom {
+  background: #051815 !important;
+  border-top: 1px solid rgba(184, 233, 45, 0.08) !important;
+  padding: 20px 0 !important;
+}
+
+.footer-copyright {
+  color: rgba(255, 255, 255, 0.6) !important;
+  font-size: 13px !important;
+}
+
+.legal-link {
+  color: rgba(255, 255, 255, 0.6) !important;
+  font-size: 13px !important;
+}
+
+.legal-link:hover {
+  color: #B8E92D !important;
+}
+
+.legal-separator {
+  color: rgba(255, 255, 255, 0.3) !important;
+  margin: 0 8px !important;
+}
+
+/* Newsletter button */
+.newsletter-button {
+  background: linear-gradient(135deg, #B8E92D 0%, #E6FF5C 100%) !important;
+  color: #0A2E1F !important;
+  font-weight: 600 !important;
+  padding: 14px 28px !important;
+  border-radius: 10px !important;
+  box-shadow: 0 4px 16px rgba(184, 233, 45, 0.25) !important;
+}
+
+.newsletter-button:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 24px rgba(184, 233, 45, 0.35) !important;
+}
+
+/* Ensure proper spacing */
+.container-footer {
+  max-width: 1200px !important;
+  margin: 0 auto !important;
+  padding: 0 24px !important;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .footer-grid {
+    grid-template-columns: 1fr !important;
+    gap: 32px !important;
+    text-align: center !important;
+  }
+  
+  .footer-social-links {
+    justify-content: center !important;
+  }
+  
+  .footer-links-list,
+  .footer-contact-list {
+    align-items: center !important;
+  }
+  
+  .footer-bottom-content {
+    flex-direction: column !important;
+    gap: 12px !important;
+  }
+}
+
+/* Remove any blue/dark backgrounds */
+footer * {
+  background-color: transparent !important;
+}
+
+footer > div {
+  background-color: inherit !important;
+}
+
+/* Fix newsletter section background */
+.footer-newsletter .container-footer {
+  background: transparent !important;
+}
+
+/* Ensure text is visible */
+.footer-modern * {
+  color: inherit;
+}
+
+/* Remove any unwanted margins */
+.footer-modern > *:first-child {
+  margin-top: 0 !important;
+}
+
+.footer-modern > *:last-child {
+  margin-bottom: 0 !important;
+}

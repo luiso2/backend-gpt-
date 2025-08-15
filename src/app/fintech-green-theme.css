@@ -1,0 +1,1130 @@
+/* ================================
+   FINTECH GREEN THEME
+   Modern Financial Dashboard Design
+   ================================ */
+
+:root {
+  /* Brand Colors - MercaTop Green Theme */
+  --fintech-dark-green: #0F3A2F;
+  --fintech-medium-green: #1A5446;
+  --fintech-light-green: #2B6B57;
+  --fintech-lime: #7FD858;
+  --fintech-yellow: #B8E92D;
+  
+  /* Text Colors */
+  --fintech-text-primary: #FFFFFF;
+  --fintech-text-secondary: #C8D6E5;
+  --fintech-text-muted: #8B9CAD;
+  
+  /* Background Colors */
+  --fintech-bg-primary: #0A2E1F;
+  --fintech-bg-secondary: #0F4C3A;
+  --fintech-bg-card: #1A5F48;
+  --fintech-bg-hover: #2B6B57;
+  
+  /* Accent Colors */
+  --fintech-accent-lime: #7FD858;
+  --fintech-accent-yellow: #B8E92D;
+  --fintech-accent-green: #4ADE80;
+  
+  /* Status Colors */
+  --fintech-success: #4ADE80;
+  --fintech-warning: #FFB300;
+  --fintech-error: #FF5252;
+  --fintech-info: #40C4FF;
+}
+
+/* ================================
+   Global Overrides
+   ================================ */
+body {
+  background: #0A2E1F !important; /* Force MERCATOP dark green */
+  color: var(--fintech-text-primary);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+/* ================================
+   Navigation - Fintech Green
+   ================================ */
+.navbar-fintech {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: rgba(10, 46, 31, 0.95);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(184, 233, 45, 0.1);
+  transition: all 0.3s ease;
+}
+
+.navbar-fintech.scrolled {
+  background: rgba(10, 46, 31, 0.98);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.navbar-fintech .navbar-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 2rem;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.navbar-fintech .logo-text {
+  font-size: 1.75rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--fintech-accent-lime), var(--fintech-accent-yellow));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: -0.02em;
+}
+
+.navbar-fintech .navbar-nav {
+  display: flex;
+  align-items: center;
+  gap: 2.5rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar-fintech .navbar-nav-link {
+  color: var(--fintech-text-secondary);
+  font-weight: 500;
+  font-size: 0.9rem;
+  text-decoration: none;
+  transition: color 0.3s ease;
+  position: relative;
+}
+
+.navbar-fintech .navbar-nav-link:hover {
+  color: var(--fintech-text-primary);
+}
+
+.navbar-fintech .navbar-nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--fintech-accent-lime);
+  transition: width 0.3s ease;
+}
+
+.navbar-fintech .navbar-nav-link:hover::after {
+  width: 100%;
+}
+
+.navbar-fintech .btn-primary {
+  background: var(--fintech-accent-lime);
+  color: var(--fintech-bg-primary);
+  border: none;
+  padding: 0.75rem 1.75rem;
+  font-weight: 600;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.navbar-fintech .btn-primary:hover {
+  background: var(--fintech-accent-yellow);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(184, 233, 45, 0.3);
+}
+
+/* ================================
+   Hero Section - Fintech Green
+   ================================ */
+.hero-fintech {
+  position: relative;
+  min-height: 100vh;
+  background: var(--fintech-bg-primary);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  padding: 120px 2rem 80px;
+}
+
+/* Decorative Elements */
+.hero-fintech::before {
+  content: '';
+  position: absolute;
+  top: -200px;
+  right: -200px;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, var(--fintech-accent-lime) 0%, transparent 70%);
+  opacity: 0.1;
+  border-radius: 50%;
+  animation: float-slow 20s ease-in-out infinite;
+}
+
+.hero-fintech::after {
+  content: '';
+  position: absolute;
+  bottom: -150px;
+  left: -150px;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, var(--fintech-accent-yellow) 0%, transparent 70%);
+  opacity: 0.08;
+  border-radius: 50%;
+  animation: float-slow 25s ease-in-out infinite reverse;
+}
+
+@keyframes float-slow {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(30px, -30px) scale(1.05); }
+  66% { transform: translate(-20px, 20px) scale(0.95); }
+}
+
+.hero-fintech-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  max-width: 1280px;
+  margin: 0 auto;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-fintech-text {
+  max-width: 600px;
+}
+
+.hero-fintech-badge {
+  display: inline-block;
+  background: rgba(184, 233, 45, 0.1);
+  color: var(--fintech-accent-lime);
+  padding: 0.5rem 1.25rem;
+  border-radius: 30px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  border: 1px solid rgba(184, 233, 45, 0.2);
+}
+
+.hero-fintech-title {
+  font-size: clamp(2.5rem, 5vw, 3.5rem);
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+  letter-spacing: -0.02em;
+}
+
+.hero-fintech-subtitle {
+  font-size: 1.125rem;
+  color: var(--fintech-text-secondary);
+  line-height: 1.7;
+  margin-bottom: 2.5rem;
+}
+
+.hero-fintech .btn-lg {
+  background: var(--fintech-accent-lime);
+  color: var(--fintech-bg-primary);
+  padding: 1rem 2.5rem;
+  font-size: 1.125rem;
+  font-weight: 700;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  text-decoration: none;
+}
+
+.hero-fintech .btn-lg:hover {
+  background: var(--fintech-accent-yellow);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 32px rgba(184, 233, 45, 0.4);
+}
+
+/* Invoice Mockup */
+.hero-fintech-visual {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.invoice-mockup {
+  background: rgba(26, 95, 72, 0.5);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(184, 233, 45, 0.2);
+  border-radius: 20px;
+  padding: 2.5rem;
+  width: 100%;
+  max-width: 450px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease;
+}
+
+.invoice-mockup.floating {
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
+
+.invoice-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.invoice-logo {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--fintech-accent-lime);
+}
+
+.invoice-status {
+  background: var(--fintech-success);
+  color: var(--fintech-bg-primary);
+  padding: 0.375rem 1rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+.invoice-details {
+  margin-bottom: 2rem;
+}
+
+.invoice-number {
+  color: var(--fintech-text-secondary);
+  font-size: 0.875rem;
+  margin-bottom: 0.5rem;
+}
+
+.invoice-amount {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--fintech-text-primary);
+  margin-bottom: 1.5rem;
+}
+
+.invoice-items {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.invoice-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background: rgba(184, 233, 45, 0.05);
+  border-radius: 12px;
+  font-size: 0.875rem;
+}
+
+.invoice-item span:first-child {
+  color: var(--fintech-text-secondary);
+}
+
+.invoice-item span:last-child {
+  color: var(--fintech-text-primary);
+  font-weight: 600;
+}
+
+.invoice-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.invoice-btn {
+  flex: 1;
+  padding: 0.75rem 1.5rem;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 0.875rem;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border: none;
+}
+
+.invoice-btn-primary {
+  background: var(--fintech-accent-lime);
+  color: var(--fintech-bg-primary);
+}
+
+.invoice-btn-primary:hover {
+  background: var(--fintech-accent-yellow);
+  transform: translateY(-2px);
+}
+
+.invoice-btn-secondary {
+  background: transparent;
+  color: var(--fintech-text-secondary);
+  border: 1px solid rgba(184, 233, 45, 0.3);
+}
+
+.invoice-btn-secondary:hover {
+  background: rgba(184, 233, 45, 0.1);
+  border-color: var(--fintech-accent-lime);
+  color: var(--fintech-text-primary);
+}
+
+/* ================================
+   Features Section - Fintech Green
+   ================================ */
+.features-fintech {
+  padding: 6rem 2rem;
+  background: var(--fintech-bg-secondary);
+  position: relative;
+}
+
+.features-fintech-container {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.features-fintech-header {
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto 4rem;
+}
+
+.features-fintech-title {
+  font-size: 2.75rem;
+  font-weight: 800;
+  margin-bottom: 1.5rem;
+  letter-spacing: -0.02em;
+}
+
+.features-fintech-subtitle {
+  font-size: 1.125rem;
+  color: var(--fintech-text-secondary);
+  line-height: 1.7;
+}
+
+.features-fintech-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 2rem;
+}
+
+.feature-fintech-card {
+  background: rgba(26, 95, 72, 0.3);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(184, 233, 45, 0.1);
+  border-radius: 16px;
+  padding: 2.5rem;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.feature-fintech-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--fintech-accent-lime), var(--fintech-accent-yellow));
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.feature-fintech-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  border-color: rgba(184, 233, 45, 0.3);
+}
+
+.feature-fintech-card:hover::before {
+  transform: scaleX(1);
+}
+
+.feature-fintech-icon {
+  font-size: 3rem;
+  margin-bottom: 1.5rem;
+  display: inline-block;
+}
+
+.feature-fintech-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: var(--fintech-text-primary);
+}
+
+.feature-fintech-description {
+  color: var(--fintech-text-secondary);
+  line-height: 1.7;
+}
+
+/* ================================
+   Dashboard Section - Fintech Green
+   ================================ */
+.dashboard-fintech {
+  padding: 6rem 2rem;
+  background: var(--fintech-bg-primary);
+  position: relative;
+}
+
+.dashboard-fintech-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.dashboard-mockup {
+  background: rgba(26, 95, 72, 0.3);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(184, 233, 45, 0.2);
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.dashboard-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--fintech-text-primary);
+}
+
+.dashboard-period {
+  color: var(--fintech-text-secondary);
+  font-size: 0.875rem;
+}
+
+.dashboard-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.dashboard-stat {
+  background: rgba(184, 233, 45, 0.05);
+  padding: 1.5rem;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.dashboard-stat-value {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: var(--fintech-accent-lime);
+  margin-bottom: 0.5rem;
+}
+
+.dashboard-stat-label {
+  color: var(--fintech-text-secondary);
+  font-size: 0.875rem;
+}
+
+.dashboard-chart {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  height: 200px;
+  margin-top: 2rem;
+}
+
+.dashboard-bar {
+  width: 14%;
+  background: linear-gradient(to top, var(--fintech-accent-lime), var(--fintech-accent-yellow));
+  border-radius: 8px 8px 0 0;
+  transition: all 0.3s ease;
+}
+
+.dashboard-bar:hover {
+  transform: scaleY(1.1);
+}
+
+.dashboard-bar-1 { height: 60%; }
+.dashboard-bar-2 { height: 80%; }
+.dashboard-bar-3 { height: 45%; }
+.dashboard-bar-4 { height: 90%; }
+.dashboard-bar-5 { height: 70%; }
+.dashboard-bar-6 { height: 85%; }
+
+.dashboard-fintech-content {
+  max-width: 500px;
+}
+
+.dashboard-fintech-title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 1.5rem;
+  letter-spacing: -0.02em;
+}
+
+.dashboard-fintech-description {
+  color: var(--fintech-text-secondary);
+  line-height: 1.7;
+  margin-bottom: 2rem;
+}
+
+.dashboard-fintech-features {
+  list-style: none;
+  margin-bottom: 2.5rem;
+}
+
+.dashboard-fintech-feature {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.75rem 0;
+  color: var(--fintech-text-secondary);
+}
+
+.dashboard-fintech-feature-icon {
+  width: 24px;
+  height: 24px;
+  background: var(--fintech-accent-lime);
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* ================================
+   Testimonials Section - Fintech Green
+   ================================ */
+.testimonials-fintech {
+  padding: 6rem 2rem;
+  background: var(--fintech-bg-secondary);
+  position: relative;
+}
+
+.testimonials-fintech-container {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.testimonials-fintech-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.testimonial-fintech-card {
+  background: rgba(26, 95, 72, 0.3);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(184, 233, 45, 0.1);
+  border-radius: 16px;
+  padding: 2.5rem;
+  transition: all 0.3s ease;
+}
+
+.testimonial-fintech-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  border-color: rgba(184, 233, 45, 0.3);
+}
+
+.testimonial-fintech-quote {
+  font-size: 1.125rem;
+  color: var(--fintech-text-primary);
+  line-height: 1.7;
+  margin-bottom: 2rem;
+  font-style: italic;
+}
+
+.testimonial-fintech-author {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.testimonial-fintech-avatar {
+  width: 48px;
+  height: 48px;
+  background: var(--fintech-accent-lime);
+  color: var(--fintech-bg-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1.125rem;
+}
+
+.testimonial-fintech-info {
+  flex: 1;
+}
+
+.testimonial-fintech-name {
+  font-weight: 700;
+  color: var(--fintech-text-primary);
+  margin-bottom: 0.25rem;
+}
+
+.testimonial-fintech-company {
+  color: var(--fintech-text-secondary);
+  font-size: 0.875rem;
+}
+
+/* ================================
+   CTA Section - Fintech Green
+   ================================ */
+.cta-fintech {
+  padding: 8rem 2rem;
+  background: linear-gradient(135deg, var(--fintech-bg-secondary) 0%, var(--fintech-bg-primary) 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.cta-fintech::before {
+  content: '';
+  position: absolute;
+  top: -100px;
+  left: -100px;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, var(--fintech-accent-lime) 0%, transparent 70%);
+  opacity: 0.1;
+  border-radius: 50%;
+}
+
+.cta-fintech-content {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+.cta-fintech-title {
+  font-size: 3rem;
+  font-weight: 800;
+  margin-bottom: 1.5rem;
+  letter-spacing: -0.02em;
+}
+
+.cta-fintech-subtitle {
+  font-size: 1.25rem;
+  color: var(--fintech-text-secondary);
+  line-height: 1.7;
+  margin-bottom: 3rem;
+}
+
+.cta-fintech-actions {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.cta-fintech-button {
+  padding: 1rem 2.5rem;
+  font-weight: 700;
+  font-size: 1.125rem;
+  border-radius: 12px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  display: inline-block;
+}
+
+.cta-fintech-primary {
+  background: var(--fintech-accent-lime);
+  color: var(--fintech-bg-primary);
+}
+
+.cta-fintech-primary:hover {
+  background: var(--fintech-accent-yellow);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 32px rgba(184, 233, 45, 0.4);
+}
+
+.cta-fintech-secondary {
+  background: transparent;
+  color: var(--fintech-text-primary);
+  border: 2px solid rgba(184, 233, 45, 0.5);
+}
+
+.cta-fintech-secondary:hover {
+  background: rgba(184, 233, 45, 0.1);
+  border-color: var(--fintech-accent-lime);
+}
+
+/* ================================
+   Footer - Fintech Green
+   ================================ */
+.footer-fintech {
+  background: var(--fintech-bg-primary);
+  border-top: 1px solid rgba(184, 233, 45, 0.1);
+  padding: 4rem 2rem 2rem;
+}
+
+/* ================================
+   Language Toggle Button
+   ================================ */
+.language-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: rgba(184, 233, 45, 0.1);
+  border: 1px solid rgba(184, 233, 45, 0.3);
+  border-radius: 8px;
+  color: var(--fintech-text-primary);
+  font-weight: 500;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.language-toggle:hover {
+  background: rgba(184, 233, 45, 0.2);
+  border-color: var(--fintech-accent-lime);
+  transform: translateY(-2px);
+}
+
+/* ================================
+   Automation Mockup
+   ================================ */
+.automation-mockup {
+  background: rgba(26, 95, 72, 0.5);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(184, 233, 45, 0.2);
+  border-radius: 20px;
+  padding: 2rem;
+  width: 100%;
+  max-width: 500px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease;
+}
+
+.automation-mockup.floating {
+  animation: float 6s ease-in-out infinite;
+}
+
+.automation-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.automation-logo {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--fintech-accent-lime);
+}
+
+.automation-status {
+  background: var(--fintech-success);
+  color: var(--fintech-bg-primary);
+  padding: 0.375rem 1rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+.workflow-preview {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+  padding: 2rem 0;
+}
+
+.workflow-node {
+  background: rgba(184, 233, 45, 0.1);
+  border: 1px solid rgba(184, 233, 45, 0.3);
+  border-radius: 12px;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.workflow-node:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(184, 233, 45, 0.2);
+}
+
+.workflow-node-trigger {
+  background: rgba(230, 255, 92, 0.1);
+  border-color: rgba(230, 255, 92, 0.3);
+}
+
+.workflow-node-action {
+  background: rgba(184, 233, 45, 0.15);
+  border-color: var(--fintech-accent-lime);
+}
+
+.workflow-node-output {
+  background: rgba(74, 222, 128, 0.1);
+  border-color: rgba(74, 222, 128, 0.3);
+}
+
+.node-icon {
+  font-size: 1.5rem;
+}
+
+.node-label {
+  font-size: 0.75rem;
+  color: var(--fintech-text-secondary);
+  text-align: center;
+}
+
+.workflow-connection {
+  flex: 1;
+  height: 2px;
+  background: linear-gradient(to right, transparent, var(--fintech-accent-lime), transparent);
+  margin: 0 -0.5rem;
+  position: relative;
+}
+
+.workflow-connection::after {
+  content: '→';
+  position: absolute;
+  right: -10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--fintech-accent-lime);
+  font-size: 1.25rem;
+}
+
+.automation-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.stat-item {
+  background: rgba(184, 233, 45, 0.05);
+  padding: 1rem;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.stat-label {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--fintech-text-secondary);
+  margin-bottom: 0.5rem;
+}
+
+.stat-value {
+  display: block;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--fintech-accent-lime);
+}
+
+/* ================================
+   Recent Invoices Card
+   ================================ */
+.recent-invoices-card {
+  background: rgba(26, 95, 72, 0.3);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(184, 233, 45, 0.2);
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.recent-invoices-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--fintech-text-primary);
+  margin-bottom: 1.5rem;
+}
+
+.invoice-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.invoice-list-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background: rgba(184, 233, 45, 0.05);
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+.invoice-list-item:hover {
+  background: rgba(184, 233, 45, 0.1);
+  transform: translateX(4px);
+}
+
+.invoice-list-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.invoice-list-number {
+  color: var(--fintech-accent-lime);
+  font-weight: 600;
+  font-size: 0.875rem;
+}
+
+.invoice-list-client {
+  color: var(--fintech-text-secondary);
+  font-size: 0.875rem;
+}
+
+.invoice-list-amount {
+  color: var(--fintech-text-primary);
+  font-weight: 700;
+  font-size: 1.125rem;
+}
+
+/* ================================
+   Responsive Design
+   ================================ */
+@media (max-width: 768px) {
+  .hero-fintech-content {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+  
+  .hero-fintech-text {
+    order: 2;
+  }
+  
+  .hero-fintech-visual {
+    order: 1;
+    margin-bottom: 2rem;
+  }
+  
+  .automation-mockup,
+  .invoice-mockup {
+    max-width: 350px;
+  }
+  
+  .workflow-preview {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .workflow-connection {
+    width: 2px;
+    height: 30px;
+    background: linear-gradient(to bottom, transparent, var(--fintech-accent-lime), transparent);
+    margin: -0.5rem 0;
+  }
+  
+  .workflow-connection::after {
+    content: '↓';
+    right: auto;
+    left: 50%;
+    bottom: -10px;
+    top: auto;
+    transform: translateX(-50%);
+  }
+  
+  .features-fintech-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .dashboard-fintech-container {
+    grid-template-columns: 1fr;
+  }
+  
+  .dashboard-fintech-visual {
+    order: 1;
+  }
+  
+  .dashboard-fintech-content {
+    order: 2;
+    text-align: center;
+    margin: 0 auto;
+  }
+  
+  .testimonials-fintech-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .navbar-fintech .navbar-nav {
+    display: none;
+  }
+  
+  .language-toggle {
+    padding: 0.375rem 0.75rem;
+    font-size: 0.75rem;
+  }
+  
+  .cta-fintech-title {
+    font-size: 2rem;
+  }
+}
+
+/* ================================
+   Decorative Shapes
+   ================================ */
+.shape-circle {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  background: var(--fintech-accent-lime);
+  border-radius: 50%;
+  opacity: 0.1;
+  filter: blur(40px);
+}
+
+.shape-dots {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  background-image: radial-gradient(circle, var(--fintech-accent-yellow) 2px, transparent 2px);
+  background-size: 20px 20px;
+  opacity: 0.3;
+}
+
+/* Scattered dots pattern */
+.hero-fintech::before,
+.features-fintech::before,
+.dashboard-fintech::before {
+  content: '';
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  background-image: radial-gradient(circle, rgba(184, 233, 45, 0.3) 2px, transparent 2px);
+  background-size: 30px 30px;
+  opacity: 0.5;
+}
+
+.hero-fintech::before {
+  top: 20%;
+  left: 5%;
+  transform: rotate(15deg);
+}
+
+.features-fintech::before {
+  bottom: 10%;
+  right: 5%;
+  transform: rotate(-20deg);
+}
+
+.dashboard-fintech::before {
+  top: 10%;
+  right: 10%;
+  transform: rotate(30deg);
+}

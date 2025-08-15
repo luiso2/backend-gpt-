@@ -1,0 +1,370 @@
+/* ================================
+   MERCATOP NAVIGATION & DROPDOWN - CONSOLIDATED
+   Todos los estilos necesarios en un solo archivo
+   ================================ */
+
+/* =========================
+   1. RESET DE OVERFLOW
+   ========================= */
+html,
+body,
+body > div,
+main,
+.main-content {
+  overflow-x: clip !important; /* Permite que elementos posicionados se muestren fuera */
+}
+
+/* =========================
+   2. NAVBAR BASE
+   ========================= */
+.navbar {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  height: 80px !important;
+  z-index: 1000 !important;
+  background: #0A2E1F !important;
+  border-bottom: 1px solid rgba(184, 233, 45, 0.08) !important;
+  overflow: visible !important;
+  transition: all 0.3s ease !important;
+  display: flex !important;
+}
+
+.navbar-scrolled {
+  background: #0A2E1F !important;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4) !important;
+}
+
+/* =========================
+   3. ALINEACIÓN DEL NAVBAR
+   ========================= */
+.navbar-content {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  height: 100% !important;
+  padding: 0 2rem !important;
+  max-width: 1280px !important;
+  margin: 0 auto !important;
+  overflow: visible !important;
+}
+
+.navbar-desktop {
+  display: flex !important;
+  align-items: center !important;
+  height: 100% !important;
+  gap: 2rem !important;
+  overflow: visible !important;
+}
+
+.navbar-links {
+  display: flex !important;
+  align-items: stretch !important;
+  height: 100% !important;
+  gap: 2rem !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  list-style: none !important;
+}
+
+/* =========================
+   4. ITEMS DEL NAVBAR
+   ========================= */
+.navbar-link,
+.navbar-dropdown {
+  display: flex !important;
+  align-items: center !important;
+  height: 100% !important;
+  position: relative !important;
+}
+
+.navbar-link,
+.navbar-dropdown-trigger {
+  color: rgba(255, 255, 255, 0.8) !important;
+  font-weight: 500 !important;
+  font-size: 0.9rem !important;
+  text-decoration: none !important;
+  transition: color 0.3s ease !important;
+  padding: 0 0.5rem !important;
+  background: none !important;
+  border: none !important;
+  cursor: pointer !important;
+  white-space: nowrap !important;
+}
+
+.navbar-link:hover,
+.navbar-dropdown-trigger:hover {
+  color: #B8E92D !important;
+  text-decoration: none !important;
+}
+
+/* Línea de hover */
+.navbar-link::after,
+.navbar-dropdown-trigger::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: #B8E92D;
+  transition: width 0.3s ease;
+}
+
+.navbar-link:hover::after,
+.navbar-dropdown-trigger:hover::after {
+  width: 100%;
+}
+
+/* =========================
+   5. DROPDOWN CONTAINER
+   ========================= */
+.navbar-dropdown {
+  overflow: visible !important;
+  z-index: 1100 !important;
+}
+
+.navbar-dropdown-trigger {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 4px !important;
+  height: 100% !important;
+}
+
+.dropdown-icon {
+  width: 14px !important;
+  height: 14px !important;
+  margin-left: 4px !important;
+  opacity: 0.7 !important;
+  transition: transform 0.3s ease, opacity 0.3s ease !important;
+}
+
+.navbar-dropdown:hover .dropdown-icon,
+.dropdown-icon.rotate {
+  transform: rotate(180deg) !important;
+  opacity: 1 !important;
+  color: #B8E92D !important;
+}
+
+/* =========================
+   6. PORTAL DROPDOWN
+   ========================= */
+#portal-root {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  z-index: 99999;
+  pointer-events: none;
+}
+
+#portal-root .dropdown-menu,
+.dropdown-menu {
+  pointer-events: auto !important;
+  position: fixed !important;
+  z-index: 99999 !important;
+  width: 280px !important;
+  min-width: 280px !important;
+  max-width: 280px !important;
+  
+  /* Estilo MERCATOP */
+  background: #0A2E1F !important;
+  background-image: 
+    linear-gradient(135deg, rgba(184, 233, 45, 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at top, rgba(184, 233, 45, 0.06) 0%, transparent 70%) !important;
+  
+  border: 2px solid rgba(184, 233, 45, 0.25) !important;
+  border-radius: 14px !important;
+  padding: 14px !important;
+  
+  /* Sombras */
+  box-shadow: 
+    0 24px 48px rgba(0, 0, 0, 0.7),
+    0 12px 24px rgba(0, 0, 0, 0.5),
+    0 0 0 1px rgba(184, 233, 45, 0.1) inset !important;
+  
+  /* Efectos */
+  backdrop-filter: blur(20px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+  
+  /* Animación */
+  animation: dropdownFadeIn 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  
+  /* Eliminar cualquier transform que pueda interferir */
+  transform: none !important;
+}
+
+/* Remover cualquier pseudo-elemento anterior */
+.dropdown-menu::before {
+  display: none !important;
+}
+
+@keyframes dropdownFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* =========================
+   7. DROPDOWN ITEMS
+   ========================= */
+.dropdown-item {
+  display: flex !important;
+  align-items: center !important;
+  gap: 14px !important;
+  padding: 16px 22px !important;
+  margin: 6px 0 !important;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.02) 100%) !important;
+  border: 1px solid rgba(184, 233, 45, 0.1) !important;
+  border-radius: 10px !important;
+  color: rgba(255, 255, 255, 0.95) !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  text-decoration: none !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  position: relative !important;
+  overflow: hidden !important;
+  cursor: pointer !important;
+}
+
+/* Efecto hover */
+.dropdown-item::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(184, 233, 45, 0.2) 0%, transparent 70%);
+  transform: translate(-50%, -50%);
+  transition: width 0.5s ease, height 0.5s ease;
+}
+
+.dropdown-item:hover::after {
+  width: 200%;
+  height: 200%;
+}
+
+.dropdown-item:hover {
+  background: linear-gradient(135deg, rgba(184, 233, 45, 0.15) 0%, rgba(184, 233, 45, 0.1) 100%) !important;
+  border-color: rgba(184, 233, 45, 0.3) !important;
+  color: #E6FF5C !important;
+  transform: translateX(10px) !important;
+  box-shadow: 0 6px 16px rgba(184, 233, 45, 0.2) !important;
+  text-decoration: none !important;
+}
+
+/* =========================
+   8. DROPDOWN ICONS
+   ========================= */
+.dropdown-item-icon {
+  width: 24px !important;
+  height: 24px !important;
+  color: #B8E92D !important;
+  opacity: 0.9 !important;
+  flex-shrink: 0 !important;
+  transition: all 0.3s ease !important;
+}
+
+.dropdown-item:hover .dropdown-item-icon {
+  color: #E6FF5C !important;
+  opacity: 1 !important;
+  transform: scale(1.2) rotate(10deg) !important;
+  filter: drop-shadow(0 0 8px rgba(184, 233, 45, 0.4)) !important;
+}
+
+/* =========================
+   9. NAVBAR ACTIONS
+   ========================= */
+.navbar-actions {
+  display: flex !important;
+  align-items: center !important;
+  height: 100% !important;
+  gap: 0 !important;
+}
+
+.language-toggle {
+  height: 40px !important;
+  margin-right: 16px !important;
+  padding: 0 16px !important;
+  background: rgba(255, 255, 255, 0.08) !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  border-radius: 8px !important;
+  color: white !important;
+  font-size: 0.875rem !important;
+  cursor: pointer !important;
+  transition: all 0.3s ease !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.5rem !important;
+}
+
+.language-toggle:hover {
+  background: rgba(184, 233, 45, 0.1) !important;
+  border-color: rgba(184, 233, 45, 0.3) !important;
+}
+
+.btn-primary.btn-sm {
+  height: 40px !important;
+  padding: 0 24px !important;
+  background: linear-gradient(135deg, #B8E92D 0%, #A8D92D 100%) !important;
+  border: none !important;
+  border-radius: 8px !important;
+  font-weight: 600 !important;
+  color: #0A2E1F !important;
+  transition: all 0.3s ease !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-decoration: none !important;
+}
+
+.btn-primary.btn-sm:hover {
+  background: linear-gradient(135deg, #E6FF5C 0%, #D6EF4C 100%) !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 10px 20px rgba(184, 233, 45, 0.25) !important;
+  text-decoration: none !important;
+}
+
+/* =========================
+   10. RESPONSIVO
+   ========================= */
+@media (max-width: 768px) {
+  .navbar-desktop {
+    display: none !important;
+  }
+  
+  /* Toggle móvil ya está definido en navigation-final-corrections.css */
+  
+  #portal-root .dropdown-menu {
+    display: none !important;
+  }
+}
+
+/* =========================
+   11. Z-INDEX HIERARCHY
+   ========================= */
+.hero,
+section,
+main > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* =========================
+   12. SAFARI FIX
+   ========================= */
+@supports (-webkit-backdrop-filter: none) {
+  .dropdown-menu {
+    -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+  }
+}

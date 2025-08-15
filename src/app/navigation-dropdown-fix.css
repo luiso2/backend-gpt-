@@ -1,0 +1,54 @@
+/* Additional fixes for vertical dropdown positioning */
+
+/* Remove any Portal-related positioning issues */
+.dropdown-menu {
+  margin: 0 !important;
+}
+
+/* Ensure the dropdown arrow rotates correctly */
+.dropdown-icon {
+  transition: transform 0.3s ease;
+}
+
+.dropdown-icon.rotate {
+  transform: rotate(180deg);
+}
+
+/* Smooth dropdown appearance */
+.dropdown-menu-vertical {
+  animation: dropdownSlide 0.2s ease-out;
+}
+
+@keyframes dropdownSlide {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Ensure proper z-index stacking */
+.navbar-dropdown {
+  position: relative;
+  z-index: 100;
+}
+
+/* Fix hover states */
+.navbar-dropdown-trigger {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  position: relative;
+}
+
+/* Visual indicator when dropdown is open */
+.dropdown-open .navbar-dropdown-trigger {
+  color: #B8E92D !important;
+}
+
+.dropdown-open .navbar-dropdown-trigger::after {
+  width: 100% !important;
+}

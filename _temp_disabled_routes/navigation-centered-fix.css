@@ -1,0 +1,63 @@
+/* ================================
+   FIX CENTRADO DEL DROPDOWN - MERCATOP
+   Corrección específica para centrar el dropdown
+   ================================ */
+
+/* Asegurar que el dropdown trigger tenga dimensiones consistentes */
+.navbar-dropdown {
+  position: relative !important;
+  display: flex !important;
+  align-items: center !important;
+  height: 100% !important;
+}
+
+.navbar-dropdown-trigger {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 0 12px !important; /* Padding simétrico */
+  height: 100% !important;
+  white-space: nowrap !important;
+}
+
+/* Dropdown menu cuando usa position fixed */
+.dropdown-menu[style*="position: fixed"] {
+  margin: 0 !important;
+  transform: none !important;
+}
+
+/* Portal dropdown específicamente */
+#portal-root .dropdown-menu {
+  width: 280px !important;
+  margin: 0 !important;
+  transform: none !important;
+}
+
+/* Override cualquier estilo que interfiera */
+.dropdown-menu {
+  left: auto !important; /* Resetear left para que use el valor del style inline */
+  transform: none !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+/* Asegurar que el botón Services tenga un ancho mínimo */
+.navbar-dropdown-trigger {
+  min-width: 80px !important;
+  text-align: center !important;
+}
+
+/* Debug visual - descomenta para ver el centro del botón */
+/*
+.navbar-dropdown::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 2px;
+  height: 100%;
+  background: red;
+  z-index: 9999;
+  pointer-events: none;
+}
+*/

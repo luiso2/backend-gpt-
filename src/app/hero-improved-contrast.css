@@ -1,0 +1,301 @@
+/* ================================
+   HERO SECTION - CONTRASTE MEJORADO
+   Sobrescribe los colores problemáticos con mejor contraste
+   ================================ */
+
+/* Hero Section - Fondo oscuro con tono MercaTop */
+.hero-section,
+.hero-fintech {
+  background: linear-gradient(135deg, #0A2520 0%, #1A3A30 100%) !important;
+}
+
+/* Gradientes de fondo más sutiles */
+.hero-gradient {
+  background: 
+    radial-gradient(circle at 20% 50%, rgba(127, 216, 88, 0.06) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(184, 233, 45, 0.04) 0%, transparent 40%),
+    radial-gradient(circle at 40% 20%, rgba(127, 216, 88, 0.03) 0%, transparent 50%) !important;
+}
+
+/* Orbes flotantes mejorados */
+.hero-orb-1 {
+  background: #7FD858 !important;
+  opacity: 0.15 !important;
+}
+
+.hero-orb-2 {
+  background: #B8E92D !important;
+  opacity: 0.12 !important;
+}
+
+.hero-orb-3 {
+  background: #7FD858 !important;
+  opacity: 0.1 !important;
+}
+
+/* Badge mejorado con mejor contraste */
+.hero-badge,
+.hero-fintech-badge {
+  background: rgba(127, 216, 88, 0.15) !important;
+  color: #7FD858 !important;
+  border: 1px solid rgba(127, 216, 88, 0.3) !important;
+}
+
+/* Título con mejor contraste */
+.hero-title,
+.hero-fintech-title {
+  color: #FFFFFF !important;
+}
+
+.hero-title .text-gradient,
+.hero-fintech-title .highlight {
+  background: linear-gradient(135deg, #7FD858, #B8E92D) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+}
+
+/* Descripción más legible */
+.hero-description,
+.hero-fintech-subtitle {
+  color: #C8D6E5 !important;
+}
+
+/* Features del hero */
+.hero-features {
+  background: rgba(127, 216, 88, 0.05);
+  padding: 1.5rem;
+  border-radius: 12px;
+  border: 1px solid rgba(127, 216, 88, 0.1);
+  margin-bottom: 2rem;
+}
+
+.hero-feature {
+  color: #E8F5F3 !important;
+}
+
+.feature-check {
+  color: #7FD858 !important;
+}
+
+/* Botones con mejor contraste */
+.btn-primary,
+.btn-hero-primary {
+  background: linear-gradient(135deg, #7FD858, #B8E92D) !important;
+  color: #0A2520 !important;
+  font-weight: 700 !important;
+  box-shadow: 0 4px 20px rgba(127, 216, 88, 0.4) !important;
+}
+
+.btn-primary:hover,
+.btn-hero-primary:hover {
+  background: linear-gradient(135deg, #B8E92D, #7FD858) !important;
+  box-shadow: 0 8px 30px rgba(127, 216, 88, 0.5) !important;
+}
+
+.btn-outline-white,
+.btn-hero-secondary {
+  background: transparent !important;
+  color: #FFFFFF !important;
+  border: 2px solid rgba(127, 216, 88, 0.5) !important;
+}
+
+.btn-outline-white:hover,
+.btn-hero-secondary:hover {
+  background: rgba(127, 216, 88, 0.1) !important;
+  border-color: #7FD858 !important;
+}
+
+/* Estadísticas del hero */
+.hero-stats,
+.automation-stats-enhanced {
+  background: rgba(15, 58, 47, 0.6) !important;
+  border: 1px solid rgba(127, 216, 88, 0.2) !important;
+}
+
+.stat-value,
+.hero-stat-value,
+.dashboard-stat-value {
+  color: #7FD858 !important;
+}
+
+.stat-label,
+.hero-stat-label {
+  color: #B8D6E5 !important;
+}
+
+/* Mockup de automatización mejorado */
+.automation-mockup-enhanced,
+.automation-mockup,
+.invoice-mockup {
+  background: linear-gradient(135deg, rgba(10, 37, 30, 0.95), rgba(15, 58, 47, 0.98)) !important;
+  border: 1px solid rgba(127, 216, 88, 0.3) !important;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.7) !important;
+}
+
+/* Nodos del workflow */
+.workflow-node-enhanced,
+.workflow-node {
+  background: rgba(127, 216, 88, 0.1) !important;
+  border: 2px solid rgba(127, 216, 88, 0.3) !important;
+}
+
+.workflow-node-enhanced:hover,
+.workflow-node:hover {
+  background: rgba(127, 216, 88, 0.15) !important;
+  border-color: #7FD858 !important;
+  box-shadow: 0 12px 24px rgba(127, 216, 88, 0.4) !important;
+}
+
+/* Conexiones del workflow */
+.workflow-connection-enhanced,
+.workflow-connection {
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    rgba(127, 216, 88, 0.5) 20%,
+    #7FD858 50%,
+    rgba(127, 216, 88, 0.5) 80%,
+    transparent 100%
+  ) !important;
+}
+
+/* Cards flotantes */
+.hero-floating-card {
+  background: linear-gradient(135deg, rgba(10, 37, 30, 0.9), rgba(15, 58, 47, 0.95)) !important;
+  border: 1px solid rgba(127, 216, 88, 0.3) !important;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5) !important;
+}
+
+.floating-card-icon {
+  background: rgba(127, 216, 88, 0.2) !important;
+  color: #7FD858 !important;
+}
+
+/* Visual principal del hero */
+.hero-main-visual {
+  background: rgba(15, 58, 47, 0.8) !important;
+  border: 1px solid rgba(127, 216, 88, 0.2) !important;
+}
+
+.visual-screen {
+  background: rgba(10, 37, 30, 0.95) !important;
+}
+
+.screen-header span {
+  background: #7FD858 !important;
+}
+
+/* Código en el visual */
+.code-keyword {
+  color: #7FD858 !important;
+}
+
+.code-variable {
+  color: #B8E92D !important;
+}
+
+.code-function {
+  color: #4ADE80 !important;
+}
+
+.code-string {
+  color: #FFB300 !important;
+}
+
+.code-punctuation {
+  color: #C8D6E5 !important;
+}
+
+/* Indicadores de confianza */
+.hero-trust-indicators {
+  background: rgba(127, 216, 88, 0.05) !important;
+  border-top: 1px solid rgba(127, 216, 88, 0.2) !important;
+}
+
+.trust-item {
+  color: #C8D6E5 !important;
+}
+
+.trust-item-icon {
+  color: #7FD858 !important;
+}
+
+.trust-item-value {
+  color: #FFFFFF !important;
+}
+
+/* Elementos decorativos con mejor contraste */
+.shape-circle {
+  background: #7FD858 !important;
+  opacity: 0.08 !important;
+}
+
+.shape-dots {
+  background-image: radial-gradient(circle, rgba(127, 216, 88, 0.4) 2px, transparent 2px) !important;
+}
+
+/* Modal de video */
+.video-modal {
+  background: rgba(5, 10, 8, 0.95) !important;
+}
+
+/* Navbar mejorada */
+.navbar-fintech {
+  background: rgba(10, 37, 30, 0.98) !important;
+  border-bottom: 1px solid rgba(127, 216, 88, 0.15) !important;
+}
+
+.navbar-fintech .logo-text {
+  background: linear-gradient(135deg, #7FD858, #B8E92D) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+}
+
+.navbar-fintech .navbar-nav-link {
+  color: #B8D6E5 !important;
+}
+
+.navbar-fintech .navbar-nav-link:hover {
+  color: #FFFFFF !important;
+}
+
+.navbar-fintech .navbar-nav-link::after {
+  background: #7FD858 !important;
+}
+
+/* Ajustes para dispositivos móviles */
+@media (max-width: 768px) {
+  .hero-section,
+  .hero-fintech {
+    padding: 100px 1rem 60px !important;
+  }
+  
+  .hero-title,
+  .hero-fintech-title {
+    font-size: clamp(2rem, 8vw, 3rem) !important;
+  }
+  
+  .hero-description,
+  .hero-fintech-subtitle {
+    font-size: 1rem !important;
+  }
+  
+  .hero-features {
+    padding: 1rem !important;
+  }
+  
+  .btn-primary,
+  .btn-hero-primary {
+    width: 100% !important;
+    padding: 1rem !important;
+  }
+}
+
+/* Asegurar la legibilidad en todos los textos */
+* {
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}

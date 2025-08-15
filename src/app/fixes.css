@@ -1,0 +1,167 @@
+/* ================================
+   Additional Component Fixes and Styles
+   ================================ */
+
+/* Generic Section Styles */
+.section {
+  padding: var(--space-20) 0;
+}
+
+.section:nth-child(even) {
+  background: var(--color-surface);
+}
+
+/* Service Card Colors */
+.service-card-blue {
+  --service-color: var(--brand-primary);
+}
+
+.service-card-purple {
+  --service-color: var(--brand-secondary);
+}
+
+.service-card-green {
+  --service-color: var(--color-success);
+}
+
+.service-card-orange {
+  --service-color: var(--color-warning);
+}
+
+.service-card-inner {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.service-features {
+  list-style: none;
+  margin: var(--space-4) 0;
+  flex: 1;
+}
+
+.service-features li {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) 0;
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+}
+
+.feature-icon {
+  width: 16px;
+  height: 16px;
+  color: var(--service-color, var(--color-success));
+  flex-shrink: 0;
+}
+
+.service-action {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: var(--space-4);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--color-border-subtle);
+  color: var(--service-color, var(--brand-primary));
+  font-weight: var(--font-medium);
+  font-size: var(--text-sm);
+}
+
+.action-icon {
+  width: 16px;
+  height: 16px;
+  transition: transform var(--transition-fast);
+}
+
+.service-card:hover .action-icon {
+  transform: translateX(4px);
+}
+
+/* Services CTA */
+.services-cta {
+  text-align: center;
+  margin-top: var(--space-16);
+  padding: var(--space-8);
+  background: var(--color-background);
+  border-radius: var(--radius-2xl);
+  box-shadow: var(--shadow-md);
+}
+
+.services-cta h3 {
+  font-size: var(--text-2xl);
+  font-weight: var(--font-semibold);
+  margin-bottom: var(--space-3);
+  color: var(--color-text-primary);
+}
+
+.services-cta p {
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-6);
+}
+
+/* Portfolio CTA */
+.portfolio-cta {
+  margin-top: var(--space-8);
+  text-align: center;
+}
+
+/* Utility Classes */
+.btn-icon {
+  margin-left: var(--space-2);
+  width: 16px;
+  height: 16px;
+  transition: transform var(--transition-fast);
+}
+
+.btn:hover .btn-icon {
+  transform: translateX(4px);
+}
+
+/* Additional Dark Mode Fixes */
+@media (prefers-color-scheme: dark) {
+  .services-cta {
+    background: var(--color-surface);
+  }
+  
+  .hero-gradient {
+    opacity: 0.5;
+  }
+  
+  .hero-pattern {
+    opacity: 0.02;
+  }
+}
+
+/* Card Hover States */
+a.service-card {
+  text-decoration: none;
+  display: block;
+  height: 100%;
+}
+
+a.service-card:hover {
+  text-decoration: none;
+}
+
+/* Fix for Automation Cards */
+a.automation-card {
+  text-decoration: none;
+  display: block;
+  color: inherit;
+}
+
+a.automation-card:hover {
+  text-decoration: none;
+}
+
+/* Fix for Portfolio Items */
+a.portfolio-item {
+  text-decoration: none;
+  display: block;
+  color: inherit;
+}
+
+a.portfolio-item:hover {
+  text-decoration: none;
+}

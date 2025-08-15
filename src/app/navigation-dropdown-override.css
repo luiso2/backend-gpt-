@@ -1,0 +1,77 @@
+/* Navigation Dropdown Override - Ensure Vertical Layout */
+
+/* Force dropdown menu to be vertical */
+.dropdown-menu.dropdown-menu-vertical,
+.navbar .dropdown-menu-vertical,
+body .dropdown-menu-vertical {
+  display: flex !important;
+  flex-direction: column !important;
+  flex-wrap: nowrap !important;
+  align-items: stretch !important;
+  justify-content: flex-start !important;
+  gap: 0.25rem !important;
+  width: 280px !important;
+  max-width: 280px !important;
+  min-width: 280px !important;
+}
+
+/* Ensure items are stacked vertically */
+.dropdown-menu-vertical .dropdown-item,
+.dropdown-menu-vertical a.dropdown-item,
+.navbar .dropdown-menu-vertical .dropdown-item {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 0 0.25rem 0 !important;
+  float: none !important;
+  clear: both !important;
+}
+
+.dropdown-menu-vertical .dropdown-item:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* Ensure proper icon alignment */
+.dropdown-menu-vertical .dropdown-item-icon {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 20px !important;
+  height: 20px !important;
+  min-width: 20px !important;
+  max-width: 20px !important;
+  margin-right: 0.75rem !important;
+  flex-shrink: 0 !important;
+}
+
+/* Text should not wrap */
+.dropdown-menu-vertical .dropdown-item span {
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  flex: 1 !important;
+}
+
+/* Override any inline styles */
+[style*="display"] .dropdown-menu-vertical {
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+/* Ensure proper positioning */
+.Portal .dropdown-menu-vertical {
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+/* Debug: Add visual indicators */
+.dropdown-menu-vertical {
+  outline: 2px solid transparent !important;
+}
+
+.dropdown-menu-vertical:hover {
+  outline-color: rgba(184, 233, 45, 0.1) !important;
+}
