@@ -636,33 +636,135 @@ export default function PortfolioPage() {
     id: 'chat-widget',
     title: 'MERKTOP AI Chat Widget',
     category: 'automation',
-    description: 'Widget de chat inteligente con IA para sitios web, incluye Lead Gate obligatorio y respuestas contextuales avanzadas',
+    description: language === 'es'
+      ? 'Widget de chat inteligente con IA para sitios web, incluye Lead Gate obligatorio y respuestas contextuales avanzadas'
+      : 'Intelligent AI chat widget for websites, includes mandatory Lead Gate and advanced contextual responses',
     image: '/projects/chat-widget.jpg',
     url: 'https://chat.merktop.com/',
     tags: ['React', 'OpenAI GPT', 'Vite', 'TypeScript'],
     client: 'MERKTOP Platform',
     year: '2024',
-    metrics: {
+    metrics: language === 'es' ? {
       'conversiones': '+65%',
       'leads/mes': '10K+',
       'integraciones': '500+'
+    } : {
+      'conversions': '+65%',
+      'leads/month': '10K+',
+      'integrations': '500+'
     },
     color: 'green'
+  },
+  {
+    id: 'crm-shopify',
+    title: language === 'es' ? 'CRM Avanzado con Chat IA' : 'Advanced CRM with AI Chat',
+    category: 'software',
+    description: language === 'es'
+      ? 'Sistema CRM completo con integración Shopify, chat widget multiidioma con IA, gestión de leads y análisis avanzado de conversaciones'
+      : 'Complete CRM system with Shopify integration, multilingual AI chat widget, lead management and advanced conversation analytics',
+    image: '/projects/crm.jpg',
+    tags: ['Next.js', 'Node.js', 'Prisma', 'PostgreSQL', 'OpenAI', 'WebSocket'],
+    client: 'Enterprise CRM',
+    year: '2024',
+    metrics: language === 'es' ? {
+      'leads captados': '15K+',
+      'conversación avg': '8min',
+      'satisfacción': '94%'
+    } : {
+      'captured leads': '15K+',
+      'avg conversation': '8min',
+      'satisfaction': '94%'
+    },
+    color: 'blue'
+  },
+  {
+    id: 'medical-ai',
+    title: language === 'es' ? 'Asistente Médico con IA' : 'Medical AI Assistant',
+    category: 'software',
+    description: language === 'es'
+      ? 'Plataforma de asistencia médica con IA, incluye test de metilación, chat con IA especializada, soporte multiidioma y análisis de salud personalizado'
+      : 'Medical assistance platform with AI, includes methylation test, specialized AI chat, multilingual support and personalized health analysis',
+    image: '/projects/medical-ai.jpg',
+    url: 'https://ai-medical-frontend-production.up.railway.app',
+    tags: ['React', 'TypeScript', 'Node.js', 'PostgreSQL', 'Redis', 'OpenAI'],
+    client: 'Healthcare Solutions',
+    year: '2024',
+    metrics: language === 'es' ? {
+      'consultas/día': '500+',
+      'precisión': '96%',
+      'usuarios activos': '8K+'
+    } : {
+      'queries/day': '500+',
+      'accuracy': '96%',
+      'active users': '8K+'
+    },
+    color: 'emerald'
+  },
+  {
+    id: 'woocommerce-admin',
+    title: language === 'es' ? 'Panel Admin WooCommerce' : 'WooCommerce Admin Panel',
+    category: 'ecommerce',
+    description: language === 'es'
+      ? 'Panel de administración avanzado para WooCommerce con AG Grid, gestión de productos, pedidos y clientes, edición inline y exportación de datos'
+      : 'Advanced admin panel for WooCommerce with AG Grid, product, order and customer management, inline editing and data export',
+    image: '/projects/woocommerce-admin.jpg',
+    url: 'https://woocommerce-admin-agrid-production.up.railway.app/',
+    tags: ['AG Grid', 'JavaScript', 'WooCommerce API', 'Vite', 'CSS3'],
+    client: 'E-commerce Solutions',
+    year: '2024',
+    metrics: language === 'es' ? {
+      'tiendas activas': '200+',
+      'productos/tienda': '5K+',
+      'eficiencia': '+75%'
+    } : {
+      'active stores': '200+',
+      'products/store': '5K+',
+      'efficiency': '+75%'
+    },
+    color: 'purple'
+  },
+  {
+    id: 'saas-market',
+    title: language === 'es' ? 'Plataforma SaaS Multi-tienda' : 'Multi-tenant SaaS Platform',
+    category: 'software',
+    description: language === 'es'
+      ? 'Plataforma SaaS completa para crear tiendas online con soporte multi-idioma, personalización de temas, suscripciones con Stripe y panel de administración'
+      : 'Complete SaaS platform for creating online stores with multi-language support, theme customization, Stripe subscriptions and admin panel',
+    image: '/projects/saas-market.jpg',
+    tags: ['Next.js', 'PostgreSQL', 'Drizzle ORM', 'Stripe', 'shadcn/ui', 'TypeScript'],
+    client: 'SaaS Market',
+    year: '2024',
+    metrics: language === 'es' ? {
+      'tiendas creadas': '350+',
+      'GMV mensual': '$2M+',
+      'retención': '89%'
+    } : {
+      'stores created': '350+',
+      'monthly GMV': '$2M+',
+      'retention': '89%'
+    },
+    color: 'orange'
   },
   {
     id: 'mercadito-store',
     title: 'EcoShop E-commerce',
     category: 'ecommerce',
-    description: 'Plataforma e-commerce moderna con integración WhatsApp para pedidos, panel admin completo y sistema de entregas',
+    description: language === 'es'
+      ? 'Plataforma e-commerce moderna con integración WhatsApp para pedidos, panel admin completo y sistema de entregas'
+      : 'Modern e-commerce platform with WhatsApp integration for orders, complete admin panel and delivery system',
     image: '/projects/ecommerce.jpg',
     url: 'https://store.merktop.com/',
     tags: ['React', 'TypeScript', 'Refine.dev', 'Ant Design', 'WhatsApp API'],
     client: 'EcoShop',
     year: '2024',
-    metrics: {
+    metrics: language === 'es' ? {
       'productos': '1000+',
       'conversión': '+45%',
       'usuarios': '25K+'
+    } : {
+      'products': '1000+',
+      'conversion': '+45%',
+      'users': '25K+'
     },
     color: 'purple'
   },
@@ -670,15 +772,21 @@ export default function PortfolioPage() {
     id: 'pitch-landing',
     title: 'Interactive Pitch Platform',
     category: 'web',
-    description: 'Landing page interactiva tipo quiz para capturar ideas de negocio con soporte multiidioma y animaciones fluidas',
+    description: language === 'es'
+      ? 'Landing page interactiva tipo quiz para capturar ideas de negocio con soporte multiidioma y animaciones fluidas'
+      : 'Interactive quiz-style landing page to capture business ideas with multilingual support and smooth animations',
     image: '/projects/pitch.jpg',
     url: 'https://pitch.merktop.com/',
     tags: ['React', 'Vite', 'i18next', 'Framer Motion'],
     client: 'MERKTOP Ventures',
     year: '2024',
-    metrics: {
+    metrics: language === 'es' ? {
       'conversión': '35%',
       'ideas captadas': '500+',
+      'engagement': '85%'
+    } : {
+      'conversion': '35%',
+      'captured ideas': '500+',
       'engagement': '85%'
     },
     color: 'blue'
@@ -687,48 +795,66 @@ export default function PortfolioPage() {
     id: 'telegram-store',
     title: 'Telegram Store WebApp',
     category: 'ecommerce',
-    description: 'Tienda online integrada como WebApp nativa de Telegram con tema dinámico y haptic feedback',
+    description: language === 'es'
+      ? 'Tienda online integrada como WebApp nativa de Telegram con tema dinámico y haptic feedback'
+      : 'Online store integrated as native Telegram WebApp with dynamic theme and haptic feedback',
     image: '/projects/telegram.jpg',
     url: 'https://telegram-shop.merktop.com/',
     tags: ['React', 'TypeScript', 'Telegram SDK', 'Context API'],
     client: 'Telegram Commerce',
     year: '2024',
-    metrics: {
+    metrics: language === 'es' ? {
       'usuarios': '50K+',
       'ventas/día': '200+',
+      'rating': '4.8★'
+    } : {
+      'users': '50K+',
+      'sales/day': '200+',
       'rating': '4.8★'
     },
     color: 'orange'
   },
   {
     id: 'ai-tutor',
-    title: 'AI Live Audio Tutor',
+    title: language === 'es' ? 'Tutor IA con Audio en Vivo' : 'AI Live Audio Tutor',
     category: 'software',
-    description: 'Aplicación de tutoría con IA que incluye procesamiento de audio en tiempo real y visualizaciones 3D interactivas',
+    description: language === 'es'
+      ? 'Aplicación de tutoría con IA que incluye procesamiento de audio en tiempo real y visualizaciones 3D interactivas'
+      : 'AI tutoring application with real-time audio processing and interactive 3D visualizations',
     image: '/projects/ai-tutor.jpg',
     url: 'https://ai-tutor-production-a281.up.railway.app/',
     tags: ['TypeScript', 'Gemini AI', 'WebGL', 'Audio API'],
     client: 'EduTech Solutions',
     year: '2024',
-    metrics: {
+    metrics: language === 'es' ? {
       'estudiantes': '15K+',
       'sesiones/día': '1K+',
       'satisfacción': '96%'
+    } : {
+      'students': '15K+',
+      'sessions/day': '1K+',
+      'satisfaction': '96%'
     },
     color: 'green'
   },
   {
     id: 'automation-suite',
-    title: 'Business Automation Suite',
+    title: language === 'es' ? 'Suite de Automatización Empresarial' : 'Business Automation Suite',
     category: 'automation',
-    description: 'Suite completa de automatización empresarial con n8n, integrando CRM, marketing y operaciones',
+    description: language === 'es'
+      ? 'Suite completa de automatización empresarial con n8n, integrando CRM, marketing y operaciones'
+      : 'Complete business automation suite with n8n, integrating CRM, marketing and operations',
     image: '/projects/automation.jpg',
     tags: ['n8n', 'Node.js', 'Docker', 'API Integration'],
     client: 'Enterprise Corp',
     year: '2024',
-    metrics: {
+    metrics: language === 'es' ? {
       'procesos auto': '150+',
       'tiempo ahorrado': '60hrs/sem',
+      'ROI': '+380%'
+    } : {
+      'automated processes': '150+',
+      'time saved': '60hrs/week',
       'ROI': '+380%'
     },
     color: 'purple'
@@ -746,7 +872,7 @@ export default function PortfolioPage() {
     },    color: 'blue'  },
   {
     id: '360-real-estate',
-    title: language === 'es' ? '360° Real Estate Platform' : '360° Real Estate Platform',
+    title: '360° Real Estate Platform',
     category: 'software',
     description: language === 'es' 
       ? 'Plataforma inmobiliaria moderna con búsqueda avanzada, filtros inteligentes, mapas interactivos y soporte multiidioma. Incluye visualización 360°, tours virtuales y gestión completa de propiedades'
@@ -1009,17 +1135,47 @@ export default function PortfolioPage() {
                       </span>
                     </motion.a>
                   ) : (
-                    <div
+                    <motion.a
+                      href="https://vartyinc.com/"
+                      target="_blank"
+                      rel="noopener noreferrer"
                       style={{
                         ...styles.demoButton,
-                        background: 'rgba(255, 255, 255, 0.05)',
-                        color: 'rgba(255, 255, 255, 0.5)',
-                        cursor: 'not-allowed',
-                        boxShadow: 'none',
+                        background: 'linear-gradient(135deg, #B8E92D 0%, #7FD858 100%)',
+                        color: '#0A2E1F',
+                        cursor: 'pointer',
+                        boxShadow: '0 4px 15px rgba(184, 233, 45, 0.2)',
+                        textDecoration: 'none',
+                      }}
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.transform = 'translateY(-2px)';
+                        e.currentTarget.style.boxShadow = '0 10px 20px rgba(184, 233, 45, 0.3)';
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.transform = 'translateY(0)';
+                        e.currentTarget.style.boxShadow = '0 4px 15px rgba(184, 233, 45, 0.2)';
                       }}
                     >
-                      <span>{language === 'es' ? 'Proyecto Privado' : 'Private Project'}</span>
-                    </div>
+                      {/* Shine effect */}
+                      <div
+                        style={{
+                          position: 'absolute',
+                          top: 0,
+                          left: '-100%',
+                          width: '100%',
+                          height: '100%',
+                          background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent)',
+                          animation: 'shine 3s ease-in-out infinite',
+                          animationDelay: `${index * 0.5}s`,
+                        }}
+                      />
+                      <ExternalLink style={{ ...styles.demoButtonIcon, position: 'relative', zIndex: 1 }} />
+                      <span style={{ position: 'relative', zIndex: 1 }}>
+                        {language === 'es' ? 'Visitar Varty Inc' : 'Visit Varty Inc'}
+                      </span>
+                    </motion.a>
                   )}
                 </div>
               </motion.div>
