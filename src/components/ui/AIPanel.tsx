@@ -827,8 +827,6 @@ const AIPanel: React.FC<AIPanelProps> = ({ isOpen, onClose }) => {
         display: inline-flex;
         align-items: center;
         gap: 10px;
-        padding: 8px 0;
-        position: relative;
       }
       
       .thinking-text {
