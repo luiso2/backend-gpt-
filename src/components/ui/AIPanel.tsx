@@ -663,11 +663,33 @@ const AIPanel: React.FC<AIPanelProps> = ({ isOpen, onClose }) => {
     styleSheet.id = 'ai-panel-styles';
     styleSheet.textContent = `
       @keyframes pulse3D {
-        0%, 100% {
-          opacity: 0.4;
+        0% {
+          transform: scale(0.95) translateY(0px);
+          opacity: 0.3;
+          filter: blur(0.5px);
+        }
+        25% {
+          transform: scale(1.1) translateY(-8px);
+          opacity: 1;
+          filter: blur(0px) brightness(1.3);
+          box-shadow: 
+            0 8px 16px rgba(184, 233, 45, 0.4),
+            0 4px 8px rgba(0, 0, 0, 0.2),
+            inset 0 1px 2px rgba(255, 255, 255, 0.3);
         }
         50% {
-          opacity: 1;
+          transform: scale(1.05) translateY(-6px);
+          opacity: 0.9;
+          filter: blur(0px) brightness(1.2);
+        }
+        75% {
+          transform: scale(1) translateY(-3px);
+          opacity: 0.7;
+        }
+        100% {
+          transform: scale(0.95) translateY(0px);
+          opacity: 0.3;
+          filter: blur(0.5px);
         }
       }
       
@@ -747,6 +769,38 @@ const AIPanel: React.FC<AIPanelProps> = ({ isOpen, onClose }) => {
         }
       }
       
+      @keyframes thinkingGlow {
+        0%, 100% {
+          opacity: 0.7;
+          filter: brightness(1);
+        }
+        50% {
+          opacity: 1;
+          filter: brightness(1.2) drop-shadow(0 0 8px rgba(184, 233, 45, 0.5));
+        }
+      }
+      
+      @keyframes elasticWave {
+        0% {
+          transform: scale(1) translateY(0);
+        }
+        20% {
+          transform: scale(0.97) translateY(0);
+        }
+        40% {
+          transform: scale(1.02) translateY(-1px);
+        }
+        60% {
+          transform: scale(0.98) translateY(0);
+        }
+        80% {
+          transform: scale(1.01) translateY(-0.5px);
+        }
+        100% {
+          transform: scale(1) translateY(0);
+        }
+      }
+      
       @keyframes subtleRotate {
         0% {
           background-position: 0% 0%, 100% 100%;
@@ -772,20 +826,61 @@ const AIPanel: React.FC<AIPanelProps> = ({ isOpen, onClose }) => {
       .thinking-indicator {
         display: inline-flex;
         align-items: center;
-        gap: 6px;
+        gap: 10px;
+        padding: 8px 0;
+        position: relative;
+      }
+      
+      .thinking-text {
+        background: linear-gradient(
+          90deg,
+          #B8E92D 0%,
+          #7fc41d 50%,
+          #B8E92D 100%
+        );
+        background-size: 200% 100%;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        animation: shimmer 3s linear infinite, thinkingGlow 2s ease-in-out infinite;
+        font-weight: 500;
+        letter-spacing: 0.5px;
       }
       
       .thinking-dot-wrapper {
         display: flex;
-        gap: 4px;
+        gap: 6px;
+        perspective: 200px;
+        transform-style: preserve-3d;
       }
       
       .thinking-dot {
-        width: 8px;
-        height: 8px;
+        width: 10px;
+        height: 10px;
         border-radius: 50%;
-        background: rgba(184, 233, 45, 0.6);
-        animation: pulse3D 1.5s ease-in-out infinite;
+        background: radial-gradient(
+          circle at 30% 30%,
+          rgba(255, 255, 255, 0.8),
+          #B8E92D 40%,
+          #7fc41d 100%
+        );
+        animation: pulse3D 1.8s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        transform-style: preserve-3d;
+        position: relative;
+      }
+      
+      .thinking-dot::after {
+        content: '';
+        position: absolute;
+        inset: -2px;
+        border-radius: 50%;
+        background: radial-gradient(
+          circle,
+          rgba(184, 233, 45, 0.4) 0%,
+          transparent 70%
+        );
+        animation: floatOrbit 2s ease-in-out infinite;
+        filter: blur(2px);
       }
       
       .thinking-dot:nth-child(1) {
@@ -1097,12 +1192,7 @@ const AIPanel: React.FC<AIPanelProps> = ({ isOpen, onClose }) => {
                               </>
                             ) : (
                               <div className="thinking-indicator">
-                                <span style={{ 
-                                  color: 'rgba(184, 233, 45, 0.7)', 
-                                  fontSize: '13px', 
-                                  fontWeight: '400',
-                                  opacity: '0.9',
-                                }}>
+                                <span className="thinking-text" style={{ fontSize: '14px' }}>
                                   {language === 'es' ? 'Pensando' : 'Thinking'}
                                 </span>
                                 <div className="thinking-dot-wrapper">
@@ -1125,12 +1215,7 @@ const AIPanel: React.FC<AIPanelProps> = ({ isOpen, onClose }) => {
                   
                   {isLoading && messages[messages.length - 1]?.role !== 'assistant' && (
                     <div className="thinking-indicator">
-                      <span style={{ 
-                        color: 'rgba(184, 233, 45, 0.7)', 
-                        fontSize: '13px', 
-                        fontWeight: '400',
-                        opacity: '0.9',
-                      }}>
+                      <span className="thinking-text" style={{ fontSize: '14px' }}>
                         {language === 'es' ? 'Pensando' : 'Thinking'}
                       </span>
                       <div className="thinking-dot-wrapper">
