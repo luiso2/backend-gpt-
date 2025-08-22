@@ -657,7 +657,7 @@ const AIPanel: React.FC<AIPanelProps> = ({ isOpen, onClose }) => {
     });
   };
 
-  // Add loading animation styles
+  // Add loading animation styles - moved inside component
   useEffect(() => {
     if (typeof document !== 'undefined' && !document.getElementById('ai-panel-styles')) {
       const styleSheet = document.createElement('style');
