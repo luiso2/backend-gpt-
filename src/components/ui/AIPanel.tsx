@@ -664,24 +664,10 @@ const AIPanel: React.FC<AIPanelProps> = ({ isOpen, onClose }) => {
     styleSheet.textContent = `
       @keyframes pulse3D {
         0%, 100% {
-          transform: translateY(0) scale(1);
-          opacity: 0.5;
-          filter: brightness(0.9);
-          box-shadow: 
-            inset -2px -2px 4px rgba(0, 0, 0, 0.2),
-            inset 2px 2px 4px rgba(255, 255, 255, 0.4),
-            0 4px 8px rgba(184, 233, 45, 0.3),
-            0 0 20px rgba(184, 233, 45, 0.2);
+          opacity: 0.4;
         }
         50% {
-          transform: translateY(-4px) scale(1.15);
           opacity: 1;
-          filter: brightness(1.2) drop-shadow(0 6px 12px rgba(184, 233, 45, 0.5));
-          box-shadow: 
-            inset -2px -2px 6px rgba(0, 0, 0, 0.3),
-            inset 2px 2px 6px rgba(255, 255, 255, 0.6),
-            0 6px 12px rgba(184, 233, 45, 0.5),
-            0 0 30px rgba(184, 233, 45, 0.4);
         }
       }
       
@@ -784,96 +770,22 @@ const AIPanel: React.FC<AIPanelProps> = ({ isOpen, onClose }) => {
       }
       
       .thinking-indicator {
-        position: relative;
-        display: flex;
+        display: inline-flex;
         align-items: center;
-        gap: 12px;
-        padding: 20px 24px;
-        background: 
-          linear-gradient(
-            135deg,
-            rgba(184, 233, 45, 0.08) 0%,
-            rgba(184, 233, 45, 0.02) 25%,
-            rgba(10, 46, 31, 0.4) 50%,
-            rgba(184, 233, 45, 0.02) 75%,
-            rgba(184, 233, 45, 0.08) 100%
-          );
-        border-radius: 16px;
-        border: 1px solid rgba(184, 233, 45, 0.3);
-        margin-bottom: 12px;
-        overflow: hidden;
-        animation: borderGlow 3s ease-in-out infinite;
-        backdrop-filter: blur(10px);
-      }
-      
-      .thinking-indicator::before {
-        content: '';
-        position: absolute;
-        top: -2px;
-        left: -2px;
-        right: -2px;
-        bottom: -2px;
-        background: linear-gradient(
-          90deg,
-          transparent,
-          rgba(184, 233, 45, 0.4),
-          transparent
-        );
-        background-size: 200% 100%;
-        animation: energyFlow 3s linear infinite;
-        border-radius: 16px;
-        opacity: 0.6;
-        z-index: -1;
-      }
-      
-      .thinking-indicator::after {
-        content: '';
-        position: absolute;
-        inset: 0;
-        background: 
-          radial-gradient(
-            circle at 30% 50%,
-            rgba(184, 233, 45, 0.1) 0%,
-            transparent 70%
-          );
-        animation: floatOrbit 4s ease-in-out infinite;
-        pointer-events: none;
+        gap: 6px;
       }
       
       .thinking-dot-wrapper {
         display: flex;
-        gap: 8px;
-        perspective: 100px;
-        transform-style: preserve-3d;
+        gap: 4px;
       }
       
       .thinking-dot {
-        width: 12px;
-        height: 12px;
+        width: 8px;
+        height: 8px;
         border-radius: 50%;
-        background: 
-          radial-gradient(
-            circle at 30% 30%,
-            rgba(255, 255, 255, 0.9),
-            #B8E92D 35%,
-            #7fc41d 100%
-          );
-        animation: pulse3D 1.8s ease-in-out infinite;
-        transform-style: preserve-3d;
-        position: relative;
-      }
-      
-      .thinking-dot::before {
-        content: '';
-        position: absolute;
-        inset: -3px;
-        border-radius: 50%;
-        background: radial-gradient(
-          circle,
-          rgba(184, 233, 45, 0.3) 0%,
-          transparent 60%
-        );
-        opacity: 0.8;
+        background: rgba(184, 233, 45, 0.6);
+        animation: pulse3D 1.5s ease-in-out infinite;
       }
       
       .thinking-dot:nth-child(1) {
@@ -1216,12 +1128,10 @@ const AIPanel: React.FC<AIPanelProps> = ({ isOpen, onClose }) => {
                   {isLoading && messages[messages.length - 1]?.role !== 'assistant' && (
                     <div className="thinking-indicator">
                       <span style={{ 
-                        color: '#B8E92D', 
-                        fontSize: '14px', 
-                        fontWeight: '600',
-                        textShadow: '0 0 10px rgba(184, 233, 45, 0.5)',
-                        letterSpacing: '0.5px',
-                        animation: 'pulse3D 2s ease-in-out infinite',
+                        color: 'rgba(184, 233, 45, 0.7)', 
+                        fontSize: '13px', 
+                        fontWeight: '400',
+                        opacity: '0.9',
                       }}>
                         {language === 'es' ? 'Pensando' : 'Thinking'}
                       </span>
