@@ -1256,7 +1256,7 @@ const AIPanel: React.FC<AIPanelProps> = ({ isOpen, onClose }) => {
             {/* Footer */}
             <div style={styles.footer}>
               <span style={styles.footerInfo}>
-                {language === 'es' ? 'Powered by' : 'Powered by'} {selectedProvider === 'openai' ? 'OpenAI' : 'Anthropic'} - {models[selectedProvider].find(m => m.id === selectedModel)?.name}
+                Powered by MERKTOP
               </span>
               {messages.length > 0 && (
                 <button
