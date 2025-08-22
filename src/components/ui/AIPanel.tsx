@@ -28,6 +28,7 @@ const AIPanel: React.FC<AIPanelProps> = ({ isOpen, onClose }) => {
   const [typingText, setTypingText] = useState('');
   const [selectedProvider, setSelectedProvider] = useState<'openai' | 'anthropic'>('openai');
   const [selectedModel, setSelectedModel] = useState('gpt-3.5-turbo');
+  const [dotOpacities, setDotOpacities] = useState([0.3, 0.3, 0.3]);
   const [streamingMessageId, setStreamingMessageId] = useState<number | null>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const streamingIntervalRef = useRef<NodeJS.Timeout | null>(null);
@@ -657,28 +658,43 @@ const AIPanel: React.FC<AIPanelProps> = ({ isOpen, onClose }) => {
     });
   };
 
+  // Animate thinking dots with JavaScript
+  useEffect(() => {
+    if (!isLoading) {
+      setDotOpacities([0.3, 0.3, 0.3]);
+      return;
+    }
+    
+    let frame = 0;
+    const interval = setInterval(() => {
+      frame = (frame + 1) % 30;
+      const newOpacities = [0, 1, 2].map(i => {
+        const offset = (frame + i * 10) % 30;
+        const opacity = Math.sin((offset / 30) * Math.PI) * 0.7 + 0.3;
+        return opacity;
+      });
+      setDotOpacities(newOpacities);
+    }, 50);
+    
+    return () => clearInterval(interval);
+  }, [isLoading]);
+  
   // Add loading animation styles - moved inside component
   useEffect(() => {
+    console.log('AIPanel useEffect running...');
     if (typeof document !== 'undefined' && !document.getElementById('ai-panel-styles')) {
+      console.log('Injecting AI Panel styles...');
       const styleSheet = document.createElement('style');
       styleSheet.id = 'ai-panel-styles';
       styleSheet.textContent = `
       @keyframes pulse3D {
-        0% {
-          opacity: 0;
-          transform: scale(0.8);
+        0%, 100% {
+          opacity: 0.2;
+          transform: scale(0.8) translateY(0);
         }
-        20% {
+        50% {
           opacity: 1;
-          transform: scale(1);
-        }
-        80% {
-          opacity: 1;
-          transform: scale(1);
-        }
-        100% {
-          opacity: 0;
-          transform: scale(0.8);
+          transform: scale(1) translateY(-3px);
         }
       }
       
@@ -827,12 +843,12 @@ const AIPanel: React.FC<AIPanelProps> = ({ isOpen, onClose }) => {
       }
       
       .thinking-dot {
-        width: 8px;
-        height: 8px;
+        width: 10px;
+        height: 10px;
         border-radius: 50%;
-        background: #B8E92D;
-        animation: pulse3D 3s cubic-bezier(0.4, 0, 0.2, 1) infinite;
-        position: relative;
+        background-color: #B8E92D;
+        animation: pulse3D 1.5s ease-in-out infinite;
+        display: inline-block;
       }
       
       .thinking-dot:nth-child(1) {
@@ -840,11 +856,11 @@ const AIPanel: React.FC<AIPanelProps> = ({ isOpen, onClose }) => {
       }
       
       .thinking-dot:nth-child(2) {
-        animation-delay: 0.5s;
+        animation-delay: 0.15s;
       }
       
       .thinking-dot:nth-child(3) {
-        animation-delay: 1s;
+        animation-delay: 0.3s;
       }
       
       .streaming-message {
@@ -1000,12 +1016,16 @@ const AIPanel: React.FC<AIPanelProps> = ({ isOpen, onClose }) => {
       }
     `;
       document.head.appendChild(styleSheet);
+      console.log('Styles injected successfully!');
+    } else {
+      console.log('Styles already exist or document not ready');
     }
     
     return () => {
       // Cleanup on unmount
       const existingStyle = document.getElementById('ai-panel-styles');
       if (existingStyle) {
+        console.log('Removing AI Panel styles...');
         existingStyle.remove();
       }
     };
@@ -1156,10 +1176,34 @@ const AIPanel: React.FC<AIPanelProps> = ({ isOpen, onClose }) => {
                                 <span className="thinking-text" style={{ fontSize: '14px' }}>
                                   {language === 'es' ? 'Pensando' : 'Thinking'}
                                 </span>
-                                <div className="thinking-dot-wrapper">
-                                  <div className="thinking-dot"></div>
-                                  <div className="thinking-dot"></div>
-                                  <div className="thinking-dot"></div>
+                                <div className="thinking-dot-wrapper" style={{ display: 'flex', gap: '6px' }}>
+                                  <div style={{
+                                    width: '10px',
+                                    height: '10px',
+                                    borderRadius: '50%',
+                                    backgroundColor: '#B8E92D',
+                                    opacity: dotOpacities[0],
+                                    transform: `scale(${0.8 + dotOpacities[0] * 0.4})`,
+                                    transition: 'all 0.05s ease-out'
+                                  }}></div>
+                                  <div style={{
+                                    width: '10px',
+                                    height: '10px',
+                                    borderRadius: '50%',
+                                    backgroundColor: '#B8E92D',
+                                    opacity: dotOpacities[1],
+                                    transform: `scale(${0.8 + dotOpacities[1] * 0.4})`,
+                                    transition: 'all 0.05s ease-out'
+                                  }}></div>
+                                  <div style={{
+                                    width: '10px',
+                                    height: '10px',
+                                    borderRadius: '50%',
+                                    backgroundColor: '#B8E92D',
+                                    opacity: dotOpacities[2],
+                                    transform: `scale(${0.8 + dotOpacities[2] * 0.4})`,
+                                    transition: 'all 0.05s ease-out'
+                                  }}></div>
                                 </div>
                               </div>
                             )}
@@ -1179,10 +1223,34 @@ const AIPanel: React.FC<AIPanelProps> = ({ isOpen, onClose }) => {
                       <span className="thinking-text" style={{ fontSize: '14px' }}>
                         {language === 'es' ? 'Pensando' : 'Thinking'}
                       </span>
-                      <div className="thinking-dot-wrapper">
-                        <div className="thinking-dot"></div>
-                        <div className="thinking-dot"></div>
-                        <div className="thinking-dot"></div>
+                      <div className="thinking-dot-wrapper" style={{ display: 'flex', gap: '6px' }}>
+                        <div style={{
+                          width: '10px',
+                          height: '10px',
+                          borderRadius: '50%',
+                          backgroundColor: '#B8E92D',
+                          opacity: dotOpacities[0],
+                          transform: `scale(${0.8 + dotOpacities[0] * 0.4})`,
+                          transition: 'all 0.05s ease-out'
+                        }}></div>
+                        <div style={{
+                          width: '10px',
+                          height: '10px',
+                          borderRadius: '50%',
+                          backgroundColor: '#B8E92D',
+                          opacity: dotOpacities[1],
+                          transform: `scale(${0.8 + dotOpacities[1] * 0.4})`,
+                          transition: 'all 0.05s ease-out'
+                        }}></div>
+                        <div style={{
+                          width: '10px',
+                          height: '10px',
+                          borderRadius: '50%',
+                          backgroundColor: '#B8E92D',
+                          opacity: dotOpacities[2],
+                          transform: `scale(${0.8 + dotOpacities[2] * 0.4})`,
+                          transition: 'all 0.05s ease-out'
+                        }}></div>
                       </div>
                     </div>
                   )}
