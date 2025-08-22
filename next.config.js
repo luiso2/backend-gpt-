@@ -1,17 +1,17 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Exportar como sitio estático para Hostinger
-  output: 'export',
+  // Comentado para desarrollo local
+  // output: 'export',
   
   // Directorio de salida
-  distDir: 'out',
+  // distDir: 'out',
   
   // Desactivar caché para exportación estática
   generateBuildId: () => 'build-' + Date.now(),
   
-  // Optimizaciones para hosting estático
+  // Optimizaciones - ajustado para desarrollo
   images: {
-    unoptimized: true, // Necesario para exportación estática
+    unoptimized: false, // Cambiado para desarrollo local
   },
   
   // Trailing slash para compatibilidad con servidores web
