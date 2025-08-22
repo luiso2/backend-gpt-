@@ -657,6 +657,26 @@ const AIPanel: React.FC<AIPanelProps> = ({ isOpen, onClose }) => {
       minute: '2-digit',
     });
   };
+  
+  // Reusable thinking dots component
+  const ThinkingDots = () => (
+    <div className="thinking-dot-wrapper" style={{ display: 'flex', gap: '6px' }}>
+      {[0, 1, 2].map((index) => (
+        <div
+          key={index}
+          style={{
+            width: '10px',
+            height: '10px',
+            borderRadius: '50%',
+            backgroundColor: '#B8E92D',
+            opacity: dotOpacities[index],
+            transform: `scale(${0.8 + dotOpacities[index] * 0.4})`,
+            transition: 'all 0.05s ease-out'
+          }}
+        />
+      ))}
+    </div>
+  );
 
   // Animate thinking dots with JavaScript
   useEffect(() => {
@@ -681,31 +701,10 @@ const AIPanel: React.FC<AIPanelProps> = ({ isOpen, onClose }) => {
   
   // Add loading animation styles - moved inside component
   useEffect(() => {
-    console.log('AIPanel useEffect running...');
     if (typeof document !== 'undefined' && !document.getElementById('ai-panel-styles')) {
-      console.log('Injecting AI Panel styles...');
       const styleSheet = document.createElement('style');
       styleSheet.id = 'ai-panel-styles';
       styleSheet.textContent = `
-      @keyframes pulse3D {
-        0%, 100% {
-          opacity: 0.2;
-          transform: scale(0.8) translateY(0);
-        }
-        50% {
-          opacity: 1;
-          transform: scale(1) translateY(-3px);
-        }
-      }
-      
-      @keyframes floatOrbit {
-        0%, 100% {
-          transform: translateY(0);
-        }
-        50% {
-          transform: translateY(-1px);
-        }
-      }
       
       @keyframes energyFlow {
         0% {
@@ -842,26 +841,6 @@ const AIPanel: React.FC<AIPanelProps> = ({ isOpen, onClose }) => {
         transform-style: preserve-3d;
       }
       
-      .thinking-dot {
-        width: 10px;
-        height: 10px;
-        border-radius: 50%;
-        background-color: #B8E92D;
-        animation: pulse3D 1.5s ease-in-out infinite;
-        display: inline-block;
-      }
-      
-      .thinking-dot:nth-child(1) {
-        animation-delay: 0s;
-      }
-      
-      .thinking-dot:nth-child(2) {
-        animation-delay: 0.15s;
-      }
-      
-      .thinking-dot:nth-child(3) {
-        animation-delay: 0.3s;
-      }
       
       .streaming-message {
         position: relative;
@@ -1016,16 +995,12 @@ const AIPanel: React.FC<AIPanelProps> = ({ isOpen, onClose }) => {
       }
     `;
       document.head.appendChild(styleSheet);
-      console.log('Styles injected successfully!');
-    } else {
-      console.log('Styles already exist or document not ready');
     }
     
     return () => {
       // Cleanup on unmount
       const existingStyle = document.getElementById('ai-panel-styles');
       if (existingStyle) {
-        console.log('Removing AI Panel styles...');
         existingStyle.remove();
       }
     };
@@ -1176,35 +1151,7 @@ const AIPanel: React.FC<AIPanelProps> = ({ isOpen, onClose }) => {
                                 <span className="thinking-text" style={{ fontSize: '14px' }}>
                                   {language === 'es' ? 'Pensando' : 'Thinking'}
                                 </span>
-                                <div className="thinking-dot-wrapper" style={{ display: 'flex', gap: '6px' }}>
-                                  <div style={{
-                                    width: '10px',
-                                    height: '10px',
-                                    borderRadius: '50%',
-                                    backgroundColor: '#B8E92D',
-                                    opacity: dotOpacities[0],
-                                    transform: `scale(${0.8 + dotOpacities[0] * 0.4})`,
-                                    transition: 'all 0.05s ease-out'
-                                  }}></div>
-                                  <div style={{
-                                    width: '10px',
-                                    height: '10px',
-                                    borderRadius: '50%',
-                                    backgroundColor: '#B8E92D',
-                                    opacity: dotOpacities[1],
-                                    transform: `scale(${0.8 + dotOpacities[1] * 0.4})`,
-                                    transition: 'all 0.05s ease-out'
-                                  }}></div>
-                                  <div style={{
-                                    width: '10px',
-                                    height: '10px',
-                                    borderRadius: '50%',
-                                    backgroundColor: '#B8E92D',
-                                    opacity: dotOpacities[2],
-                                    transform: `scale(${0.8 + dotOpacities[2] * 0.4})`,
-                                    transition: 'all 0.05s ease-out'
-                                  }}></div>
-                                </div>
+                                <ThinkingDots />
                               </div>
                             )}
                           </div>
@@ -1223,35 +1170,7 @@ const AIPanel: React.FC<AIPanelProps> = ({ isOpen, onClose }) => {
                       <span className="thinking-text" style={{ fontSize: '14px' }}>
                         {language === 'es' ? 'Pensando' : 'Thinking'}
                       </span>
-                      <div className="thinking-dot-wrapper" style={{ display: 'flex', gap: '6px' }}>
-                        <div style={{
-                          width: '10px',
-                          height: '10px',
-                          borderRadius: '50%',
-                          backgroundColor: '#B8E92D',
-                          opacity: dotOpacities[0],
-                          transform: `scale(${0.8 + dotOpacities[0] * 0.4})`,
-                          transition: 'all 0.05s ease-out'
-                        }}></div>
-                        <div style={{
-                          width: '10px',
-                          height: '10px',
-                          borderRadius: '50%',
-                          backgroundColor: '#B8E92D',
-                          opacity: dotOpacities[1],
-                          transform: `scale(${0.8 + dotOpacities[1] * 0.4})`,
-                          transition: 'all 0.05s ease-out'
-                        }}></div>
-                        <div style={{
-                          width: '10px',
-                          height: '10px',
-                          borderRadius: '50%',
-                          backgroundColor: '#B8E92D',
-                          opacity: dotOpacities[2],
-                          transform: `scale(${0.8 + dotOpacities[2] * 0.4})`,
-                          transition: 'all 0.05s ease-out'
-                        }}></div>
-                      </div>
+                      <ThinkingDots />
                     </div>
                   )}
                   
