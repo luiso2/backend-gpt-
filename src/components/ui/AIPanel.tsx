@@ -1008,32 +1008,31 @@ const AIPanel: React.FC<AIPanelProps> = ({ isOpen, onClose }) => {
       }
       
       .typing-text {
-        color: rgba(184, 233, 45, 0.7);
+        color: rgba(184, 233, 45, 0.4);
         font-size: 16px;
         font-family: inherit;
         text-shadow: 
-          0 0 2px rgba(184, 233, 45, 0.9),
-          0 0 4px rgba(184, 233, 45, 0.7),
-          0 0 8px rgba(184, 233, 45, 0.5),
-          0 0 12px rgba(184, 233, 45, 0.3),
-          0 0 16px rgba(184, 233, 45, 0.2),
-          0 2px 4px rgba(0, 0, 0, 0.4);
+          0 0 1px rgba(184, 233, 45, 0.3),
+          0 0 3px rgba(184, 233, 45, 0.2),
+          0 0 6px rgba(184, 233, 45, 0.1),
+          0 1px 2px rgba(0, 0, 0, 0.3);
         animation: glow 3s ease-in-out infinite;
         letter-spacing: 0.5px;
-        font-weight: 500;
-        filter: brightness(1.2);
+        font-weight: 400;
+        filter: brightness(1.05);
+        opacity: 0.8;
       }
       
       .typing-cursor {
         display: inline-block;
         width: 2px;
         height: 20px;
-        background: linear-gradient(180deg, rgba(184, 233, 45, 0.8), rgba(184, 233, 45, 0.4));
+        background: linear-gradient(180deg, rgba(184, 233, 45, 0.5), rgba(184, 233, 45, 0.2));
         margin-left: 2px;
         animation: cursorBlink 1s infinite;
         box-shadow: 
-          0 0 6px rgba(184, 233, 45, 0.6),
-          0 0 12px rgba(184, 233, 45, 0.4);
+          0 0 3px rgba(184, 233, 45, 0.3),
+          0 0 6px rgba(184, 233, 45, 0.1);
         vertical-align: text-bottom;
       }
       
