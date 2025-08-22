@@ -13,6 +13,8 @@ interface Message {
   role: 'user' | 'assistant';
   content: string;
   timestamp: Date;
+  isStreaming?: boolean;
+  streamedContent?: string;
 }
 
 const AIPanel: React.FC<AIPanelProps> = ({ isOpen, onClose }) => {
@@ -24,7 +26,70 @@ const AIPanel: React.FC<AIPanelProps> = ({ isOpen, onClose }) => {
   const [error, setError] = useState<string | null>(null);
   const [showTypingAnimation, setShowTypingAnimation] = useState(true);
   const [typingText, setTypingText] = useState('');
+  const [selectedProvider, setSelectedProvider] = useState<'openai' | 'anthropic'>('openai');
+  const [selectedModel, setSelectedModel] = useState('gpt-3.5-turbo');
+  const [streamingMessageId, setStreamingMessageId] = useState<number | null>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const streamingIntervalRef = useRef<NodeJS.Timeout | null>(null);
+  
+  // Available models for each provider
+  const models = {
+    openai: [
+      { id: 'gpt-3.5-turbo', name: 'GPT-3.5 Turbo', description: 'Fast and efficient' },
+      { id: 'gpt-4', name: 'GPT-4', description: 'Most capable' },
+      { id: 'gpt-4-turbo-preview', name: 'GPT-4 Turbo', description: 'Latest GPT-4' },
+    ],
+    anthropic: [
+      { id: 'claude-3-haiku-20240307', name: 'Claude 3 Haiku', description: 'Fast and light' },
+      { id: 'claude-3-sonnet-20240229', name: 'Claude 3 Sonnet', description: 'Balanced performance' },
+      { id: 'claude-3-opus-20240229', name: 'Claude 3 Opus', description: 'Most capable' },
+    ]
+  };
+  
+  // Update selected model when provider changes
+  useEffect(() => {
+    if (selectedProvider === 'openai') {
+      setSelectedModel('gpt-3.5-turbo');
+    } else {
+      setSelectedModel('claude-3-haiku-20240307');
+    }
+  }, [selectedProvider]);
+  
+  // Stream text animation
+  const streamText = (fullText: string, messageIndex: number) => {
+    let currentIndex = 0;
+    const words = fullText.split(' ');
+    let currentText = '';
+    
+    if (streamingIntervalRef.current) {
+      clearInterval(streamingIntervalRef.current);
+    }
+    
+    streamingIntervalRef.current = setInterval(() => {
+      if (currentIndex < words.length) {
+        currentText += (currentIndex === 0 ? '' : ' ') + words[currentIndex];
+        
+        setMessages(prev => prev.map((msg, idx) => 
+          idx === messageIndex 
+            ? { ...msg, streamedContent: currentText, isStreaming: true }
+            : msg
+        ));
+        
+        currentIndex++;
+      } else {
+        // Streaming complete
+        if (streamingIntervalRef.current) {
+          clearInterval(streamingIntervalRef.current);
+        }
+        setMessages(prev => prev.map((msg, idx) => 
+          idx === messageIndex 
+            ? { ...msg, streamedContent: fullText, isStreaming: false }
+            : msg
+        ));
+        setStreamingMessageId(null);
+      }
+    }, 50); // Adjust speed here (50ms per word)
+  };
   
   // Typewriter animation effect
   useEffect(() => {
@@ -198,14 +263,16 @@ const AIPanel: React.FC<AIPanelProps> = ({ isOpen, onClose }) => {
     },
     promptTextarea: {
       width: '100%',
-      minHeight: '100px',
-      padding: '15px',
+      minHeight: '150px',
+      padding: '20px',
+      paddingBottom: '60px', // Space for the send button
       backgroundColor: 'rgba(255, 255, 255, 0.03)',
       backdropFilter: 'blur(10px)',
       border: '1px solid rgba(184, 233, 45, 0.2)',
       borderRadius: '12px',
       color: '#fff',
       fontSize: '16px',
+      lineHeight: '1.6',
       resize: 'vertical' as const,
       outline: 'none',
       transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
@@ -223,6 +290,35 @@ const AIPanel: React.FC<AIPanelProps> = ({ isOpen, onClose }) => {
           rgba(255, 255, 255, 0.02) 100%
         )
       `,
+    },
+    textareaContainer: {
+      position: 'relative' as const,
+      width: '100%',
+    },
+    sendButtonInside: {
+      position: 'absolute' as const,
+      bottom: '12px',
+      right: '12px',
+      padding: '10px 20px',
+      backgroundColor: '#B8E92D',
+      color: '#0A2E1F',
+      border: 'none',
+      borderRadius: '8px',
+      fontSize: '14px',
+      fontWeight: '600',
+      cursor: 'pointer',
+      transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+      display: 'flex',
+      alignItems: 'center',
+      gap: '6px',
+      boxShadow: '0 2px 8px rgba(184, 233, 45, 0.3)',
+      zIndex: 2,
+    },
+    sendButtonDisabled: {
+      backgroundColor: 'rgba(184, 233, 45, 0.2)',
+      color: 'rgba(255, 255, 255, 0.3)',
+      cursor: 'not-allowed',
+      boxShadow: 'none',
     },
     suggestionsSection: {
       display: 'flex',
@@ -317,6 +413,49 @@ const AIPanel: React.FC<AIPanelProps> = ({ isOpen, onClose }) => {
       cursor: 'pointer',
       transition: 'all 0.3s ease',
     },
+    providerSection: {
+      display: 'flex',
+      gap: '15px',
+      alignItems: 'center',
+      flexWrap: 'wrap' as const,
+    },
+    providerToggle: {
+      display: 'flex',
+      backgroundColor: 'rgba(255, 255, 255, 0.05)',
+      borderRadius: '10px',
+      padding: '4px',
+      gap: '4px',
+    },
+    providerButton: {
+      padding: '8px 16px',
+      borderRadius: '8px',
+      border: 'none',
+      backgroundColor: 'transparent',
+      color: 'rgba(255, 255, 255, 0.7)',
+      fontSize: '14px',
+      fontWeight: '500',
+      cursor: 'pointer',
+      transition: 'all 0.3s ease',
+      display: 'flex',
+      alignItems: 'center',
+      gap: '6px',
+    },
+    providerButtonActive: {
+      backgroundColor: 'rgba(184, 233, 45, 0.2)',
+      color: '#B8E92D',
+    },
+    modelSelect: {
+      padding: '8px 12px',
+      backgroundColor: 'rgba(255, 255, 255, 0.05)',
+      border: '1px solid rgba(184, 233, 45, 0.2)',
+      borderRadius: '8px',
+      color: '#fff',
+      fontSize: '14px',
+      cursor: 'pointer',
+      outline: 'none',
+      transition: 'all 0.3s ease',
+      minWidth: '200px',
+    },
   };
 
   const modes = [
@@ -393,12 +532,24 @@ const AIPanel: React.FC<AIPanelProps> = ({ isOpen, onClose }) => {
 
     setMessages(prev => [...prev, userMessage]);
     setPrompt('');
-    setIsLoading(true);
     setError(null);
     setShowTypingAnimation(true);
+    
+    // Add thinking message immediately
+    const thinkingMessage: Message = {
+      role: 'assistant',
+      content: '',
+      timestamp: new Date(),
+      isStreaming: true,
+      streamedContent: '',
+    };
+    setMessages(prev => [...prev, thinkingMessage]);
+    setIsLoading(true);
 
     try {
-      const response = await fetch('/api/openai', {
+      const apiEndpoint = selectedProvider === 'openai' ? '/api/openai' : '/api/anthropic';
+      
+      const response = await fetch(apiEndpoint, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -406,31 +557,48 @@ const AIPanel: React.FC<AIPanelProps> = ({ isOpen, onClose }) => {
         body: JSON.stringify({
           prompt,
           mode: selectedMode,
+          model: selectedModel,
         }),
       });
 
       if (!response.ok) {
-        throw new Error('Failed to get response from AI');
+        throw new Error(`Failed to get response from ${selectedProvider}`);
       }
 
       const data = await response.json();
 
       if (data.success && data.response) {
-        const assistantMessage: Message = {
-          role: 'assistant',
-          content: data.response,
-          timestamp: new Date(),
-        };
-        setMessages(prev => [...prev, assistantMessage]);
+        // Update the last message (thinking indicator) with the actual response
+        setMessages(prev => {
+          const newMessages = [...prev];
+          const lastIndex = newMessages.length - 1;
+          
+          // Update the thinking message to start streaming
+          newMessages[lastIndex] = {
+            ...newMessages[lastIndex],
+            content: data.response,
+            streamedContent: '',
+            isStreaming: true,
+          };
+          
+          setStreamingMessageId(lastIndex);
+          
+          // Start streaming animation after a short delay
+          setTimeout(() => {
+            streamText(data.response, lastIndex);
+          }, 500);
+          
+          return newMessages;
+        });
       } else {
         throw new Error(data.error || 'Unexpected response format');
       }
     } catch (err) {
-      console.error('Error calling OpenAI:', err);
+      console.error(`Error calling ${selectedProvider}:`, err);
       setError(
         language === 'es' 
-          ? 'Error al obtener respuesta. Por favor, intenta de nuevo.'
-          : 'Error getting response. Please try again.'
+          ? `Error al obtener respuesta de ${selectedProvider}. Por favor, intenta de nuevo.`
+          : `Error getting response from ${selectedProvider}. Please try again.`
       );
     } finally {
       setIsLoading(false);
@@ -458,13 +626,227 @@ const AIPanel: React.FC<AIPanelProps> = ({ isOpen, onClose }) => {
     const styleSheet = document.createElement('style');
     styleSheet.id = 'ai-panel-styles';
     styleSheet.textContent = `
-      @keyframes pulse {
-        0%, 80%, 100% {
-          opacity: 0.3;
+      @keyframes pulse3D {
+        0%, 100% {
+          transform: translateY(0) scale(1);
+          opacity: 0.5;
+          filter: brightness(0.9);
+          box-shadow: 
+            inset -2px -2px 4px rgba(0, 0, 0, 0.2),
+            inset 2px 2px 4px rgba(255, 255, 255, 0.4),
+            0 4px 8px rgba(184, 233, 45, 0.3),
+            0 0 20px rgba(184, 233, 45, 0.2);
         }
-        40% {
+        50% {
+          transform: translateY(-4px) scale(1.15);
           opacity: 1;
+          filter: brightness(1.2) drop-shadow(0 6px 12px rgba(184, 233, 45, 0.5));
+          box-shadow: 
+            inset -2px -2px 6px rgba(0, 0, 0, 0.3),
+            inset 2px 2px 6px rgba(255, 255, 255, 0.6),
+            0 6px 12px rgba(184, 233, 45, 0.5),
+            0 0 30px rgba(184, 233, 45, 0.4);
         }
+      }
+      
+      @keyframes floatOrbit {
+        0% {
+          transform: translateY(0) translateX(0) translateZ(0);
+        }
+        33% {
+          transform: translateY(-5px) translateX(3px) translateZ(10px);
+        }
+        66% {
+          transform: translateY(3px) translateX(-3px) translateZ(-5px);
+        }
+        100% {
+          transform: translateY(0) translateX(0) translateZ(0);
+        }
+      }
+      
+      @keyframes energyFlow {
+        0% {
+          background-position: -200% center;
+          filter: hue-rotate(0deg);
+        }
+        50% {
+          filter: hue-rotate(20deg);
+        }
+        100% {
+          background-position: 200% center;
+          filter: hue-rotate(0deg);
+        }
+      }
+      
+      @keyframes borderGlow {
+        0%, 100% {
+          box-shadow: 
+            inset 0 0 20px rgba(184, 233, 45, 0.1),
+            0 0 20px rgba(184, 233, 45, 0.2),
+            0 0 40px rgba(184, 233, 45, 0.1);
+        }
+        50% {
+          box-shadow: 
+            inset 0 0 30px rgba(184, 233, 45, 0.2),
+            0 0 30px rgba(184, 233, 45, 0.3),
+            0 0 60px rgba(184, 233, 45, 0.2);
+        }
+      }
+      
+      @keyframes shimmer {
+        0% {
+          background-position: -1000px 0;
+        }
+        100% {
+          background-position: 1000px 0;
+        }
+      }
+      
+      @keyframes fadeInWord {
+        0% {
+          opacity: 0;
+          filter: blur(4px);
+          transform: translateY(10px);
+        }
+        100% {
+          opacity: 1;
+          filter: blur(0);
+          transform: translateY(0);
+        }
+      }
+      
+      .thinking-indicator {
+        position: relative;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 20px 24px;
+        background: 
+          linear-gradient(
+            135deg,
+            rgba(184, 233, 45, 0.08) 0%,
+            rgba(184, 233, 45, 0.02) 25%,
+            rgba(10, 46, 31, 0.4) 50%,
+            rgba(184, 233, 45, 0.02) 75%,
+            rgba(184, 233, 45, 0.08) 100%
+          );
+        border-radius: 16px;
+        border: 1px solid rgba(184, 233, 45, 0.3);
+        margin-bottom: 12px;
+        overflow: hidden;
+        animation: borderGlow 3s ease-in-out infinite;
+        backdrop-filter: blur(10px);
+      }
+      
+      .thinking-indicator::before {
+        content: '';
+        position: absolute;
+        top: -2px;
+        left: -2px;
+        right: -2px;
+        bottom: -2px;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(184, 233, 45, 0.4),
+          transparent
+        );
+        background-size: 200% 100%;
+        animation: energyFlow 3s linear infinite;
+        border-radius: 16px;
+        opacity: 0.6;
+        z-index: -1;
+      }
+      
+      .thinking-indicator::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: 
+          radial-gradient(
+            circle at 30% 50%,
+            rgba(184, 233, 45, 0.1) 0%,
+            transparent 70%
+          );
+        animation: floatOrbit 4s ease-in-out infinite;
+        pointer-events: none;
+      }
+      
+      .thinking-dot-wrapper {
+        display: flex;
+        gap: 8px;
+        perspective: 100px;
+        transform-style: preserve-3d;
+      }
+      
+      .thinking-dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: 
+          radial-gradient(
+            circle at 30% 30%,
+            rgba(255, 255, 255, 0.9),
+            #B8E92D 35%,
+            #7fc41d 100%
+          );
+        animation: pulse3D 1.8s ease-in-out infinite;
+        transform-style: preserve-3d;
+        position: relative;
+      }
+      
+      .thinking-dot::before {
+        content: '';
+        position: absolute;
+        inset: -3px;
+        border-radius: 50%;
+        background: radial-gradient(
+          circle,
+          rgba(184, 233, 45, 0.3) 0%,
+          transparent 60%
+        );
+        opacity: 0.8;
+      }
+      
+      .thinking-dot:nth-child(1) {
+        animation-delay: 0s;
+      }
+      
+      .thinking-dot:nth-child(2) {
+        animation-delay: 0.3s;
+      }
+      
+      .thinking-dot:nth-child(3) {
+        animation-delay: 0.6s;
+      }
+      
+      .streaming-message {
+        position: relative;
+        animation: fadeInWord 0.3s ease-out;
+      }
+      
+      .streaming-text {
+        background: linear-gradient(
+          90deg,
+          rgba(255, 255, 255, 0) 0%,
+          rgba(184, 233, 45, 0.1) 50%,
+          rgba(255, 255, 255, 0) 100%
+        );
+        background-size: 200% 100%;
+        animation: shimmer 2s linear infinite;
+        padding: 2px 0;
+      }
+      
+      .streaming-cursor {
+        display: inline-block;
+        width: 3px;
+        height: 18px;
+        background: linear-gradient(180deg, #B8E92D, rgba(184, 233, 45, 0.6));
+        margin-left: 2px;
+        animation: cursorBlink 0.8s infinite;
+        box-shadow: 0 0 8px rgba(184, 233, 45, 0.8);
+        vertical-align: text-bottom;
+        border-radius: 1px;
       }
       
       @keyframes cursorBlink {
@@ -539,8 +921,8 @@ const AIPanel: React.FC<AIPanelProps> = ({ isOpen, onClose }) => {
       
       .typing-animation-container {
         position: absolute;
-        top: 15px;
-        left: 15px;
+        top: 20px;
+        left: 20px;
         pointer-events: none;
         z-index: 1;
       }
@@ -622,6 +1004,52 @@ const AIPanel: React.FC<AIPanelProps> = ({ isOpen, onClose }) => {
                 </button>
               </div>
               
+              {/* Provider and Model Selection */}
+              <div style={styles.providerSection}>
+                <div style={styles.providerToggle}>
+                  <button
+                    style={{
+                      ...styles.providerButton,
+                      ...(selectedProvider === 'openai' ? styles.providerButtonActive : {}),
+                    }}
+                    onClick={() => setSelectedProvider('openai')}
+                  >
+                    <span>🤖</span>
+                    <span>OpenAI</span>
+                  </button>
+                  <button
+                    style={{
+                      ...styles.providerButton,
+                      ...(selectedProvider === 'anthropic' ? styles.providerButtonActive : {}),
+                    }}
+                    onClick={() => setSelectedProvider('anthropic')}
+                  >
+                    <span>🧠</span>
+                    <span>Anthropic</span>
+                  </button>
+                </div>
+                
+                <select
+                  style={styles.modelSelect}
+                  value={selectedModel}
+                  onChange={(e) => setSelectedModel(e.target.value)}
+                  onFocus={(e) => {
+                    e.currentTarget.style.borderColor = '#B8E92D';
+                    e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.08)';
+                  }}
+                  onBlur={(e) => {
+                    e.currentTarget.style.borderColor = 'rgba(184, 233, 45, 0.2)';
+                    e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.05)';
+                  }}
+                >
+                  {models[selectedProvider].map((model) => (
+                    <option key={model.id} value={model.id} style={{ backgroundColor: '#0A2E1F', color: '#fff' }}>
+                      {model.name} - {model.description}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              
               <div style={styles.modes}>
                 {modes.map((mode) => (
                   <button
@@ -664,19 +1092,63 @@ const AIPanel: React.FC<AIPanelProps> = ({ isOpen, onClose }) => {
                         ...(message.role === 'user' ? styles.userMessage : styles.assistantMessage),
                       }}
                     >
-                      <div style={styles.messageContent}>{message.content}</div>
+                      {message.role === 'assistant' && message.isStreaming !== undefined ? (
+                        <div className="streaming-message">
+                          <div style={styles.messageContent}>
+                            {message.streamedContent ? (
+                              <>
+                                <span className={message.isStreaming ? "streaming-text" : ""}>
+                                  {message.streamedContent}
+                                </span>
+                                {message.isStreaming && <span className="streaming-cursor"></span>}
+                              </>
+                            ) : (
+                              <div className="thinking-indicator">
+                                <span style={{ 
+                                  color: '#B8E92D', 
+                                  fontSize: '14px', 
+                                  fontWeight: '600',
+                                  textShadow: '0 0 10px rgba(184, 233, 45, 0.5)',
+                                  letterSpacing: '0.5px',
+                                  animation: 'pulse3D 2s ease-in-out infinite',
+                                }}>
+                                  {language === 'es' ? 'Pensando' : 'Thinking'}
+                                </span>
+                                <div className="thinking-dot-wrapper">
+                                  <div className="thinking-dot"></div>
+                                  <div className="thinking-dot"></div>
+                                  <div className="thinking-dot"></div>
+                                </div>
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                      ) : (
+                        <div style={styles.messageContent}>{message.content}</div>
+                      )}
                       <div style={styles.messageTimestamp}>
                         {formatTimestamp(message.timestamp)}
                       </div>
                     </motion.div>
                   ))}
                   
-                  {isLoading && (
-                    <div style={styles.loadingIndicator}>
-                      <span>{language === 'es' ? 'Pensando' : 'Thinking'}</span>
-                      <div className="loading-dot" style={styles.loadingDot}></div>
-                      <div className="loading-dot" style={styles.loadingDot}></div>
-                      <div className="loading-dot" style={styles.loadingDot}></div>
+                  {isLoading && messages[messages.length - 1]?.role !== 'assistant' && (
+                    <div className="thinking-indicator">
+                      <span style={{ 
+                        color: '#B8E92D', 
+                        fontSize: '14px', 
+                        fontWeight: '600',
+                        textShadow: '0 0 10px rgba(184, 233, 45, 0.5)',
+                        letterSpacing: '0.5px',
+                        animation: 'pulse3D 2s ease-in-out infinite',
+                      }}>
+                        {language === 'es' ? 'Pensando' : 'Thinking'}
+                      </span>
+                      <div className="thinking-dot-wrapper">
+                        <div className="thinking-dot"></div>
+                        <div className="thinking-dot"></div>
+                        <div className="thinking-dot"></div>
+                      </div>
                     </div>
                   )}
                   
@@ -693,7 +1165,7 @@ const AIPanel: React.FC<AIPanelProps> = ({ isOpen, onClose }) => {
                 <label style={styles.promptLabel}>
                   {modes.find(m => m.id === selectedMode)?.description}
                 </label>
-                <div className="textarea-with-animation" style={{ position: 'relative' }}>
+                <div className="textarea-with-animation" style={styles.textareaContainer}>
                   {!prompt && showTypingAnimation && (
                     <div className="typing-animation-container">
                       <span className="typing-text">{typingText}</span>
@@ -712,7 +1184,8 @@ const AIPanel: React.FC<AIPanelProps> = ({ isOpen, onClose }) => {
                       }
                     }}
                     onKeyDown={(e) => {
-                      if (e.key === 'Enter' && e.ctrlKey) {
+                      if (e.key === 'Enter' && !e.shiftKey) {
+                        e.preventDefault();
                         handleSubmit();
                       }
                     }}
@@ -726,6 +1199,35 @@ const AIPanel: React.FC<AIPanelProps> = ({ isOpen, onClose }) => {
                     }}
                     disabled={isLoading}
                   />
+                  {/* Send Button Inside Textarea */}
+                  <motion.button
+                    style={{
+                      ...styles.sendButtonInside,
+                      ...((!prompt.trim() || isLoading) ? styles.sendButtonDisabled : {}),
+                    }}
+                    onClick={handleSubmit}
+                    disabled={!prompt.trim() || isLoading}
+                    whileHover={prompt.trim() && !isLoading ? { 
+                      scale: 1.05,
+                      boxShadow: '0 4px 12px rgba(184, 233, 45, 0.4)'
+                    } : {}}
+                    whileTap={prompt.trim() && !isLoading ? { scale: 0.95 } : {}}
+                  >
+                    {isLoading ? (
+                      <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                        <span className="loading-dot" style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: 'currentColor' }}></span>
+                        <span className="loading-dot" style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: 'currentColor' }}></span>
+                        <span className="loading-dot" style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: 'currentColor' }}></span>
+                      </span>
+                    ) : (
+                      <>
+                        <span>{language === 'es' ? 'Enviar' : 'Send'}</span>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                          <path d="M22 2L11 13M22 2L15 22L11 13L2 9L22 2Z" />
+                        </svg>
+                      </>
+                    )}
+                  </motion.button>
                 </div>
               </div>
 
@@ -762,46 +1264,23 @@ const AIPanel: React.FC<AIPanelProps> = ({ isOpen, onClose }) => {
 
             {/* Footer */}
             <div style={styles.footer}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                <span style={styles.footerInfo}>
-                  {language === 'es' ? 'Powered by OpenAI GPT-3.5' : 'Powered by OpenAI GPT-3.5'}
-                </span>
-                {messages.length > 0 && (
-                  <button
-                    style={styles.clearButton}
-                    onClick={handleClearChat}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.2)';
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
-                    }}
-                  >
-                    {language === 'es' ? 'Limpiar chat' : 'Clear chat'}
-                  </button>
-                )}
-              </div>
-              <button
-                style={{
-                  ...styles.submitButton,
-                  ...((!prompt.trim() || isLoading) ? styles.submitButtonDisabled : {}),
-                }}
-                onClick={handleSubmit}
-                disabled={!prompt.trim() || isLoading}
-                onMouseEnter={(e) => {
-                  if (prompt.trim() && !isLoading) {
-                    e.currentTarget.style.transform = 'translateY(-2px)';
-                    e.currentTarget.style.boxShadow = '0 6px 20px rgba(184, 233, 45, 0.4)';
-                  }
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.transform = 'translateY(0)';
-                  e.currentTarget.style.boxShadow = 'none';
-                }}
-              >
-                <span>{isLoading ? '...' : (language === 'es' ? 'Enviar' : 'Send')}</span>
-                <span>→</span>
-              </button>
+              <span style={styles.footerInfo}>
+                {language === 'es' ? 'Powered by' : 'Powered by'} {selectedProvider === 'openai' ? 'OpenAI' : 'Anthropic'} - {models[selectedProvider].find(m => m.id === selectedModel)?.name}
+              </span>
+              {messages.length > 0 && (
+                <button
+                  style={styles.clearButton}
+                  onClick={handleClearChat}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.2)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
+                  }}
+                >
+                  {language === 'es' ? 'Limpiar chat' : 'Clear chat'}
+                </button>
+              )}
             </div>
           </motion.div>
         </motion.div>
