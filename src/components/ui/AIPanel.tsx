@@ -267,9 +267,9 @@ const AIPanel: React.FC<AIPanelProps> = ({ isOpen, onClose }) => {
       padding: '20px',
       paddingBottom: '60px', // Space for the send button
       backgroundColor: 'rgba(255, 255, 255, 0.03)',
-      backdropFilter: 'blur(10px)',
-      border: '1px solid rgba(184, 233, 45, 0.2)',
-      borderRadius: '12px',
+      backdropFilter: 'blur(20px) saturate(180%)',
+      border: '1px solid transparent',
+      borderRadius: '16px',
       color: '#fff',
       fontSize: '16px',
       lineHeight: '1.6',
@@ -277,23 +277,59 @@ const AIPanel: React.FC<AIPanelProps> = ({ isOpen, onClose }) => {
       outline: 'none',
       transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
       fontFamily: 'inherit',
+      position: 'relative' as const,
+      animation: 'neonPulse 4s ease-in-out infinite',
       boxShadow: `
-        inset 0 1px 3px rgba(0, 0, 0, 0.1),
-        0 0 0 1px rgba(184, 233, 45, 0.1),
-        0 4px 6px rgba(0, 0, 0, 0.1),
-        0 0 20px rgba(184, 233, 45, 0.05)
+        inset 0 2px 8px rgba(0, 0, 0, 0.2),
+        inset 0 -2px 8px rgba(184, 233, 45, 0.03),
+        0 0 1px rgba(184, 233, 45, 0.4),
+        0 0 4px rgba(184, 233, 45, 0.2),
+        0 0 8px rgba(184, 233, 45, 0.1),
+        0 0 16px rgba(184, 233, 45, 0.05),
+        0 8px 32px rgba(0, 0, 0, 0.3)
       `,
       background: `
         linear-gradient(135deg, 
-          rgba(255, 255, 255, 0.03) 0%, 
-          rgba(184, 233, 45, 0.01) 50%,
-          rgba(255, 255, 255, 0.02) 100%
+          rgba(10, 46, 31, 0.6) 0%, 
+          rgba(184, 233, 45, 0.02) 25%,
+          rgba(255, 255, 255, 0.01) 50%,
+          rgba(184, 233, 45, 0.02) 75%,
+          rgba(10, 46, 31, 0.6) 100%
+        ),
+        radial-gradient(
+          ellipse at top left,
+          rgba(184, 233, 45, 0.05) 0%,
+          transparent 50%
+        ),
+        radial-gradient(
+          ellipse at bottom right,
+          rgba(184, 233, 45, 0.05) 0%,
+          transparent 50%
         )
       `,
+      backgroundSize: '200% 200%, 100% 100%, 100% 100%',
+      backgroundPosition: '0% 0%, 0% 0%, 100% 100%',
     },
     textareaContainer: {
       position: 'relative' as const,
       width: '100%',
+      padding: '2px',
+      background: `
+        linear-gradient(45deg, 
+          rgba(184, 233, 45, 0.1) 0%, 
+          transparent 25%, 
+          transparent 75%, 
+          rgba(184, 233, 45, 0.1) 100%
+        ),
+        linear-gradient(-45deg, 
+          rgba(184, 233, 45, 0.1) 0%, 
+          transparent 25%, 
+          transparent 75%, 
+          rgba(184, 233, 45, 0.1) 100%
+        )
+      `,
+      borderRadius: '18px',
+      animation: 'subtleRotate 20s linear infinite',
     },
     sendButtonInside: {
       position: 'absolute' as const,
@@ -693,12 +729,44 @@ const AIPanel: React.FC<AIPanelProps> = ({ isOpen, onClose }) => {
         }
       }
       
+      @keyframes neonPulse {
+        0%, 100% {
+          box-shadow: 
+            inset 0 2px 8px rgba(0, 0, 0, 0.2),
+            inset 0 -2px 8px rgba(184, 233, 45, 0.03),
+            0 0 1px rgba(184, 233, 45, 0.4),
+            0 0 4px rgba(184, 233, 45, 0.2),
+            0 0 8px rgba(184, 233, 45, 0.1),
+            0 0 16px rgba(184, 233, 45, 0.05),
+            0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+        50% {
+          box-shadow: 
+            inset 0 2px 10px rgba(0, 0, 0, 0.25),
+            inset 0 -2px 10px rgba(184, 233, 45, 0.05),
+            0 0 2px rgba(184, 233, 45, 0.5),
+            0 0 8px rgba(184, 233, 45, 0.3),
+            0 0 16px rgba(184, 233, 45, 0.15),
+            0 0 24px rgba(184, 233, 45, 0.08),
+            0 10px 40px rgba(0, 0, 0, 0.35);
+        }
+      }
+      
       @keyframes shimmer {
         0% {
           background-position: -1000px 0;
         }
         100% {
           background-position: 1000px 0;
+        }
+      }
+      
+      @keyframes subtleRotate {
+        0% {
+          background-position: 0% 0%, 100% 100%;
+        }
+        100% {
+          background-position: 100% 100%, 0% 0%;
         }
       }
       
@@ -894,17 +962,29 @@ const AIPanel: React.FC<AIPanelProps> = ({ isOpen, onClose }) => {
       .futuristic-textarea:focus {
         animation: none;
         box-shadow: 
-          inset 0 1px 3px rgba(0, 0, 0, 0.15),
-          0 0 0 2px rgba(184, 233, 45, 0.3),
-          0 8px 16px rgba(0, 0, 0, 0.2),
-          0 0 40px rgba(184, 233, 45, 0.15),
-          0 0 80px rgba(184, 233, 45, 0.05) !important;
-        border-color: rgba(184, 233, 45, 0.5) !important;
-        background: linear-gradient(135deg, 
-          rgba(255, 255, 255, 0.05) 0%, 
-          rgba(184, 233, 45, 0.02) 50%,
-          rgba(255, 255, 255, 0.03) 100%
-        ) !important;
+          inset 0 2px 12px rgba(0, 0, 0, 0.3),
+          inset 0 -2px 12px rgba(184, 233, 45, 0.08),
+          0 0 2px rgba(184, 233, 45, 0.8),
+          0 0 8px rgba(184, 233, 45, 0.6),
+          0 0 16px rgba(184, 233, 45, 0.4),
+          0 0 32px rgba(184, 233, 45, 0.2),
+          0 0 48px rgba(184, 233, 45, 0.1),
+          0 12px 48px rgba(0, 0, 0, 0.4) !important;
+        border: 1px solid rgba(184, 233, 45, 0.6) !important;
+        background: 
+          linear-gradient(135deg, 
+            rgba(10, 46, 31, 0.7) 0%, 
+            rgba(184, 233, 45, 0.04) 25%,
+            rgba(255, 255, 255, 0.02) 50%,
+            rgba(184, 233, 45, 0.04) 75%,
+            rgba(10, 46, 31, 0.7) 100%
+          ),
+          radial-gradient(
+            ellipse at 50% 0%,
+            rgba(184, 233, 45, 0.1) 0%,
+            transparent 70%
+          ) !important;
+        filter: brightness(1.1) contrast(1.05);
       }
       
       .loading-dot:nth-child(1) {
@@ -928,18 +1008,20 @@ const AIPanel: React.FC<AIPanelProps> = ({ isOpen, onClose }) => {
       }
       
       .typing-text {
-        color: rgba(184, 233, 45, 0.6);
+        color: rgba(184, 233, 45, 0.7);
         font-size: 16px;
         font-family: inherit;
         text-shadow: 
-          0 0 10px rgba(184, 233, 45, 0.5),
-          0 0 20px rgba(184, 233, 45, 0.3),
-          0 0 30px rgba(184, 233, 45, 0.2),
-          0 2px 4px rgba(0, 0, 0, 0.3),
-          0 1px 2px rgba(0, 0, 0, 0.2);
-        animation: glow 2s ease-in-out infinite;
+          0 0 2px rgba(184, 233, 45, 0.9),
+          0 0 4px rgba(184, 233, 45, 0.7),
+          0 0 8px rgba(184, 233, 45, 0.5),
+          0 0 12px rgba(184, 233, 45, 0.3),
+          0 0 16px rgba(184, 233, 45, 0.2),
+          0 2px 4px rgba(0, 0, 0, 0.4);
+        animation: glow 3s ease-in-out infinite;
         letter-spacing: 0.5px;
         font-weight: 500;
+        filter: brightness(1.2);
       }
       
       .typing-cursor {
