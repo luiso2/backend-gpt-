@@ -1098,12 +1098,10 @@ const AIPanel: React.FC<AIPanelProps> = ({ isOpen, onClose }) => {
                             ) : (
                               <div className="thinking-indicator">
                                 <span style={{ 
-                                  color: '#B8E92D', 
-                                  fontSize: '14px', 
-                                  fontWeight: '600',
-                                  textShadow: '0 0 10px rgba(184, 233, 45, 0.5)',
-                                  letterSpacing: '0.5px',
-                                  animation: 'pulse3D 2s ease-in-out infinite',
+                                  color: 'rgba(184, 233, 45, 0.7)', 
+                                  fontSize: '13px', 
+                                  fontWeight: '400',
+                                  opacity: '0.9',
                                 }}>
                                   {language === 'es' ? 'Pensando' : 'Thinking'}
                                 </span>
