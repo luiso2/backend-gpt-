@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '@/contexts/LanguageContext';
 
@@ -22,6 +22,36 @@ const AIPanel: React.FC<AIPanelProps> = ({ isOpen, onClose }) => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [showTypingAnimation, setShowTypingAnimation] = useState(true);
+  const [typingText, setTypingText] = useState('');
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
+  
+  // Typewriter animation effect
+  useEffect(() => {
+    if (!showTypingAnimation || prompt) {
+      setTypingText('');
+      return;
+    }
+    
+    const fullText = language === 'es' ? 'Escribe tu consulta aquí...' : 'Type your query here...';
+    let currentIndex = 0;
+    setTypingText('');
+    
+    const typingInterval = setInterval(() => {
+      if (currentIndex <= fullText.length) {
+        setTypingText(fullText.slice(0, currentIndex));
+        currentIndex++;
+      } else {
+        // Reset animation after a pause
+        setTimeout(() => {
+          currentIndex = 0;
+          setTypingText('');
+        }, 2000);
+      }
+    }, 100);
+    
+    return () => clearInterval(typingInterval);
+  }, [showTypingAnimation, language, prompt]);
 
   // CSS-in-JS Styles
   const styles = {
@@ -170,15 +200,29 @@ const AIPanel: React.FC<AIPanelProps> = ({ isOpen, onClose }) => {
       width: '100%',
       minHeight: '100px',
       padding: '15px',
-      backgroundColor: 'rgba(255, 255, 255, 0.05)',
-      border: '1px solid rgba(184, 233, 45, 0.3)',
-      borderRadius: '10px',
+      backgroundColor: 'rgba(255, 255, 255, 0.03)',
+      backdropFilter: 'blur(10px)',
+      border: '1px solid rgba(184, 233, 45, 0.2)',
+      borderRadius: '12px',
       color: '#fff',
       fontSize: '16px',
       resize: 'vertical' as const,
       outline: 'none',
-      transition: 'all 0.3s ease',
+      transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
       fontFamily: 'inherit',
+      boxShadow: `
+        inset 0 1px 3px rgba(0, 0, 0, 0.1),
+        0 0 0 1px rgba(184, 233, 45, 0.1),
+        0 4px 6px rgba(0, 0, 0, 0.1),
+        0 0 20px rgba(184, 233, 45, 0.05)
+      `,
+      background: `
+        linear-gradient(135deg, 
+          rgba(255, 255, 255, 0.03) 0%, 
+          rgba(184, 233, 45, 0.01) 50%,
+          rgba(255, 255, 255, 0.02) 100%
+        )
+      `,
     },
     suggestionsSection: {
       display: 'flex',
@@ -351,6 +395,7 @@ const AIPanel: React.FC<AIPanelProps> = ({ isOpen, onClose }) => {
     setPrompt('');
     setIsLoading(true);
     setError(null);
+    setShowTypingAnimation(true);
 
     try {
       const response = await fetch('/api/openai', {
@@ -422,6 +467,64 @@ const AIPanel: React.FC<AIPanelProps> = ({ isOpen, onClose }) => {
         }
       }
       
+      @keyframes cursorBlink {
+        0%, 49% {
+          opacity: 1;
+        }
+        50%, 100% {
+          opacity: 0;
+        }
+      }
+      
+      @keyframes glow {
+        0% {
+          filter: brightness(1) drop-shadow(0 0 2px rgba(184, 233, 45, 0.3));
+        }
+        50% {
+          filter: brightness(1.1) drop-shadow(0 0 4px rgba(184, 233, 45, 0.5));
+        }
+        100% {
+          filter: brightness(1) drop-shadow(0 0 2px rgba(184, 233, 45, 0.3));
+        }
+      }
+      
+      @keyframes subtleGlow {
+        0%, 100% {
+          box-shadow: 
+            inset 0 1px 3px rgba(0, 0, 0, 0.1),
+            0 0 0 1px rgba(184, 233, 45, 0.1),
+            0 4px 6px rgba(0, 0, 0, 0.1),
+            0 0 20px rgba(184, 233, 45, 0.05);
+        }
+        50% {
+          box-shadow: 
+            inset 0 1px 3px rgba(0, 0, 0, 0.1),
+            0 0 0 1px rgba(184, 233, 45, 0.15),
+            0 4px 8px rgba(0, 0, 0, 0.15),
+            0 0 30px rgba(184, 233, 45, 0.08);
+        }
+      }
+      
+      .futuristic-textarea {
+        animation: subtleGlow 4s ease-in-out infinite;
+      }
+      
+      .futuristic-textarea:focus {
+        animation: none;
+        box-shadow: 
+          inset 0 1px 3px rgba(0, 0, 0, 0.15),
+          0 0 0 2px rgba(184, 233, 45, 0.3),
+          0 8px 16px rgba(0, 0, 0, 0.2),
+          0 0 40px rgba(184, 233, 45, 0.15),
+          0 0 80px rgba(184, 233, 45, 0.05) !important;
+        border-color: rgba(184, 233, 45, 0.5) !important;
+        background: linear-gradient(135deg, 
+          rgba(255, 255, 255, 0.05) 0%, 
+          rgba(184, 233, 45, 0.02) 50%,
+          rgba(255, 255, 255, 0.03) 100%
+        ) !important;
+      }
+      
       .loading-dot:nth-child(1) {
         animation-delay: 0s;
       }
@@ -432,6 +535,46 @@ const AIPanel: React.FC<AIPanelProps> = ({ isOpen, onClose }) => {
       
       .loading-dot:nth-child(3) {
         animation-delay: 0.4s;
+      }
+      
+      .typing-animation-container {
+        position: absolute;
+        top: 15px;
+        left: 15px;
+        pointer-events: none;
+        z-index: 1;
+      }
+      
+      .typing-text {
+        color: rgba(184, 233, 45, 0.6);
+        font-size: 16px;
+        font-family: inherit;
+        text-shadow: 
+          0 0 10px rgba(184, 233, 45, 0.5),
+          0 0 20px rgba(184, 233, 45, 0.3),
+          0 0 30px rgba(184, 233, 45, 0.2),
+          0 2px 4px rgba(0, 0, 0, 0.3),
+          0 1px 2px rgba(0, 0, 0, 0.2);
+        animation: glow 2s ease-in-out infinite;
+        letter-spacing: 0.5px;
+        font-weight: 500;
+      }
+      
+      .typing-cursor {
+        display: inline-block;
+        width: 2px;
+        height: 20px;
+        background: linear-gradient(180deg, rgba(184, 233, 45, 0.8), rgba(184, 233, 45, 0.4));
+        margin-left: 2px;
+        animation: cursorBlink 1s infinite;
+        box-shadow: 
+          0 0 6px rgba(184, 233, 45, 0.6),
+          0 0 12px rgba(184, 233, 45, 0.4);
+        vertical-align: text-bottom;
+      }
+      
+      .textarea-with-animation {
+        position: relative;
       }
     `;
     document.head.appendChild(styleSheet);
@@ -550,30 +693,40 @@ const AIPanel: React.FC<AIPanelProps> = ({ isOpen, onClose }) => {
                 <label style={styles.promptLabel}>
                   {modes.find(m => m.id === selectedMode)?.description}
                 </label>
-                <textarea
-                  style={styles.promptTextarea}
-                  value={prompt}
-                  onChange={(e) => setPrompt(e.target.value)}
-                  placeholder={
-                    language === 'es' 
-                      ? 'Escribe tu consulta aquí...'
-                      : 'Type your query here...'
-                  }
-                  onKeyDown={(e) => {
-                    if (e.key === 'Enter' && e.ctrlKey) {
-                      handleSubmit();
-                    }
-                  }}
-                  onFocus={(e) => {
-                    e.currentTarget.style.borderColor = '#B8E92D';
-                    e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.08)';
-                  }}
-                  onBlur={(e) => {
-                    e.currentTarget.style.borderColor = 'rgba(184, 233, 45, 0.3)';
-                    e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.05)';
-                  }}
-                  disabled={isLoading}
-                />
+                <div className="textarea-with-animation" style={{ position: 'relative' }}>
+                  {!prompt && showTypingAnimation && (
+                    <div className="typing-animation-container">
+                      <span className="typing-text">{typingText}</span>
+                      {typingText && <span className="typing-cursor"></span>}
+                    </div>
+                  )}
+                  <textarea
+                    ref={textareaRef}
+                    className="futuristic-textarea"
+                    style={styles.promptTextarea}
+                    value={prompt}
+                    onChange={(e) => {
+                      setPrompt(e.target.value);
+                      if (e.target.value) {
+                        setShowTypingAnimation(false);
+                      }
+                    }}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter' && e.ctrlKey) {
+                        handleSubmit();
+                      }
+                    }}
+                    onFocus={(e) => {
+                      setShowTypingAnimation(false);
+                    }}
+                    onBlur={(e) => {
+                      if (!prompt) {
+                        setShowTypingAnimation(true);
+                      }
+                    }}
+                    disabled={isLoading}
+                  />
+                </div>
               </div>
 
               {/* Suggestions Section */}
