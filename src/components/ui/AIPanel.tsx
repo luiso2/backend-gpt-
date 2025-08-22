@@ -663,48 +663,22 @@ const AIPanel: React.FC<AIPanelProps> = ({ isOpen, onClose }) => {
     styleSheet.id = 'ai-panel-styles';
     styleSheet.textContent = `
       @keyframes pulse3D {
-        0% {
-          transform: scale(0.95) translateY(0px);
-          opacity: 0.3;
-          filter: blur(0.5px);
-        }
-        25% {
-          transform: scale(1.1) translateY(-8px);
-          opacity: 1;
-          filter: blur(0px) brightness(1.3);
-          box-shadow: 
-            0 8px 16px rgba(184, 233, 45, 0.4),
-            0 4px 8px rgba(0, 0, 0, 0.2),
-            inset 0 1px 2px rgba(255, 255, 255, 0.3);
+        0%, 100% {
+          transform: scale(1) translateY(0px);
+          opacity: 0.4;
         }
         50% {
-          transform: scale(1.05) translateY(-6px);
-          opacity: 0.9;
-          filter: blur(0px) brightness(1.2);
-        }
-        75% {
-          transform: scale(1) translateY(-3px);
-          opacity: 0.7;
-        }
-        100% {
-          transform: scale(0.95) translateY(0px);
-          opacity: 0.3;
-          filter: blur(0.5px);
+          transform: scale(1.02) translateY(-2px);
+          opacity: 1;
         }
       }
       
       @keyframes floatOrbit {
-        0% {
-          transform: translateY(0) translateX(0) translateZ(0);
+        0%, 100% {
+          transform: translateY(0);
         }
-        33% {
-          transform: translateY(-5px) translateX(3px) translateZ(10px);
-        }
-        66% {
-          transform: translateY(3px) translateX(-3px) translateZ(-5px);
-        }
-        100% {
-          transform: translateY(0) translateX(0) translateZ(0);
+        50% {
+          transform: translateY(-1px);
         }
       }
       
@@ -771,12 +745,12 @@ const AIPanel: React.FC<AIPanelProps> = ({ isOpen, onClose }) => {
       
       @keyframes thinkingGlow {
         0%, 100% {
-          opacity: 0.7;
+          opacity: 0.8;
           filter: brightness(1);
         }
         50% {
-          opacity: 1;
-          filter: brightness(1.2) drop-shadow(0 0 8px rgba(184, 233, 45, 0.5));
+          opacity: 0.95;
+          filter: brightness(1.05);
         }
       }
       
@@ -853,32 +827,26 @@ const AIPanel: React.FC<AIPanelProps> = ({ isOpen, onClose }) => {
       }
       
       .thinking-dot {
-        width: 10px;
-        height: 10px;
+        width: 8px;
+        height: 8px;
         border-radius: 50%;
-        background: radial-gradient(
-          circle at 30% 30%,
-          rgba(255, 255, 255, 0.8),
-          #B8E92D 40%,
-          #7fc41d 100%
-        );
-        animation: pulse3D 1.8s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-        transform-style: preserve-3d;
+        background: rgba(184, 233, 45, 0.8);
+        animation: pulse3D 2.4s ease-in-out infinite;
         position: relative;
       }
       
       .thinking-dot::after {
         content: '';
         position: absolute;
-        inset: -2px;
+        inset: -1px;
         border-radius: 50%;
         background: radial-gradient(
           circle,
-          rgba(184, 233, 45, 0.4) 0%,
-          transparent 70%
+          rgba(184, 233, 45, 0.2) 0%,
+          transparent 60%
         );
-        animation: floatOrbit 2s ease-in-out infinite;
-        filter: blur(2px);
+        animation: floatOrbit 2.4s ease-in-out infinite;
+        filter: blur(1px);
       }
       
       .thinking-dot:nth-child(1) {
@@ -886,11 +854,11 @@ const AIPanel: React.FC<AIPanelProps> = ({ isOpen, onClose }) => {
       }
       
       .thinking-dot:nth-child(2) {
-        animation-delay: 0.3s;
+        animation-delay: 0.2s;
       }
       
       .thinking-dot:nth-child(3) {
-        animation-delay: 0.6s;
+        animation-delay: 0.4s;
       }
       
       .streaming-message {
