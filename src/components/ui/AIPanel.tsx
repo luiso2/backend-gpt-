@@ -658,10 +658,11 @@ const AIPanel: React.FC<AIPanelProps> = ({ isOpen, onClose }) => {
   };
 
   // Add loading animation styles
-  if (typeof document !== 'undefined' && !document.getElementById('ai-panel-styles')) {
-    const styleSheet = document.createElement('style');
-    styleSheet.id = 'ai-panel-styles';
-    styleSheet.textContent = `
+  useEffect(() => {
+    if (typeof document !== 'undefined' && !document.getElementById('ai-panel-styles')) {
+      const styleSheet = document.createElement('style');
+      styleSheet.id = 'ai-panel-styles';
+      styleSheet.textContent = `
       @keyframes pulse3D {
         0% {
           opacity: 0;
@@ -998,8 +999,17 @@ const AIPanel: React.FC<AIPanelProps> = ({ isOpen, onClose }) => {
         position: relative;
       }
     `;
-    document.head.appendChild(styleSheet);
-  }
+      document.head.appendChild(styleSheet);
+    }
+    
+    return () => {
+      // Cleanup on unmount
+      const existingStyle = document.getElementById('ai-panel-styles');
+      if (existingStyle) {
+        existingStyle.remove();
+      }
+    };
+  }, []);
 
   return (
     <AnimatePresence>
