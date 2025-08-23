@@ -28,6 +28,7 @@ const AIPanel: React.FC<AIPanelProps> = ({ isOpen, onClose }) => {
   const [typingText, setTypingText] = useState('');
   const [selectedProvider, setSelectedProvider] = useState<'openai' | 'anthropic'>('openai');
   const [selectedModel, setSelectedModel] = useState('gpt-3.5-turbo');
+  const [dotOpacities, setDotOpacities] = useState([0.3, 0.3, 0.3]);
   const [streamingMessageId, setStreamingMessageId] = useState<number | null>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const streamingIntervalRef = useRef<NodeJS.Timeout | null>(null);
@@ -656,35 +657,54 @@ const AIPanel: React.FC<AIPanelProps> = ({ isOpen, onClose }) => {
       minute: '2-digit',
     });
   };
+  
+  // Reusable thinking dots component
+  const ThinkingDots = () => (
+    <div className="thinking-dot-wrapper" style={{ display: 'flex', gap: '6px' }}>
+      {[0, 1, 2].map((index) => (
+        <div
+          key={index}
+          style={{
+            width: '10px',
+            height: '10px',
+            borderRadius: '50%',
+            backgroundColor: '#B8E92D',
+            opacity: dotOpacities[index],
+            transform: `scale(${0.8 + dotOpacities[index] * 0.4})`,
+            transition: 'all 0.05s ease-out'
+          }}
+        />
+      ))}
+    </div>
+  );
 
-  // Add loading animation styles
-  if (typeof document !== 'undefined' && !document.getElementById('ai-panel-styles')) {
-    const styleSheet = document.createElement('style');
-    styleSheet.id = 'ai-panel-styles';
-    styleSheet.textContent = `
-      @keyframes pulse3D {
-        0%, 100% {
-          opacity: 0.4;
-        }
-        50% {
-          opacity: 1;
-        }
-      }
-      
-      @keyframes floatOrbit {
-        0% {
-          transform: translateY(0) translateX(0) translateZ(0);
-        }
-        33% {
-          transform: translateY(-5px) translateX(3px) translateZ(10px);
-        }
-        66% {
-          transform: translateY(3px) translateX(-3px) translateZ(-5px);
-        }
-        100% {
-          transform: translateY(0) translateX(0) translateZ(0);
-        }
-      }
+  // Animate thinking dots with JavaScript
+  useEffect(() => {
+    if (!isLoading) {
+      setDotOpacities([0.3, 0.3, 0.3]);
+      return;
+    }
+    
+    let frame = 0;
+    const interval = setInterval(() => {
+      frame = (frame + 1) % 30;
+      const newOpacities = [0, 1, 2].map(i => {
+        const offset = (frame + i * 10) % 30;
+        const opacity = Math.sin((offset / 30) * Math.PI) * 0.7 + 0.3;
+        return opacity;
+      });
+      setDotOpacities(newOpacities);
+    }, 50);
+    
+    return () => clearInterval(interval);
+  }, [isLoading]);
+  
+  // Add loading animation styles - moved inside component
+  useEffect(() => {
+    if (typeof document !== 'undefined' && !document.getElementById('ai-panel-styles')) {
+      const styleSheet = document.createElement('style');
+      styleSheet.id = 'ai-panel-styles';
+      styleSheet.textContent = `
       
       @keyframes energyFlow {
         0% {
@@ -747,6 +767,38 @@ const AIPanel: React.FC<AIPanelProps> = ({ isOpen, onClose }) => {
         }
       }
       
+      @keyframes thinkingGlow {
+        0%, 100% {
+          opacity: 0.8;
+          filter: brightness(1);
+        }
+        50% {
+          opacity: 0.95;
+          filter: brightness(1.05);
+        }
+      }
+      
+      @keyframes elasticWave {
+        0% {
+          transform: scale(1) translateY(0);
+        }
+        20% {
+          transform: scale(0.97) translateY(0);
+        }
+        40% {
+          transform: scale(1.02) translateY(-1px);
+        }
+        60% {
+          transform: scale(0.98) translateY(0);
+        }
+        80% {
+          transform: scale(1.01) translateY(-0.5px);
+        }
+        100% {
+          transform: scale(1) translateY(0);
+        }
+      }
+      
       @keyframes subtleRotate {
         0% {
           background-position: 0% 0%, 100% 100%;
@@ -772,33 +824,23 @@ const AIPanel: React.FC<AIPanelProps> = ({ isOpen, onClose }) => {
       .thinking-indicator {
         display: inline-flex;
         align-items: center;
-        gap: 6px;
+        gap: 10px;
+      }
+      
+      .thinking-text {
+        color: rgba(184, 233, 45, 0.9);
+        font-weight: 400;
+        letter-spacing: 0.3px;
+        animation: thinkingGlow 3s ease-in-out infinite;
       }
       
       .thinking-dot-wrapper {
         display: flex;
-        gap: 4px;
+        gap: 6px;
+        perspective: 200px;
+        transform-style: preserve-3d;
       }
       
-      .thinking-dot {
-        width: 8px;
-        height: 8px;
-        border-radius: 50%;
-        background: rgba(184, 233, 45, 0.6);
-        animation: pulse3D 1.5s ease-in-out infinite;
-      }
-      
-      .thinking-dot:nth-child(1) {
-        animation-delay: 0s;
-      }
-      
-      .thinking-dot:nth-child(2) {
-        animation-delay: 0.3s;
-      }
-      
-      .thinking-dot:nth-child(3) {
-        animation-delay: 0.6s;
-      }
       
       .streaming-message {
         position: relative;
@@ -952,8 +994,17 @@ const AIPanel: React.FC<AIPanelProps> = ({ isOpen, onClose }) => {
         position: relative;
       }
     `;
-    document.head.appendChild(styleSheet);
-  }
+      document.head.appendChild(styleSheet);
+    }
+    
+    return () => {
+      // Cleanup on unmount
+      const existingStyle = document.getElementById('ai-panel-styles');
+      if (existingStyle) {
+        existingStyle.remove();
+      }
+    };
+  }, []);
 
   return (
     <AnimatePresence>
@@ -1097,21 +1148,10 @@ const AIPanel: React.FC<AIPanelProps> = ({ isOpen, onClose }) => {
                               </>
                             ) : (
                               <div className="thinking-indicator">
-                                <span style={{ 
-                                  color: '#B8E92D', 
-                                  fontSize: '14px', 
-                                  fontWeight: '600',
-                                  textShadow: '0 0 10px rgba(184, 233, 45, 0.5)',
-                                  letterSpacing: '0.5px',
-                                  animation: 'pulse3D 2s ease-in-out infinite',
-                                }}>
+                                <span className="thinking-text" style={{ fontSize: '14px' }}>
                                   {language === 'es' ? 'Pensando' : 'Thinking'}
                                 </span>
-                                <div className="thinking-dot-wrapper">
-                                  <div className="thinking-dot"></div>
-                                  <div className="thinking-dot"></div>
-                                  <div className="thinking-dot"></div>
-                                </div>
+                                <ThinkingDots />
                               </div>
                             )}
                           </div>
@@ -1127,19 +1167,10 @@ const AIPanel: React.FC<AIPanelProps> = ({ isOpen, onClose }) => {
                   
                   {isLoading && messages[messages.length - 1]?.role !== 'assistant' && (
                     <div className="thinking-indicator">
-                      <span style={{ 
-                        color: 'rgba(184, 233, 45, 0.7)', 
-                        fontSize: '13px', 
-                        fontWeight: '400',
-                        opacity: '0.9',
-                      }}>
+                      <span className="thinking-text" style={{ fontSize: '14px' }}>
                         {language === 'es' ? 'Pensando' : 'Thinking'}
                       </span>
-                      <div className="thinking-dot-wrapper">
-                        <div className="thinking-dot"></div>
-                        <div className="thinking-dot"></div>
-                        <div className="thinking-dot"></div>
-                      </div>
+                      <ThinkingDots />
                     </div>
                   )}
                   
