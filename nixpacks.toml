@@ -1,11 +1,26 @@
+# Railway Nixpacks configuration for Next.js SSR
+
 [phases.setup]
+# Install Node.js 20 LTS
 nixPkgs = ["nodejs_20"]
 
 [phases.install]
-cmds = ["npm ci --no-cache"]
+# Install dependencies without cache issues
+cmds = [
+  "npm ci"
+]
 
 [phases.build]
-cmds = ["npm run build"]
+# Build the Next.js application
+cmds = [
+  "npm run build"
+]
 
 [start]
+# Start the production server
 cmd = "npm start"
+
+[variables]
+# Disable caching to avoid conflicts
+CI = "true"
+NODE_ENV = "production"
