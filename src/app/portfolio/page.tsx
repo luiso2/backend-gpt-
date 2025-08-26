@@ -663,6 +663,7 @@ export default function PortfolioPage() {
       ? 'Sistema CRM completo con integración Shopify, chat widget multiidioma con IA, gestión de leads y análisis avanzado de conversaciones'
       : 'Complete CRM system with Shopify integration, multilingual AI chat widget, lead management and advanced conversation analytics',
     image: '/projects/crm.jpg',
+    url: 'https://vartyinc.com/',
     tags: ['Next.js', 'Node.js', 'Prisma', 'PostgreSQL', 'OpenAI', 'WebSocket'],
     client: 'Enterprise CRM',
     year: '2024',
@@ -731,6 +732,7 @@ export default function PortfolioPage() {
       ? 'Plataforma SaaS completa para crear tiendas online con soporte multi-idioma, personalización de temas, suscripciones con Stripe y panel de administración'
       : 'Complete SaaS platform for creating online stores with multi-language support, theme customization, Stripe subscriptions and admin panel',
     image: '/projects/saas-market.jpg',
+    url: 'https://sass-marketplace-app-production.up.railway.app/',
     tags: ['Next.js', 'PostgreSQL', 'Drizzle ORM', 'Stripe', 'shadcn/ui', 'TypeScript'],
     client: 'SaaS Market',
     year: '2024',
@@ -753,7 +755,7 @@ export default function PortfolioPage() {
       ? 'Plataforma e-commerce moderna con integración WhatsApp para pedidos, panel admin completo y sistema de entregas'
       : 'Modern e-commerce platform with WhatsApp integration for orders, complete admin panel and delivery system',
     image: '/projects/ecommerce.jpg',
-    url: 'https://store.merktop.com/',
+    url: 'https://ecoshop-production-46b3.up.railway.app/',
     tags: ['React', 'TypeScript', 'Refine.dev', 'Ant Design', 'WhatsApp API'],
     client: 'EcoShop',
     year: '2024',
@@ -776,7 +778,7 @@ export default function PortfolioPage() {
       ? 'Landing page interactiva tipo quiz para capturar ideas de negocio con soporte multiidioma y animaciones fluidas'
       : 'Interactive quiz-style landing page to capture business ideas with multilingual support and smooth animations',
     image: '/projects/pitch.jpg',
-    url: 'https://pitch.merktop.com/',
+    url: 'https://pitch-production.up.railway.app/',
     tags: ['React', 'Vite', 'i18next', 'Framer Motion'],
     client: 'MERKTOP Ventures',
     year: '2024',
@@ -790,29 +792,6 @@ export default function PortfolioPage() {
       'engagement': '85%'
     },
     color: 'blue'
-  },
-  {
-    id: 'telegram-store',
-    title: 'Telegram Store WebApp',
-    category: 'ecommerce',
-    description: language === 'es'
-      ? 'Tienda online integrada como WebApp nativa de Telegram con tema dinámico y haptic feedback'
-      : 'Online store integrated as native Telegram WebApp with dynamic theme and haptic feedback',
-    image: '/projects/telegram.jpg',
-    url: 'https://telegram-shop.merktop.com/',
-    tags: ['React', 'TypeScript', 'Telegram SDK', 'Context API'],
-    client: 'Telegram Commerce',
-    year: '2024',
-    metrics: language === 'es' ? {
-      'usuarios': '50K+',
-      'ventas/día': '200+',
-      'rating': '4.8★'
-    } : {
-      'users': '50K+',
-      'sales/day': '200+',
-      'rating': '4.8★'
-    },
-    color: 'orange'
   },
   {
     id: 'ai-tutor',
@@ -878,7 +857,7 @@ export default function PortfolioPage() {
       ? 'Plataforma inmobiliaria moderna con búsqueda avanzada, filtros inteligentes, mapas interactivos y soporte multiidioma. Incluye visualización 360°, tours virtuales y gestión completa de propiedades'
       : 'Modern real estate platform with advanced search, smart filters, interactive maps and multilingual support. Features 360° visualization, virtual tours and complete property management',
     image: '/projects/360-real-estate.jpg',
-    url: 'https://360.merktop.com/',
+    url: 'https://360-real-state-production.up.railway.app/',
     tags: ['React 18', 'TypeScript', 'Tailwind CSS', 'i18next', 'Leaflet', 'Zustand', 'Vite'],
     client: '360° Real Estate',
     year: '2024',
