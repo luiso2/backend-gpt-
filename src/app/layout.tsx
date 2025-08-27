@@ -1,5 +1,6 @@
 import Navigation from "@/components/layout/Navigation";
 import Footer from "@/components/layout/Footer";
+import DynamicHtmlLang from "@/components/layout/DynamicHtmlLang";
 import { CartProvider } from "@/contexts/CartContext";
 import ClientLayout from "./ClientLayout";
 import type { Metadata } from "next";
@@ -41,6 +42,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <LanguageProvider>
+          <DynamicHtmlLang />
           <CartProvider>
             <ClientLayout>
               <Navigation />

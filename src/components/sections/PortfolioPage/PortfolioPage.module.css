@@ -1,0 +1,132 @@
+/* Portfolio Page Styles - Better maintainability */
+
+.portfolioCard {
+  @apply bg-white/[0.02] backdrop-blur-xl border border-white/10 rounded-3xl overflow-hidden transition-all duration-300 relative h-full flex flex-col;
+}
+
+.portfolioCard:hover {
+  @apply -translate-y-2 shadow-2xl border-primary/30;
+  box-shadow: 0 20px 40px rgba(184, 233, 45, 0.1);
+}
+
+.featuredBadge {
+  @apply absolute top-4 right-4 bg-gradient-to-r from-primary to-primary-dark text-black px-3.5 py-1.5 rounded-2xl text-xs font-bold z-10 flex items-center gap-1;
+  box-shadow: 0 4px 10px rgba(184, 233, 45, 0.3);
+}
+
+.projectImage {
+  @apply relative h-60 overflow-hidden;
+  background: linear-gradient(135deg, rgba(184, 233, 45, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
+}
+
+.projectContent {
+  @apply p-8 flex-1 flex flex-col;
+}
+
+.projectMeta {
+  @apply flex gap-6 mb-4;
+}
+
+.metaItem {
+  @apply flex items-center gap-2 text-sm text-white/60;
+}
+
+.projectTitle {
+  @apply text-2xl font-bold mb-3 leading-tight text-white;
+}
+
+.projectDescription {
+  @apply text-white/70 leading-relaxed mb-6 flex-1;
+}
+
+.tagsContainer {
+  @apply flex flex-wrap gap-2 mb-6;
+}
+
+.tag {
+  @apply px-3.5 py-1.5 bg-primary/10 border border-primary/20 rounded-2xl text-xs text-primary transition-all duration-300;
+}
+
+.tag:hover {
+  @apply bg-primary/20 -translate-y-0.5;
+}
+
+.metricsGrid {
+  @apply grid grid-cols-3 gap-4 pt-6 border-t border-white/10 mb-2;
+}
+
+.metricItem {
+  @apply text-center;
+}
+
+.metricValue {
+  @apply text-xl font-bold text-primary mb-1;
+}
+
+.metricLabel {
+  @apply text-xs text-white/60 uppercase;
+}
+
+.demoButton {
+  @apply inline-flex items-center justify-center gap-2 px-7 py-3.5 bg-gradient-to-r from-primary to-primary-dark text-black rounded-full font-semibold no-underline transition-all duration-300 text-sm mt-6 w-full text-center relative overflow-hidden;
+  box-shadow: 0 4px 15px rgba(184, 233, 45, 0.2);
+}
+
+.demoButton:hover {
+  @apply -translate-y-0.5;
+  box-shadow: 0 10px 20px rgba(184, 233, 45, 0.3);
+}
+
+.demoButtonFeatured {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+/* Animations */
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 4px 15px rgba(184, 233, 45, 0.2);
+  }
+  50% {
+    box-shadow: 0 4px 25px rgba(184, 233, 45, 0.4);
+  }
+}
+
+@keyframes pattern-slide {
+  0% {
+    background-position: 0% 0%;
+  }
+  100% {
+    background-position: 100% 100%;
+  }
+}
+
+.patternOverlay {
+  @apply absolute w-full h-full;
+  background: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 10px,
+    rgba(184, 233, 45, 0.05) 10px,
+    rgba(184, 233, 45, 0.05) 20px
+  );
+  animation: pattern-slide 20s linear infinite;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .portfolioCard {
+    @apply mx-4;
+  }
+  
+  .projectContent {
+    @apply p-6;
+  }
+  
+  .metricsGrid {
+    @apply grid-cols-2 gap-3;
+  }
+  
+  .projectTitle {
+    @apply text-xl;
+  }
+}
