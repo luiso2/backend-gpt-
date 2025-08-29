@@ -1,0 +1,46 @@
+{
+  "navigation": {
+    "home": "Home",
+    "services": "Services", 
+    "portfolio": "Portfolio",
+    "partnerships": "Partnerships",
+    "about": "About",
+    "contact": "Contact",
+    "getStarted": "Get Started",
+    "startProject": "Start Project"
+  },
+  "buttons": {
+    "learnMore": "Learn More",
+    "viewProject": "View Project",
+    "getStarted": "Get Started",
+    "contactUs": "Contact Us",
+    "viewAll": "View All",
+    "next": "Next",
+    "previous": "Previous",
+    "close": "Close",
+    "open": "Open",
+    "save": "Save",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "yes": "Yes",
+    "no": "No",
+    "loading": "Loading...",
+    "tryAgain": "Try Again"
+  },
+  "status": {
+    "loading": "Loading...",
+    "error": "Something went wrong",
+    "success": "Success!",
+    "noResults": "No results found",
+    "comingSoon": "Coming Soon"
+  },
+  "forms": {
+    "required": "This field is required",
+    "invalidEmail": "Invalid email address",
+    "minLength": "Minimum {count} characters required",
+    "maxLength": "Maximum {count} characters allowed",
+    "submit": "Submit",
+    "submitting": "Submitting...",
+    "submitted": "Submitted successfully"
+  }
+}

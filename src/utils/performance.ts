@@ -1,6 +1,7 @@
 /**
  * Performance monitoring utilities for portfolio components
  */
+import React from 'react'
 
 interface PerformanceMetrics {
   componentName: string
@@ -90,7 +91,7 @@ export function withPerformanceMonitoring<T extends Record<string, unknown>>(
   Component: React.ComponentType<T>,
   componentName?: string
 ) {
-  const WrappedComponent = (props: T) => {
+  const WrappedComponent: React.FC<T> = (props: T) => {
     const { startMeasure } = usePerformanceMonitor(componentName || Component.name)
     
     React.useEffect(() => {
@@ -98,7 +99,7 @@ export function withPerformanceMonitoring<T extends Record<string, unknown>>(
       return endMeasure
     })
 
-    return <Component {...props} />
+    return React.createElement(Component, props)
   }
 
   WrappedComponent.displayName = `withPerformanceMonitoring(${componentName || Component.name})`

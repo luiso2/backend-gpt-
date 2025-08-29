@@ -4,79 +4,45 @@ import { motion } from 'framer-motion'
 import Link from 'next/link'
 import { Handshake, Target, TrendingUp, Users, Shield, Rocket, ArrowRight, CheckCircle, Sparkles, Globe, Zap } from 'lucide-react'
 import { useLanguage } from '@/contexts/LanguageContext'
+import { useTranslation, getNestedTranslation } from '@/lib/i18n'
 
-const partnerTypes = [
+const getPartnerTypes = (t: any) => [
   {
     icon: Target,
-    title: 'Agencias de Marketing',
-    description: 'Potencia tus campañas con automatizaciones inteligentes y desarrollo web de alto rendimiento',
-    benefits: [
-      'Comisiones atractivas por referidos',
-      'Soporte técnico dedicado',
-      'Capacitación gratuita en n8n',
-      'Material de marketing personalizado'
-    ],
+    key: 'marketingAgencies',
     color: 'purple'
   },
   {
     icon: Users,
-    title: 'Consultores Tecnológicos',
-    description: 'Amplía tu portafolio de servicios con nuestras soluciones de desarrollo y automatización',
-    benefits: [
-      'Descuentos exclusivos para clientes',
-      'Acceso a beta de nuevos productos',
-      'Certificación como partner oficial',
-      'Leads calificados'
-    ],
+    key: 'techConsultants',
     color: 'blue'
   },
   {
     icon: Rocket,
-    title: 'Startups & Scale-ups',
-    description: 'Acelera tu crecimiento con tecnología escalable y procesos automatizados',
-    benefits: [
-      'Precios preferenciales',
-      'Arquitectura escalable',
-      'Mentoría técnica',
-      'Créditos para automatizaciones'
-    ],
+    key: 'startups',
     color: 'green'
   },
   {
     icon: Shield,
-    title: 'Empresas Establecidas',
-    description: 'Moderniza tu infraestructura tecnológica y optimiza tus operaciones',
-    benefits: [
-      'SLAs personalizados',
-      'Equipo dedicado',
-      'Integración con sistemas legacy',
-      'Formación para tu equipo'
-    ],
+    key: 'enterprises',
     color: 'orange'
   }
 ]
 
-const successStories = [
+const getSuccessStories = (t: any) => [
   {
-    company: 'TechGrowth Agency',
-    industry: 'Marketing Digital',
-    result: '+300% en eficiencia operativa',
-    quote: 'La asociación con MERKTOP transformó completamente nuestra capacidad de entregar proyectos. Las automatizaciones n8n nos ahorraron cientos de horas.',
-    author: 'María González',
-    role: 'CEO'
+    key: 'techGrowthAgency'
   },
   {
-    company: 'InnovateCorp',
-    industry: 'Consultoría IT',
-    result: '50+ proyectos conjuntos',
-    quote: 'El equipo de MERKTOP se convirtió en una extensión de nuestro negocio. Su expertise técnico nos permitió abordar proyectos más ambiciosos.',
-    author: 'Carlos Mendez',
-    role: 'Director de Tecnología'
+    key: 'innovateCorp'
   }
 ]
 
 export default function PartnershipsPage() {
   const { language } = useLanguage()
+  const { t } = useTranslation('partnerships', language)
+  const partnerTypes = getPartnerTypes(t)
+  const successStories = getSuccessStories(t)
 
   // CSS-in-JS Styles
   const styles = {
@@ -640,19 +606,15 @@ export default function PartnershipsPage() {
               style={styles.heroBadge}
             >
               <Sparkles size={18} />
-              <span>{language === 'es' ? 'Programa de Partners' : 'Partner Program'}</span>
+              <span>{t.hero.badge}</span>
             </motion.div>
             
             <h1 style={styles.pageTitle}>
-              {language === 'es' ? 'Crecemos ' : 'We Grow '}
-              <span style={styles.textGradient}>{language === 'es' ? 'Juntos' : 'Together'}</span>
+              {t.hero.title} <span style={styles.textGradient}>{t.hero.titleHighlight}</span>
             </h1>
             
             <p style={styles.pageSubtitle}>
-              {language === 'es' 
-                ? 'Únete a nuestro ecosistema de partners y multiplica las oportunidades de negocio'
-                : 'Join our partner ecosystem and multiply business opportunities'
-              }
+              {t.hero.subtitle}
             </p>
             
             <div style={styles.heroStats}>
@@ -664,7 +626,7 @@ export default function PartnershipsPage() {
               >
                 <div style={styles.statValue}>50+</div>
                 <div style={styles.statLabel}>
-                  {language === 'es' ? 'Partners Activos' : 'Active Partners'}
+                  {t.hero.stats.activePartners}
                 </div>
               </motion.div>
               
@@ -676,7 +638,7 @@ export default function PartnershipsPage() {
               >
                 <div style={styles.statValue}>200+</div>
                 <div style={styles.statLabel}>
-                  {language === 'es' ? 'Proyectos Conjuntos' : 'Joint Projects'}
+                  {t.hero.stats.jointProjects}
                 </div>
               </motion.div>
               
@@ -688,7 +650,7 @@ export default function PartnershipsPage() {
               >
                 <div style={styles.statValue}>95%</div>
                 <div style={styles.statLabel}>
-                  {language === 'es' ? 'Satisfacción' : 'Satisfaction'}
+                  {t.hero.stats.satisfaction}
                 </div>
               </motion.div>
             </div>
@@ -706,42 +668,42 @@ export default function PartnershipsPage() {
             style={styles.sectionHeader}
           >
             <h2 style={styles.sectionTitle}>
-              {language === 'es' ? 'Tipos de Asociación' : 'Partnership Types'}
+              {t.partnerTypes.title}
             </h2>
             <p style={styles.sectionSubtitle}>
-              {language === 'es' 
-                ? 'Encuentra el modelo de colaboración que mejor se adapte a tu negocio'
-                : 'Find the collaboration model that best suits your business'
-              }
+              {t.partnerTypes.subtitle}
             </p>
           </motion.div>
 
           <div style={styles.partnerGrid}>
-            {partnerTypes.map((type, index) => (
-              <motion.div
-                key={type.title}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                style={styles.partnerCard}
-                whileHover={styles.partnerCardHover}
-              >
-                <div style={styles.partnerIcon}>
-                  <type.icon size={32} />
-                </div>
-                <h3 style={styles.partnerCardTitle}>{type.title}</h3>
-                <p style={styles.partnerCardDescription}>{type.description}</p>
-                <ul style={styles.partnerBenefits}>
-                  {type.benefits.map((benefit) => (
-                    <li key={benefit} style={styles.benefitItem}>
-                      <CheckCircle style={styles.benefitIcon} />
-                      {benefit}
-                    </li>
-                  ))}
-                </ul>
-              </motion.div>
-            ))}
+            {partnerTypes.map((type, index) => {
+              const typeData = t.partnerTypes.types[type.key]
+              return (
+                <motion.div
+                  key={type.key}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1 }}
+                  style={styles.partnerCard}
+                  whileHover={styles.partnerCardHover}
+                >
+                  <div style={styles.partnerIcon}>
+                    <type.icon size={32} />
+                  </div>
+                  <h3 style={styles.partnerCardTitle}>{typeData.title}</h3>
+                  <p style={styles.partnerCardDescription}>{typeData.description}</p>
+                  <ul style={styles.partnerBenefits}>
+                    {typeData.benefits.map((benefit: string, benefitIndex: number) => (
+                      <li key={benefitIndex} style={styles.benefitItem}>
+                        <CheckCircle style={styles.benefitIcon} />
+                        {benefit}
+                      </li>
+                    ))}
+                  </ul>
+                </motion.div>
+              )
+            })}
           </div>
         </div>
       </section>
@@ -755,13 +717,10 @@ export default function PartnershipsPage() {
             viewport={{ once: true }}
           >
             <h2 style={styles.benefitsTitle}>
-              {language === 'es' ? 'Por qué asociarte con MERKTOP' : 'Why Partner with MERKTOP'}
+              {t.benefits.title}
             </h2>
             <p style={styles.benefitsDescription}>
-              {language === 'es'
-                ? 'Más que un proveedor, somos tu aliado estratégico para el crecimiento. Nuestro programa de partners está diseñado para crear valor mutuo y relaciones a largo plazo.'
-                : 'More than a provider, we are your strategic ally for growth. Our partner program is designed to create mutual value and long-term relationships.'
-              }
+              {t.benefits.subtitle}
             </p>
             
             <div style={styles.benefitsGrid}>
@@ -775,13 +734,10 @@ export default function PartnershipsPage() {
               >
                 <Handshake style={styles.benefitCardIcon} />
                 <h3 style={styles.benefitCardTitle}>
-                  {language === 'es' ? 'Colaboración Estratégica' : 'Strategic Collaboration'}
+                  {t.benefits.items.strategicCollaboration.title}
                 </h3>
                 <p style={styles.benefitCardDescription}>
-                  {language === 'es'
-                    ? 'Trabajamos codo a codo para identificar oportunidades y maximizar resultados'
-                    : 'We work side by side to identify opportunities and maximize results'
-                  }
+                  {t.benefits.items.strategicCollaboration.description}
                 </p>
               </motion.div>
               
@@ -795,13 +751,10 @@ export default function PartnershipsPage() {
               >
                 <TrendingUp style={styles.benefitCardIcon} />
                 <h3 style={styles.benefitCardTitle}>
-                  {language === 'es' ? 'Crecimiento Conjunto' : 'Joint Growth'}
+                  {t.benefits.items.jointGrowth.title}
                 </h3>
                 <p style={styles.benefitCardDescription}>
-                  {language === 'es'
-                    ? 'Tu éxito es nuestro éxito. Crecemos juntos con cada proyecto'
-                    : 'Your success is our success. We grow together with each project'
-                  }
+                  {t.benefits.items.jointGrowth.description}
                 </p>
               </motion.div>
               
@@ -815,13 +768,10 @@ export default function PartnershipsPage() {
               >
                 <Shield style={styles.benefitCardIcon} />
                 <h3 style={styles.benefitCardTitle}>
-                  {language === 'es' ? 'Soporte Garantizado' : 'Guaranteed Support'}
+                  {t.benefits.items.guaranteedSupport.title}
                 </h3>
                 <p style={styles.benefitCardDescription}>
-                  {language === 'es'
-                    ? 'Respaldo técnico y comercial en cada etapa del proceso'
-                    : 'Technical and commercial support at every stage of the process'
-                  }
+                  {t.benefits.items.guaranteedSupport.description}
                 </p>
               </motion.div>
               
@@ -835,13 +785,10 @@ export default function PartnershipsPage() {
               >
                 <Rocket style={styles.benefitCardIcon} />
                 <h3 style={styles.benefitCardTitle}>
-                  {language === 'es' ? 'Innovación Continua' : 'Continuous Innovation'}
+                  {t.benefits.items.continuousInnovation.title}
                 </h3>
                 <p style={styles.benefitCardDescription}>
-                  {language === 'es'
-                    ? 'Acceso prioritario a nuevas tecnologías y metodologías'
-                    : 'Priority access to new technologies and methodologies'
-                  }
+                  {t.benefits.items.continuousInnovation.description}
                 </p>
               </motion.div>
             </div>
@@ -859,44 +806,44 @@ export default function PartnershipsPage() {
             style={styles.sectionHeader}
           >
             <h2 style={styles.sectionTitle}>
-              {language === 'es' ? 'Historias de Éxito' : 'Success Stories'}
+              {t.successStories.title}
             </h2>
             <p style={styles.sectionSubtitle}>
-              {language === 'es'
-                ? 'Conoce cómo nuestros partners han transformado sus negocios'
-                : 'Learn how our partners have transformed their businesses'
-              }
+              {t.successStories.subtitle}
             </p>
           </motion.div>
 
           <div style={styles.storiesGrid}>
-            {successStories.map((story, index) => (
-              <motion.div
-                key={story.company}
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.2 }}
-                style={styles.storyCard}
-                whileHover={styles.storyCardHover}
-              >
-                <div style={styles.storyHeader}>
-                  <h3 style={styles.storyCompany}>{story.company}</h3>
-                  <span style={styles.storyIndustry}>{story.industry}</span>
-                </div>
-                
-                <div style={styles.storyResult}>{story.result}</div>
-                
-                <blockquote style={styles.storyQuote}>
-                  "{story.quote}"
-                </blockquote>
-                
-                <div style={styles.storyAuthor}>
-                  <strong style={styles.storyAuthorName}>{story.author}</strong>
-                  <span style={styles.storyAuthorRole}>{story.role}</span>
-                </div>
-              </motion.div>
-            ))}
+            {successStories.map((story, index) => {
+              const storyData = t.successStories.stories[story.key]
+              return (
+                <motion.div
+                  key={story.key}
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.2 }}
+                  style={styles.storyCard}
+                  whileHover={styles.storyCardHover}
+                >
+                  <div style={styles.storyHeader}>
+                    <h3 style={styles.storyCompany}>{storyData.company}</h3>
+                    <span style={styles.storyIndustry}>{storyData.industry}</span>
+                  </div>
+                  
+                  <div style={styles.storyResult}>{storyData.result}</div>
+                  
+                  <blockquote style={styles.storyQuote}>
+                    "{storyData.quote}"
+                  </blockquote>
+                  
+                  <div style={styles.storyAuthor}>
+                    <strong style={styles.storyAuthorName}>{storyData.author}</strong>
+                    <span style={styles.storyAuthorRole}>{storyData.role}</span>
+                  </div>
+                </motion.div>
+              )
+            })}
           </div>
         </div>
       </section>
@@ -916,17 +863,11 @@ export default function PartnershipsPage() {
             <div style={styles.ctaGlow} />
             
             <h2 style={styles.ctaTitle}>
-              {language === 'es' 
-                ? '¿Listo para ser parte de nuestro ecosistema?'
-                : 'Ready to be part of our ecosystem?'
-              }
+              {t.cta.title}
             </h2>
             
             <p style={styles.ctaDescription}>
-              {language === 'es'
-                ? 'Completa el formulario y nuestro equipo de partnerships se pondrá en contacto contigo en las próximas 24 horas'
-                : 'Complete the form and our partnerships team will contact you within the next 24 hours'
-              }
+              {t.cta.subtitle}
             </p>
             
             <Link 
@@ -935,7 +876,7 @@ export default function PartnershipsPage() {
               onMouseEnter={(e) => Object.assign(e.currentTarget.style, styles.ctaButtonHover)}
               onMouseLeave={(e) => Object.assign(e.currentTarget.style, styles.ctaButton)}
             >
-              {language === 'es' ? 'Aplicar como Partner' : 'Apply as Partner'}
+              {t.cta.button}
               <ArrowRight size={20} />
             </Link>
           </motion.div>

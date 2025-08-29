@@ -1,0 +1,48 @@
+{
+  "title": "Nuestros Servicios",
+  "subtitle": "Soluciones tecnológicas integrales para impulsar tu negocio al siguiente nivel",
+  "categories": {
+    "all": "Todos los Servicios",
+    "automation": "Automatización",
+    "development": "Desarrollo",
+    "ecommerce": "E-commerce",
+    "consulting": "Consultoría"
+  },
+  "items": {
+    "customSoftware": {
+      "title": "Desarrollo de Software a Medida",
+      "description": "Soluciones tecnológicas diseñadas específicamente para tu negocio",
+      "features": [
+        "Aplicaciones web y móviles",
+        "APIs y microservicios",
+        "Integración de sistemas",
+        "Soluciones en la nube"
+      ]
+    },
+    "ecommerceSolutions": {
+      "title": "Soluciones E-commerce",
+      "description": "Aplicaciones web modernas, rápidas y responsivas con las últimas tecnologías",
+      "features": [
+        "Tiendas online",
+        "Pasarelas de pago",
+        "Gestión de inventario",
+        "Analytics y reportes"
+      ]
+    },
+    "processAutomation": {
+      "title": "Automatización de Procesos",
+      "description": "Automatizaciones inteligentes que optimizan operaciones y reducen trabajo manual",
+      "features": [
+        "Automatización de workflows",
+        "Sincronización de datos",
+        "Integraciones con terceros",
+        "Flujos de trabajo personalizados"
+      ]
+    }
+  },
+  "cta": {
+    "title": "¿Listo para transformar tu negocio?",
+    "subtitle": "Únete a más de 100 empresas que ya confían en nosotros para sus soluciones tecnológicas",
+    "button": "Comenzar"
+  }
+}

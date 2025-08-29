@@ -1,0 +1,108 @@
+{
+  "hero": {
+    "badge": "Programa de Partners",
+    "title": "Crecemos",
+    "titleHighlight": "Juntos",
+    "subtitle": "Únete a nuestro ecosistema de partners y multiplica las oportunidades de negocio",
+    "stats": {
+      "activePartners": "Partners Activos",
+      "jointProjects": "Proyectos Conjuntos",
+      "satisfaction": "Satisfacción"
+    }
+  },
+  "partnerTypes": {
+    "title": "Tipos de Asociación",
+    "subtitle": "Encuentra el modelo de colaboración que mejor se adapte a tu negocio",
+    "types": {
+      "marketingAgencies": {
+        "title": "Agencias de Marketing",
+        "description": "Potencia tus campañas con automatizaciones inteligentes y desarrollo web de alto rendimiento",
+        "benefits": [
+          "Comisiones atractivas por referidos",
+          "Soporte técnico dedicado", 
+          "Capacitación gratuita en n8n",
+          "Material de marketing personalizado"
+        ]
+      },
+      "techConsultants": {
+        "title": "Consultores Tecnológicos",
+        "description": "Amplía tu portafolio de servicios con nuestras soluciones de desarrollo y automatización",
+        "benefits": [
+          "Descuentos exclusivos para clientes",
+          "Acceso a beta de nuevos productos",
+          "Certificación como partner oficial",
+          "Leads calificados"
+        ]
+      },
+      "startups": {
+        "title": "Startups & Scale-ups",
+        "description": "Acelera tu crecimiento con tecnología escalable y procesos automatizados",
+        "benefits": [
+          "Precios preferenciales",
+          "Arquitectura escalable",
+          "Mentoría técnica",
+          "Créditos para automatizaciones"
+        ]
+      },
+      "enterprises": {
+        "title": "Empresas Establecidas",
+        "description": "Moderniza tu infraestructura tecnológica y optimiza tus operaciones",
+        "benefits": [
+          "SLAs personalizados",
+          "Equipo dedicado",
+          "Integración con sistemas legacy",
+          "Formación para tu equipo"
+        ]
+      }
+    }
+  },
+  "benefits": {
+    "title": "Por qué asociarte con MERKTOP",
+    "subtitle": "Más que un proveedor, somos tu aliado estratégico para el crecimiento. Nuestro programa de partners está diseñado para crear valor mutuo y relaciones a largo plazo.",
+    "items": {
+      "strategicCollaboration": {
+        "title": "Colaboración Estratégica",
+        "description": "Trabajamos codo a codo para identificar oportunidades y maximizar resultados"
+      },
+      "jointGrowth": {
+        "title": "Crecimiento Conjunto", 
+        "description": "Tu éxito es nuestro éxito. Crecemos juntos con cada proyecto"
+      },
+      "guaranteedSupport": {
+        "title": "Soporte Garantizado",
+        "description": "Respaldo técnico y comercial en cada etapa del proceso"
+      },
+      "continuousInnovation": {
+        "title": "Innovación Continua",
+        "description": "Acceso prioritario a nuevas tecnologías y metodologías"
+      }
+    }
+  },
+  "successStories": {
+    "title": "Historias de Éxito",
+    "subtitle": "Conoce cómo nuestros partners han transformado sus negocios",
+    "stories": {
+      "techGrowthAgency": {
+        "company": "TechGrowth Agency",
+        "industry": "Marketing Digital",
+        "result": "+300% en eficiencia operativa",
+        "quote": "La asociación con MERKTOP transformó completamente nuestra capacidad de entregar proyectos. Las automatizaciones n8n nos ahorraron cientos de horas.",
+        "author": "María González",
+        "role": "CEO"
+      },
+      "innovateCorp": {
+        "company": "InnovateCorp",
+        "industry": "Consultoría IT",
+        "result": "50+ proyectos conjuntos",
+        "quote": "El equipo de MERKTOP se convirtió en una extensión de nuestro negocio. Su expertise técnico nos permitió abordar proyectos más ambiciosos.",
+        "author": "Carlos Mendez",
+        "role": "Director de Tecnología"
+      }
+    }
+  },
+  "cta": {
+    "title": "¿Listo para ser parte de nuestro ecosistema?",
+    "subtitle": "Completa el formulario y nuestro equipo de partnerships se pondrá en contacto contigo en las próximas 24 horas",
+    "button": "Aplicar como Partner"
+  }
+}

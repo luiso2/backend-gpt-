@@ -1,0 +1,46 @@
+{
+  "navigation": {
+    "home": "Inicio",
+    "services": "Servicios", 
+    "portfolio": "Portafolio",
+    "partnerships": "Alianzas",
+    "about": "Nosotros",
+    "contact": "Contacto",
+    "getStarted": "Comenzar",
+    "startProject": "Comenzar Proyecto"
+  },
+  "buttons": {
+    "learnMore": "Saber Más",
+    "viewProject": "Ver Proyecto",
+    "getStarted": "Comenzar",
+    "contactUs": "Contáctanos",
+    "viewAll": "Ver Todo",
+    "next": "Siguiente",
+    "previous": "Anterior",
+    "close": "Cerrar",
+    "open": "Abrir",
+    "save": "Guardar",
+    "cancel": "Cancelar",
+    "confirm": "Confirmar",
+    "yes": "Sí",
+    "no": "No",
+    "loading": "Cargando...",
+    "tryAgain": "Intentar de Nuevo"
+  },
+  "status": {
+    "loading": "Cargando...",
+    "error": "Algo salió mal",
+    "success": "¡Éxito!",
+    "noResults": "No se encontraron resultados",
+    "comingSoon": "Próximamente"
+  },
+  "forms": {
+    "required": "Este campo es requerido",
+    "invalidEmail": "Dirección de email inválida",
+    "minLength": "Se requieren mínimo {count} caracteres",
+    "maxLength": "Máximo {count} caracteres permitidos",
+    "submit": "Enviar",
+    "submitting": "Enviando...",
+    "submitted": "Enviado exitosamente"
+  }
+}

@@ -1,0 +1,108 @@
+{
+  "hero": {
+    "badge": "Partner Program",
+    "title": "We Grow",
+    "titleHighlight": "Together",
+    "subtitle": "Join our partner ecosystem and multiply business opportunities",
+    "stats": {
+      "activePartners": "Active Partners",
+      "jointProjects": "Joint Projects",
+      "satisfaction": "Satisfaction"
+    }
+  },
+  "partnerTypes": {
+    "title": "Partnership Types",
+    "subtitle": "Find the collaboration model that best suits your business",
+    "types": {
+      "marketingAgencies": {
+        "title": "Marketing Agencies",
+        "description": "Boost your campaigns with intelligent automations and high-performance web development",
+        "benefits": [
+          "Attractive referral commissions",
+          "Dedicated technical support", 
+          "Free n8n training",
+          "Custom marketing materials"
+        ]
+      },
+      "techConsultants": {
+        "title": "Technology Consultants",
+        "description": "Expand your service portfolio with our development and automation solutions",
+        "benefits": [
+          "Exclusive client discounts",
+          "Beta access to new products",
+          "Official partner certification",
+          "Qualified leads"
+        ]
+      },
+      "startups": {
+        "title": "Startups & Scale-ups",
+        "description": "Accelerate your growth with scalable technology and automated processes",
+        "benefits": [
+          "Preferential pricing",
+          "Scalable architecture",
+          "Technical mentoring",
+          "Automation credits"
+        ]
+      },
+      "enterprises": {
+        "title": "Established Companies",
+        "description": "Modernize your technology infrastructure and optimize your operations",
+        "benefits": [
+          "Custom SLAs",
+          "Dedicated team",
+          "Legacy system integration",
+          "Team training"
+        ]
+      }
+    }
+  },
+  "benefits": {
+    "title": "Why Partner with MERKTOP",
+    "subtitle": "More than a provider, we are your strategic ally for growth. Our partner program is designed to create mutual value and long-term relationships.",
+    "items": {
+      "strategicCollaboration": {
+        "title": "Strategic Collaboration",
+        "description": "We work side by side to identify opportunities and maximize results"
+      },
+      "jointGrowth": {
+        "title": "Joint Growth", 
+        "description": "Your success is our success. We grow together with each project"
+      },
+      "guaranteedSupport": {
+        "title": "Guaranteed Support",
+        "description": "Technical and commercial support at every stage of the process"
+      },
+      "continuousInnovation": {
+        "title": "Continuous Innovation",
+        "description": "Priority access to new technologies and methodologies"
+      }
+    }
+  },
+  "successStories": {
+    "title": "Success Stories",
+    "subtitle": "Learn how our partners have transformed their businesses",
+    "stories": {
+      "techGrowthAgency": {
+        "company": "TechGrowth Agency",
+        "industry": "Digital Marketing",
+        "result": "+300% operational efficiency",
+        "quote": "The partnership with MERKTOP completely transformed our project delivery capacity. The n8n automations saved us hundreds of hours.",
+        "author": "María González",
+        "role": "CEO"
+      },
+      "innovateCorp": {
+        "company": "InnovateCorp",
+        "industry": "IT Consulting",
+        "result": "50+ joint projects",
+        "quote": "The MERKTOP team became an extension of our business. Their technical expertise allowed us to tackle more ambitious projects.",
+        "author": "Carlos Mendez",
+        "role": "Technology Director"
+      }
+    }
+  },
+  "cta": {
+    "title": "Ready to be part of our ecosystem?",
+    "subtitle": "Complete the form and our partnerships team will contact you within the next 24 hours",
+    "button": "Apply as Partner"
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "title": "Our Services",
+  "subtitle": "Comprehensive technology solutions to drive your business to the next level",
+  "categories": {
+    "all": "All Services",
+    "automation": "Automation",
+    "development": "Development",
+    "ecommerce": "E-commerce",
+    "consulting": "Consulting"
+  },
+  "items": {
+    "customSoftware": {
+      "title": "Custom Software Development",
+      "description": "Tailored technology solutions designed specifically for your business",
+      "features": [
+        "Web and mobile applications",
+        "APIs and microservices",
+        "System integrations",
+        "Cloud solutions"
+      ]
+    },
+    "ecommerceSolutions": {
+      "title": "E-commerce Solutions",
+      "description": "Modern, fast and responsive web applications with the latest technologies",
+      "features": [
+        "Online stores",
+        "Payment gateways",
+        "Inventory management",
+        "Analytics and reporting"
+      ]
+    },
+    "processAutomation": {
+      "title": "Process Automation",
+      "description": "Intelligent automations that optimize operations and reduce manual work",
+      "features": [
+        "Workflow automation",
+        "Data synchronization",
+        "Third-party integrations",
+        "Custom workflows"
+      ]
+    }
+  },
+  "cta": {
+    "title": "Ready to transform your business?",
+    "subtitle": "Join over 100 companies that already trust us for their technology solutions",
+    "button": "Get Started"
+  }
+}

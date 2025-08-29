@@ -7,10 +7,12 @@
     "build": "next build",
     "start": "next start -p ${PORT:-3000}",
     "lint": "next lint",
+    "lint:i18n": "node scripts/check-i18n.js",
     "type-check": "tsc --noEmit",
     "build:analyze": "ANALYZE=true npm run build",
     "clean": "rm -rf .next out node_modules/.cache",
-    "deploy:railway": "npm run build"
+    "deploy:railway": "npm run build",
+    "precommit": "npm run lint:i18n && npm run lint && npm run type-check"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.60.0",
