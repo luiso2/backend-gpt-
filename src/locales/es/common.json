@@ -7,12 +7,13 @@
     "about": "Nosotros",
     "contact": "Contacto",
     "getStarted": "Comenzar",
-    "startProject": "Comenzar Proyecto"
+    "startProject": "Iniciar Proyecto"
   },
   "buttons": {
     "learnMore": "Saber Más",
     "viewProject": "Ver Proyecto",
     "getStarted": "Comenzar",
+    "startProject": "Iniciar Proyecto",
     "contactUs": "Contáctanos",
     "viewAll": "Ver Todo",
     "next": "Siguiente",

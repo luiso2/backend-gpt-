@@ -6,6 +6,9 @@ import HeroSection from '@/components/sections/HeroSection'
 import CTAFooter from '@/components/sections/CTAFooter'
 import VideoShowcase from '@/components/sections/VideoShowcase'
 import AIPanel from '@/components/ui/AIPanel'
+import { GlassCard, GlassPanel, Button } from '@/components/ui'
+import { isLiquidGlassEnabled, getGlassIntensity } from '@/lib/featureFlags'
+import GlassToggle from '@/components/dev/GlassToggle'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 import { 
@@ -27,6 +30,47 @@ import {
 export default function Home() {
   const [showAIPanel, setShowAIPanel] = useState(false)
   const { language, t } = useLanguage()
+  const glassEnabled = isLiquidGlassEnabled()
+  const glassIntensity = getGlassIntensity()
+
+  // Glass Card Wrapper - conditionally applies glass effects with intensity
+  const GlassCardWrapper = ({ children, style, intensity = 'default', ...props }) => {
+    if (glassEnabled) {
+      return (
+        <GlassCard 
+          variant="light" 
+          intensity={intensity}
+          hover 
+          animated 
+          padding="lg" 
+          elevation={2}
+          {...props}
+        >
+          {children}
+        </GlassCard>
+      )
+    }
+    return <motion.div style={style} {...props}>{children}</motion.div>
+  }
+
+  // Glass Panel Wrapper for larger sections with intensity
+  const GlassPanelWrapper = ({ children, variant = 'card', style, intensity = 'default', ...props }) => {
+    if (glassEnabled) {
+      return (
+        <GlassPanel 
+          variant={variant} 
+          intensity={intensity}
+          interactive 
+          animated 
+          padding="xl" 
+          {...props}
+        >
+          {children}
+        </GlassPanel>
+      )
+    }
+    return <motion.div style={style} {...props}>{children}</motion.div>
+  }
 
   // CSS-in-JS Styles
   const styles = {
@@ -55,12 +99,18 @@ export default function Home() {
       fontWeight: 'bold',
       color: '#fff',
       marginBottom: '16px',
+      lineHeight: 'var(--lh-h2)',
+      letterSpacing: 'var(--track-h2)',
+      maxWidth: 'var(--measure-hero)',
+      margin: '0 auto 16px',
     },
     sectionSubtitle: {
       fontSize: '18px',
       color: 'rgba(255, 255, 255, 0.8)',
-      maxWidth: '600px',
+      maxWidth: 'var(--measure-body)',
       margin: '0 auto',
+      lineHeight: 'var(--lh-body)',
+      letterSpacing: 'var(--track-body)',
     },
     featuresGrid: {
       display: 'grid',
@@ -265,22 +315,23 @@ export default function Home() {
           
           <div style={styles.featuresGrid}>
             {t.features.items.map((item, index) => (
-              <motion.div
+              <GlassCardWrapper
                 key={index}
-                style={styles.featureCard}
+                intensity={glassIntensity}
+                style={!glassEnabled ? styles.featureCard : undefined}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
                 whileHover={{ 
                   transform: 'translateY(-5px)',
-                  boxShadow: '0 10px 30px rgba(184, 233, 45, 0.2)'
+                  boxShadow: glassEnabled ? undefined : '0 10px 30px rgba(184, 233, 45, 0.2)'
                 }}
               >
                 <div style={styles.featureIcon}>{item.icon}</div>
                 <h3 style={styles.featureTitle}>{item.title}</h3>
                 <p style={styles.featureDescription}>{item.description}</p>
-              </motion.div>
+              </GlassCardWrapper>
             ))}
           </div>
         </div>
@@ -302,14 +353,14 @@ export default function Home() {
           
           <div style={styles.servicesGrid}>
             {/* n8n Automation Service */}
-            <motion.div
-              style={styles.serviceCard}
+            <GlassCardWrapper
+              style={!glassEnabled ? styles.serviceCard : undefined}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               whileHover={{ 
                 transform: 'translateY(-5px)',
-                boxShadow: '0 10px 30px rgba(184, 233, 45, 0.2)'
+                boxShadow: glassEnabled ? undefined : '0 10px 30px rgba(184, 233, 45, 0.2)'
               }}
             >
               <Zap size={32} style={styles.serviceIcon} />
@@ -352,18 +403,18 @@ export default function Home() {
                 <span>{language === 'es' ? 'Comenzar' : 'Get Started'}</span>
                 <ArrowRight size={16} />
               </Link>
-            </motion.div>
+            </GlassCardWrapper>
 
             {/* Software Development Service */}
-            <motion.div
-              style={styles.serviceCard}
+            <GlassCardWrapper
+              style={!glassEnabled ? styles.serviceCard : undefined}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.1 }}
               whileHover={{ 
                 transform: 'translateY(-5px)',
-                boxShadow: '0 10px 30px rgba(184, 233, 45, 0.2)'
+                boxShadow: glassEnabled ? undefined : '0 10px 30px rgba(184, 233, 45, 0.2)'
               }}
             >
               <Code2 size={32} style={styles.serviceIcon} />
@@ -406,18 +457,18 @@ export default function Home() {
                 <span>{language === 'es' ? 'Estoy interesado' : 'I\'m interested'}</span>
                 <ArrowRight size={16} />
               </Link>
-            </motion.div>
+            </GlassCardWrapper>
 
             {/* E-commerce Service */}
-            <motion.div
-              style={styles.serviceCard}
+            <GlassCardWrapper
+              style={!glassEnabled ? styles.serviceCard : undefined}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.2 }}
               whileHover={{ 
                 transform: 'translateY(-5px)',
-                boxShadow: '0 10px 30px rgba(184, 233, 45, 0.2)'
+                boxShadow: glassEnabled ? undefined : '0 10px 30px rgba(184, 233, 45, 0.2)'
               }}
             >
               <ShoppingCart size={32} style={styles.serviceIcon} />
@@ -460,78 +511,11 @@ export default function Home() {
                 <span>{language === 'es' ? 'Empezar' : 'Start Now'}</span>
                 <ArrowRight size={16} />
               </Link>
-            </motion.div>
+            </GlassCardWrapper>
           </div>
         </div>
       </section>
 
-      {/* Dashboard Section */}
-      <section style={{ ...styles.section, ...styles.sectionBg }}>
-        <div style={styles.container}>
-          <div style={styles.sectionHeader}>
-            <motion.h2 
-              style={styles.sectionTitle}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-            >
-              {t.dashboard.title}
-            </motion.h2>
-            <motion.p 
-              style={styles.sectionSubtitle}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.1 }}
-            >
-              {t.dashboard.description}
-            </motion.p>
-          </div>
-          
-          <motion.div 
-            style={styles.dashboardSection}
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
-            <h3 style={{ fontSize: '24px', marginBottom: '16px', color: '#B8E92D' }}>
-              {t.dashboard.stats.title}
-            </h3>
-            <p style={{ color: 'rgba(255, 255, 255, 0.7)', marginBottom: '32px' }}>
-              {t.dashboard.stats.period}
-            </p>
-            
-            <div style={styles.statsGrid}>
-              {t.dashboard.stats.items.map((stat, index) => (
-                <motion.div 
-                  key={index}
-                  style={styles.statCard}
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
-                >
-                  <div style={styles.statValue}>{stat.value}</div>
-                  <div style={styles.statLabel}>{stat.label}</div>
-                </motion.div>
-              ))}
-            </div>
-            
-            <Link 
-              href="/contact" 
-              style={{
-                ...styles.button,
-                width: 'auto',
-                margin: '40px auto 0',
-                display: 'inline-flex',
-              }}
-            >
-              {t.dashboard.cta}
-              <ArrowRight size={16} />
-            </Link>
-          </motion.div>
-        </div>
-      </section>
 
       {/* Testimonials Section */}
       <section style={{ ...styles.section, ...styles.sectionAlt }}>
@@ -549,9 +533,9 @@ export default function Home() {
           
           <div style={{ maxWidth: '800px', margin: '0 auto' }}>
             {t.testimonials.items.map((testimonial, index) => (
-              <motion.div
+              <GlassCardWrapper
                 key={index}
-                style={styles.testimonialCard}
+                style={!glassEnabled ? styles.testimonialCard : undefined}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -567,7 +551,7 @@ export default function Home() {
                     <div style={styles.authorCompany}>{testimonial.company}</div>
                   </div>
                 </div>
-              </motion.div>
+              </GlassCardWrapper>
             ))}
           </div>
         </div>
@@ -578,6 +562,9 @@ export default function Home() {
 
       {/* AI Panel */}
       <AIPanel isOpen={showAIPanel} onClose={() => setShowAIPanel(false)} />
+      
+      {/* Dev Controls */}
+      <GlassToggle />
     </>
   )
 }

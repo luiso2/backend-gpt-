@@ -96,7 +96,9 @@
   font-weight: 700;
   color: white;
   margin-bottom: 1.5rem;
-  line-height: 1.2;
+  line-height: var(--lh-h1);
+  letter-spacing: var(--track-h1);
+  max-width: var(--measure-hero);
 }
 
 .hero-title-highlight {
@@ -112,14 +114,26 @@
   font-size: clamp(1.25rem, 2.5vw, 1.5rem);
   color: #D1D5DB;
   margin-bottom: 2rem;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  max-width: 55ch;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  word-spacing: 0.1em;
+  font-weight: 400;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .hero-description {
   font-size: 1.125rem;
   color: #9CA3AF;
-  max-width: 48rem;
+  max-width: var(--measure-body);
   margin: 0 auto 3rem;
-  line-height: 1.7;
+  line-height: var(--lh-body);
+  letter-spacing: var(--track-body);
 }
 
 /* CTA Buttons */

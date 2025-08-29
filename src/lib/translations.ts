@@ -118,7 +118,7 @@ export const translations = {
     dashboard: {
       title: "Empower Your Business with Data-Driven Solutions",
       description: "Our comprehensive suite of services transforms your business operations through automation, custom development, and strategic consulting. We help you leverage technology to achieve measurable results.",
-      cta: "Schedule Consultation",
+      cta: "Start Project",
       
       stats: {
         title: "Business Impact Metrics",
@@ -602,7 +602,7 @@ export const translations = {
     dashboard: {
       title: "Potencia Tu Negocio con Soluciones Basadas en Datos",
       description: "Nuestro conjunto integral de servicios transforma las operaciones de tu negocio a través de automatización, desarrollo personalizado y consultoría estratégica. Te ayudamos a aprovechar la tecnología para lograr resultados medibles.",
-      cta: "Agenda una Consulta",
+      cta: "Iniciar Proyecto",
       
       stats: {
         title: "Métricas de Impacto Empresarial",
