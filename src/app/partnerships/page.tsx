@@ -41,8 +41,39 @@ const getSuccessStories = (t: any) => [
 export default function PartnershipsPage() {
   const { language } = useLanguage()
   const { t } = useTranslation('partnerships', language)
-  const partnerTypes = getPartnerTypes(t)
-  const successStories = getSuccessStories(t)
+  
+  // Ensure t has the expected structure with fallbacks
+  const safeT = {
+    hero: (t as any)?.hero || {
+      badge: 'Partner Program',
+      title: 'We Grow',
+      titleHighlight: 'Together',
+      subtitle: 'Join our partner ecosystem and multiply business opportunities'
+    },
+    partnerTypes: (t as any)?.partnerTypes || {
+      title: 'Partnership Types',
+      subtitle: 'Find the collaboration model that best suits your business',
+      types: {}
+    },
+    benefits: (t as any)?.benefits || {
+      title: 'Why Partner with MERKTOP',
+      subtitle: 'More than a provider, we are your strategic ally',
+      items: {}
+    },
+    successStories: (t as any)?.successStories || {
+      title: 'Success Stories',
+      subtitle: 'Learn how our partners have transformed their businesses',
+      stories: {}
+    },
+    cta: (t as any)?.cta || {
+      title: 'Ready to be part of our ecosystem?',
+      subtitle: 'Complete the form and our team will contact you',
+      button: 'Apply as Partner'
+    }
+  }
+  
+  const partnerTypes = getPartnerTypes(safeT)
+  const successStories = getSuccessStories(safeT)
 
   // CSS-in-JS Styles
   const styles = {
@@ -606,15 +637,15 @@ export default function PartnershipsPage() {
               style={styles.heroBadge}
             >
               <Sparkles size={18} />
-              <span>{t.hero.badge}</span>
+              <span>{safeT.hero.badge}</span>
             </motion.div>
             
             <h1 style={styles.pageTitle}>
-              {t.hero.title} <span style={styles.textGradient}>{t.hero.titleHighlight}</span>
+              {safeT.hero.title} <span style={styles.textGradient}>{safeT.hero.titleHighlight}</span>
             </h1>
             
             <p style={styles.pageSubtitle}>
-              {t.hero.subtitle}
+              {safeT.hero.subtitle}
             </p>
             
             <div style={styles.heroStats}>
@@ -626,7 +657,7 @@ export default function PartnershipsPage() {
               >
                 <div style={styles.statValue}>50+</div>
                 <div style={styles.statLabel}>
-                  {t.hero.stats.activePartners}
+                  {safeT.hero.stats.activePartners}
                 </div>
               </motion.div>
               
@@ -638,7 +669,7 @@ export default function PartnershipsPage() {
               >
                 <div style={styles.statValue}>200+</div>
                 <div style={styles.statLabel}>
-                  {t.hero.stats.jointProjects}
+                  {safeT.hero.stats.jointProjects}
                 </div>
               </motion.div>
               
@@ -650,7 +681,7 @@ export default function PartnershipsPage() {
               >
                 <div style={styles.statValue}>95%</div>
                 <div style={styles.statLabel}>
-                  {t.hero.stats.satisfaction}
+                  {safeT.hero.stats.satisfaction}
                 </div>
               </motion.div>
             </div>
@@ -668,16 +699,20 @@ export default function PartnershipsPage() {
             style={styles.sectionHeader}
           >
             <h2 style={styles.sectionTitle}>
-              {t.partnerTypes.title}
+              {safeT.partnerTypes.title}
             </h2>
             <p style={styles.sectionSubtitle}>
-              {t.partnerTypes.subtitle}
+              {safeT.partnerTypes.subtitle}
             </p>
           </motion.div>
 
           <div style={styles.partnerGrid}>
             {partnerTypes.map((type, index) => {
-              const typeData = t.partnerTypes.types[type.key]
+              const typeData = (t as any)?.partnerTypes?.types?.[type.key] || {
+                title: type.key,
+                description: 'Partnership opportunity',
+                benefits: []
+              }
               return (
                 <motion.div
                   key={type.key}
@@ -717,10 +752,10 @@ export default function PartnershipsPage() {
             viewport={{ once: true }}
           >
             <h2 style={styles.benefitsTitle}>
-              {t.benefits.title}
+              {safeT.benefits.title}
             </h2>
             <p style={styles.benefitsDescription}>
-              {t.benefits.subtitle}
+              {safeT.benefits.subtitle}
             </p>
             
             <div style={styles.benefitsGrid}>
@@ -734,10 +769,10 @@ export default function PartnershipsPage() {
               >
                 <Handshake style={styles.benefitCardIcon} />
                 <h3 style={styles.benefitCardTitle}>
-                  {t.benefits.items.strategicCollaboration.title}
+                  {safeT.benefits.items.strategicCollaboration.title}
                 </h3>
                 <p style={styles.benefitCardDescription}>
-                  {t.benefits.items.strategicCollaboration.description}
+                  {safeT.benefits.items.strategicCollaboration.description}
                 </p>
               </motion.div>
               
@@ -751,10 +786,10 @@ export default function PartnershipsPage() {
               >
                 <TrendingUp style={styles.benefitCardIcon} />
                 <h3 style={styles.benefitCardTitle}>
-                  {t.benefits.items.jointGrowth.title}
+                  {safeT.benefits.items.jointGrowth.title}
                 </h3>
                 <p style={styles.benefitCardDescription}>
-                  {t.benefits.items.jointGrowth.description}
+                  {safeT.benefits.items.jointGrowth.description}
                 </p>
               </motion.div>
               
@@ -768,10 +803,10 @@ export default function PartnershipsPage() {
               >
                 <Shield style={styles.benefitCardIcon} />
                 <h3 style={styles.benefitCardTitle}>
-                  {t.benefits.items.guaranteedSupport.title}
+                  {safeT.benefits.items.guaranteedSupport.title}
                 </h3>
                 <p style={styles.benefitCardDescription}>
-                  {t.benefits.items.guaranteedSupport.description}
+                  {safeT.benefits.items.guaranteedSupport.description}
                 </p>
               </motion.div>
               
@@ -785,10 +820,10 @@ export default function PartnershipsPage() {
               >
                 <Rocket style={styles.benefitCardIcon} />
                 <h3 style={styles.benefitCardTitle}>
-                  {t.benefits.items.continuousInnovation.title}
+                  {safeT.benefits.items.continuousInnovation.title}
                 </h3>
                 <p style={styles.benefitCardDescription}>
-                  {t.benefits.items.continuousInnovation.description}
+                  {safeT.benefits.items.continuousInnovation.description}
                 </p>
               </motion.div>
             </div>
@@ -806,16 +841,16 @@ export default function PartnershipsPage() {
             style={styles.sectionHeader}
           >
             <h2 style={styles.sectionTitle}>
-              {t.successStories.title}
+              {safeT.successStories.title}
             </h2>
             <p style={styles.sectionSubtitle}>
-              {t.successStories.subtitle}
+              {safeT.successStories.subtitle}
             </p>
           </motion.div>
 
           <div style={styles.storiesGrid}>
             {successStories.map((story, index) => {
-              const storyData = t.successStories.stories[story.key]
+              const storyData = safeT.successStories.stories[story.key]
               return (
                 <motion.div
                   key={story.key}
@@ -863,11 +898,11 @@ export default function PartnershipsPage() {
             <div style={styles.ctaGlow} />
             
             <h2 style={styles.ctaTitle}>
-              {t.cta.title}
+              {safeT.cta.title}
             </h2>
             
             <p style={styles.ctaDescription}>
-              {t.cta.subtitle}
+              {safeT.cta.subtitle}
             </p>
             
             <Link 
@@ -876,7 +911,7 @@ export default function PartnershipsPage() {
               onMouseEnter={(e) => Object.assign(e.currentTarget.style, styles.ctaButtonHover)}
               onMouseLeave={(e) => Object.assign(e.currentTarget.style, styles.ctaButton)}
             >
-              {t.cta.button}
+              {safeT.cta.button}
               <ArrowRight size={20} />
             </Link>
           </motion.div>

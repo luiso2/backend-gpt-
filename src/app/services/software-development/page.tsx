@@ -143,21 +143,27 @@ export default function SoftwareDevelopmentPage() {
       gap: '20px',
       justifyContent: 'center',
       flexWrap: 'wrap' as const,
+      marginTop: '32px',
     },
     
     btnPrimary: {
       display: 'inline-flex',
       alignItems: 'center',
+      justifyContent: 'center',
       gap: '10px',
       padding: '18px 36px',
       background: 'linear-gradient(135deg, #B8E92D 0%, #7FD858 100%)',
       color: '#0A2E1F',
+      border: 'none',
       borderRadius: '12px',
       fontSize: '17px',
       fontWeight: '700',
       textDecoration: 'none',
-      transition: 'all 0.3s ease',
+      transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
       boxShadow: '0 8px 32px rgba(184, 233, 45, 0.3)',
+      cursor: 'pointer',
+      minWidth: 'fit-content',
+      whiteSpace: 'nowrap' as const,
     },
     
     btnSecondary: {
@@ -449,6 +455,21 @@ export default function SoftwareDevelopmentPage() {
         0%, 100% { transform: translateY(0) rotate(0deg); }
         50% { transform: translateY(-20px) rotate(180deg); }
       }
+      
+      /* Responsive button styles */
+      @media (max-width: 768px) {
+        .hero-buttons {
+          flex-direction: column;
+          align-items: center;
+          gap: 16px !important;
+        }
+        .btn-primary-mobile {
+          padding: 16px 28px !important;
+          font-size: 16px !important;
+          width: 100%;
+          max-width: 280px;
+        }
+      }
     `
     document.head.appendChild(styleSheet)
   }
@@ -609,22 +630,40 @@ export default function SoftwareDevelopmentPage() {
               }
             </p>
             
-            <div style={styles.heroButtons}>
-              <Link 
-                href="/contact?service=software-development"
-                style={styles.btnPrimary}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.transform = 'translateY(-2px)';
-                  e.currentTarget.style.boxShadow = '0 12px 40px rgba(184, 233, 45, 0.4)';
+            <motion.div 
+              style={styles.heroButtons}
+              className="hero-buttons"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4 }}
+            >
+              <motion.div
+                whileHover={{ 
+                  scale: 1.05,
+                  y: -2
                 }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.transform = 'translateY(0)';
-                  e.currentTarget.style.boxShadow = '0 8px 32px rgba(184, 233, 45, 0.3)';
-                }}
+                whileTap={{ scale: 0.98 }}
+                transition={{ type: "spring", stiffness: 400, damping: 25 }}
               >
-                {language === 'es' ? 'Iniciar Proyecto' : 'Start Project'}
-                <ArrowRight size={20} />
-              </Link>
+                <Link 
+                  href="/contact?service=software-development"
+                  style={styles.btnPrimary}
+                  className="btn-primary-mobile"
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.transform = 'translateY(-2px)';
+                    e.currentTarget.style.boxShadow = '0 12px 40px rgba(184, 233, 45, 0.4)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.transform = 'translateY(0)';
+                    e.currentTarget.style.boxShadow = '0 8px 32px rgba(184, 233, 45, 0.3)';
+                  }}
+                  role="button"
+                  aria-label={t.navigation?.startProject || (language === 'es' ? 'Iniciar Proyecto' : 'Start Project')}
+                >
+                  {t.navigation?.startProject || (language === 'es' ? 'Iniciar Proyecto' : 'Start Project')}
+                  <ArrowRight size={20} />
+                </Link>
+              </motion.div>
               
               <Link 
                 href="#portfolio"
@@ -642,7 +681,7 @@ export default function SoftwareDevelopmentPage() {
               >
                 {language === 'es' ? 'Ver Proyectos' : 'View Projects'}
               </Link>
-            </div>
+            </motion.div>
           </motion.div>
         </div>
       </section>
@@ -942,21 +981,32 @@ export default function SoftwareDevelopmentPage() {
               }
             </p>
             
-            <Link 
-              href="/contact?service=software-development"
-              style={styles.btnPrimary}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.transform = 'translateY(-2px)';
-                e.currentTarget.style.boxShadow = '0 12px 40px rgba(184, 233, 45, 0.4)';
+            <motion.div
+              whileHover={{ 
+                scale: 1.05,
+                y: -2
               }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = 'translateY(0)';
-                e.currentTarget.style.boxShadow = '0 8px 32px rgba(184, 233, 45, 0.3)';
-              }}
+              whileTap={{ scale: 0.98 }}
+              transition={{ type: "spring", stiffness: 400, damping: 25 }}
             >
-              {language === 'es' ? 'Conversemos sobre tu proyecto' : "Let's talk about your project"}
-              <ArrowRight size={20} />
-            </Link>
+              <Link 
+                href="/contact?service=software-development"
+                style={styles.btnPrimary}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = 'translateY(-2px)';
+                  e.currentTarget.style.boxShadow = '0 12px 40px rgba(184, 233, 45, 0.4)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = 'translateY(0)';
+                  e.currentTarget.style.boxShadow = '0 8px 32px rgba(184, 233, 45, 0.3)';
+                }}
+                role="button"
+                aria-label={language === 'es' ? 'Conversemos sobre tu proyecto' : "Let's talk about your project"}
+              >
+                {language === 'es' ? 'Conversemos sobre tu proyecto' : "Let's talk about your project"}
+                <ArrowRight size={20} />
+              </Link>
+            </motion.div>
           </motion.div>
         </div>
       </section>
