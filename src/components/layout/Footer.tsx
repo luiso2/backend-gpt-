@@ -166,6 +166,10 @@ const Footer = () => {
                 {language === 'es' ? 'Términos' : 'Terms'}
               </Link>
               <span className="legal-separator">•</span>
+              <Link href="/eula" className="legal-link">
+                {language === 'es' ? 'EULA' : 'EULA'}
+              </Link>
+              <span className="legal-separator">•</span>
               <Link href="/cookies" className="legal-link">
                 {language === 'es' ? 'Cookies' : 'Cookies'}
               </Link>
