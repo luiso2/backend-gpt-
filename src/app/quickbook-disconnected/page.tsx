@@ -1,6 +1,6 @@
 export const metadata = {
   title: 'QuickBook Disconnected | Merktop',
-  description: 'Your QuickBooks account is disconnected. Reconnect to resume syncing.',
+  description: 'You have successfully disconnected your QuickBooks account from Merktop.',
 };
 
 export default function QuickBookDisconnectedPage() {
@@ -148,27 +148,43 @@ export default function QuickBookDisconnectedPage() {
           <div className="exclamation"></div>
         </div>
 
-        <h1>QuickBooks Disconnected</h1>
+        <h1>Connection Disconnected</h1>
         <p className="subtitle">
-          Your QuickBooks account is currently disconnected from Merktop.
-          Please reconnect to resume automatic syncing of your accounting data.
+          You have successfully disconnected your QuickBooks account from Merktop. Your information is safe and we no longer have access to your data.
         </p>
 
         <div className="info-box">
-          <h3>How to reconnect</h3>
+          <h3>⚠️ Important</h3>
+          <p style={{ color: '#4b5563', fontSize: 16 }}>
+            By disconnecting QuickBooks, all automatic synchronizations have been stopped. If you want to use this integration again, you'll need to reconnect your account.
+          </p>
+        </div>
+
+        <div className="info-box">
+          <h3>What happened?</h3>
           <ul>
-            <li>Go to Integrations in your Merktop dashboard</li>
-            <li>Select QuickBooks and click "Connect"</li>
-            <li>Sign in and authorize the connection</li>
+            <li>Merktop's access to your QuickBooks was revoked</li>
+            <li>Authentication tokens have been invalidated</li>
+            <li>Automatic synchronization has stopped</li>
+            <li>Your data remains safe in QuickBooks</li>
           </ul>
         </div>
 
-        <a href="https://www.merktop.com" className="button-primary" target="_blank" rel="noopener noreferrer">
-          Open Merktop Dashboard
+        <a href="https://www.merktop.com" className="button-secondary" target="_blank" rel="noopener noreferrer">
+          Back to Merktop
         </a>
-        <a href="/quickbook-connected" className="button-secondary">
-          View Connected Info
+        <a href="/quickbook-connected" className="button-primary">
+          Reconnect QuickBooks
         </a>
+
+        <p className="subtitle" style={{ marginTop: 20 }}>
+          Did you have any issues? Contact us at <a href="mailto:support@merktop.com">support@merktop.com</a>
+        </p>
+
+        <p style={{ color: '#6b7280', fontSize: 14, marginTop: 10 }}>
+          <a href="/privacy" style={{ color: '#6b7280', textDecoration: 'none' }}>Privacy Policy</a> ·{' '}
+          <a href="/terms" style={{ color: '#6b7280', textDecoration: 'none' }}>Terms of Service</a>
+        </p>
 
       </div>
     </>
