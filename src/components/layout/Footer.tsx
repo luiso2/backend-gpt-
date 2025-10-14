@@ -13,10 +13,17 @@ import {
 } from 'lucide-react'
 import { useLanguage } from '@/contexts/LanguageContext'
 import '@/styles/footer-override.css'
+import { usePathname } from 'next/navigation'
 
 const Footer = () => {
   const currentYear = new Date().getFullYear()
   const { language, t } = useLanguage()
+  const pathname = usePathname()
+
+  // Exclude footer on specific routes
+  if (pathname === '/quickbook-connected') {
+    return null
+  }
 
   return (
     <>
@@ -119,6 +126,26 @@ const Footer = () => {
                 <li>
                   <Link href="/contact" className="footer-link">
                     {language === 'es' ? 'Contacto' : 'Contact'}
+                  </Link>
+                </li>
+              </ul>
+            </div>
+
+            {/* QuickBook Column */}
+            <div className="footer-column">
+              <h4 className="footer-column-title">QuickBook</h4>
+              <ul className="footer-links-list">
+                <li>
+                  <Link href="/eula" className="footer-link">EULA</Link>
+                </li>
+                <li>
+                  <Link href="/privacy" className="footer-link">
+                    {language === 'es' ? 'Política de Privacidad' : 'Privacy Policy'}
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/quickbook-connected" className="footer-link">
+                    {language === 'es' ? 'QuickBook Conectado' : 'QuickBook Connected'}
                   </Link>
                 </li>
               </ul>
