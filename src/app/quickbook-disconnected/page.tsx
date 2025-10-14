@@ -80,26 +80,29 @@ export default function QuickBookDisconnectedPage() {
           line-height: 1.6;
         }
         .info-box {
-          background: #f3f4f6;
+          background: #111827;
+          color: #ffffff;
           border-radius: 12px;
           padding: 20px;
           margin: 30px 0;
           text-align: left;
         }
         .info-box h3 {
-          color: #374151;
+          color: #ffffff;
           font-size: 16px;
           margin-bottom: 15px;
           font-weight: 600;
         }
         .info-box ul { list-style: none; padding: 0; }
         .info-box li {
-          color: #6b7280;
+          color: #ffffff;
           padding: 8px 0;
           padding-left: 25px;
           position: relative;
           font-size: 14px;
         }
+        .info-box p { color: #ffffff; font-size: 16px; }
+        .subtitle a { color: #ffffff; text-decoration: underline; }
         .info-box li:before {
           content: '•';
           color: #ef4444;
@@ -155,7 +158,7 @@ export default function QuickBookDisconnectedPage() {
 
         <div className="info-box">
           <h3>⚠️ Important</h3>
-          <p style={{ color: '#4b5563', fontSize: 16 }}>
+          <p>
             By disconnecting QuickBooks, all automatic synchronizations have been stopped. If you want to use this integration again, you'll need to reconnect your account.
           </p>
         </div>
