@@ -68,13 +68,13 @@ export default function QuickBookDisconnectedPage() {
           border-radius: 50%;
         }
         h1 {
-          color: #111827;
+          color: #ffffff;
           font-size: 32px;
           margin-bottom: 15px;
           font-weight: 700;
         }
         .subtitle {
-          color: #4b5563;
+          color: #ffffff;
           font-size: 18px;
           margin-bottom: 30px;
           line-height: 1.6;
