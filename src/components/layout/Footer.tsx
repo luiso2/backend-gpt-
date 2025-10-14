@@ -148,6 +148,11 @@ const Footer = () => {
                     {language === 'es' ? 'QuickBook Conectado' : 'QuickBook Connected'}
                   </Link>
                 </li>
+                <li>
+                  <Link href="/quickbook-disconnected" className="footer-link">
+                    {language === 'es' ? 'QuickBook Desconectado' : 'QuickBook Disconnected'}
+                  </Link>
+                </li>
               </ul>
             </div>
 
