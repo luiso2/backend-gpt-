@@ -1,145 +1,167 @@
-'use client'
+import type { Metadata } from 'next'
 
-import { useLanguage } from '@/contexts/LanguageContext'
-import { motion } from 'framer-motion'
-import { Lock, Shield, Eye, Database, UserCheck } from 'lucide-react'
+export const metadata: Metadata = {
+  title: 'Privacy Policy | MERKTOP',
+  description: 'Privacy Policy for MERKTOP QuickBooks Integration Application covering data collection, usage, storage, security, sharing, rights, revocation, retention, third-party services, international transfers, children’s privacy, changes, contact, cookies, and compliance.',
+}
 
-export default function PrivacyPage() {
-  const { language } = useLanguage()
-
-  const sections = [
-    {
-      icon: <Database className="w-5 h-5" />,
-      title: language === 'es' ? '1. Información que Recopilamos' : '1. Information We Collect',
-      content: language === 'es' 
-        ? 'En MERCATOP, recopilamos información que nos proporcionas directamente, como tu nombre, correo electrónico, número de teléfono y detalles sobre tu proyecto cuando te pones en contacto con nosotros a través de nuestros formularios o chat.'
-        : 'At MERCATOP, we collect information that you provide directly to us, such as your name, email address, phone number, and project details when you contact us through our forms or chat.'
-    },
-    {
-      icon: <Eye className="w-5 h-5" />,
-      title: language === 'es' ? '2. Cómo Utilizamos tu Información' : '2. How We Use Your Information',
-      content: language === 'es'
-        ? 'Utilizamos la información recopilada para: responder a tus consultas, proporcionar cotizaciones de servicios, comunicarnos contigo sobre proyectos, y mejorar nuestros servicios.'
-        : 'We use the collected information to: respond to your inquiries, provide service quotes, communicate with you about projects, and improve our services.'
-    },
-    {
-      icon: <UserCheck className="w-5 h-5" />,
-      title: language === 'es' ? '3. Compartir Información' : '3. Information Sharing',
-      content: language === 'es'
-        ? 'No vendemos, intercambiamos ni transferimos tu información personal a terceros sin tu consentimiento, excepto cuando sea necesario para proporcionar nuestros servicios o cuando lo requiera la ley.'
-        : 'We do not sell, trade, or transfer your personal information to third parties without your consent, except when necessary to provide our services or when required by law.'
-    },
-    {
-      icon: <Shield className="w-5 h-5" />,
-      title: language === 'es' ? '4. Seguridad de Datos' : '4. Data Security',
-      content: language === 'es'
-        ? 'Implementamos medidas de seguridad apropiadas para proteger tu información personal contra acceso no autorizado, alteración, divulgación o destrucción.'
-        : 'We implement appropriate security measures to protect your personal information against unauthorized access, alteration, disclosure, or destruction.'
-    },
-    {
-      icon: <Lock className="w-5 h-5" />,
-      title: language === 'es' ? '5. Tus Derechos' : '5. Your Rights',
-      content: language === 'es'
-        ? 'Tienes derecho a acceder, actualizar o eliminar tu información personal. También puedes optar por no recibir comunicaciones de marketing en cualquier momento.'
-        : 'You have the right to access, update, or delete your personal information. You can also opt out of marketing communications at any time.'
-    }
-  ]
-
+export default function PrivacyPolicyPage() {
   return (
-    <div className="min-h-screen pt-24 pb-16">
-      {/* Background Elements */}
-      <div className="hero-pattern-grid"></div>
-      <div className="hero-orb hero-orb-1"></div>
-      <div className="hero-orb hero-orb-2"></div>
-      
-      <div className="container mx-auto px-4">
-        {/* Header */}
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="text-center mb-12"
-        >
-          <div className="flex justify-center mb-6">
-            <div className="p-4 bg-gradient-to-br from-blue-500/20 to-cyan-500/20 rounded-2xl backdrop-blur-sm border border-blue-500/20">
-              <Lock className="w-12 h-12 text-blue-400" />
-            </div>
-          </div>
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">
-            <span className="bg-gradient-to-r from-blue-400 to-cyan-500 bg-clip-text text-transparent">
-              {language === 'es' ? 'Política de Privacidad' : 'Privacy Policy'}
-            </span>
-          </h1>
-          <p className="text-gray-400 max-w-2xl mx-auto">
-            {language === 'es' 
-              ? 'Tu privacidad es nuestra prioridad. Conoce cómo protegemos tu información.'
-              : 'Your privacy is our priority. Learn how we protect your information.'
-            }
+    <section className="legal-page" style={{ backgroundColor: '#0A2E1F', color: '#fff' }}>
+      <div className="container" style={{ padding: '40px 0' }}>
+        <h1 style={{ color: '#B8E92D', marginBottom: '8px' }}>Privacy Policy</h1>
+        <p style={{ opacity: 0.9, marginBottom: '24px' }}>Effective Date: October 14, 2025</p>
+
+        <div className="legal-content" style={{ lineHeight: 1.7, opacity: 0.95 }}>
+          <p>
+            This Privacy Policy describes how Merktop ("we," "us," or "our") collects, uses, and protects your information when you use our QuickBooks Integration Application ("Application").
           </p>
-        </motion.div>
 
-        {/* Content */}
-        <motion.div 
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
-          className="max-w-4xl mx-auto"
-        >
-          <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-8 md:p-12">
-            <div className="space-y-8">
-              {sections.map((section, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.3 + index * 0.1 }}
-                  className="pb-8 border-b border-white/10 last:border-0"
-                >
-                  <div className="flex items-start gap-4">
-                    <div className="p-2 bg-gradient-to-br from-blue-500/20 to-cyan-500/20 rounded-lg flex-shrink-0">
-                      {section.icon}
-                    </div>
-                    <div className="flex-1">
-                      <h2 className="text-2xl font-semibold text-blue-400 mb-4">
-                        {section.title}
-                      </h2>
-                      <p className="text-gray-300 leading-relaxed">
-                        {section.content}
-                      </p>
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
+          <h2 style={{ color: '#E6FF5C', marginTop: '28px' }}>1. Information We Collect</h2>
+          <h3 style={{ color: '#E6FF5C', marginTop: '16px' }}>1.1 Information You Provide</h3>
+          <ul style={{ paddingLeft: '20px' }}>
+            <li>QuickBooks Authorization: When you connect your QuickBooks account, we receive authorization to access your QuickBooks data</li>
+            <li>Account Information: Your QuickBooks company information and realm ID</li>
+          </ul>
+          <h3 style={{ color: '#E6FF5C', marginTop: '16px' }}>1.2 Information from QuickBooks</h3>
+          <p>With your authorization, we may access:</p>
+          <ul style={{ paddingLeft: '20px' }}>
+            <li>Customer and vendor information</li>
+            <li>Invoices, bills, and payments</li>
+            <li>Financial reports and accounts</li>
+            <li>Items and products</li>
+            <li>Other data necessary for the Application's functionality</li>
+          </ul>
+          <h3 style={{ color: '#E6FF5C', marginTop: '16px' }}>1.3 Technical Information</h3>
+          <ul style={{ paddingLeft: '20px' }}>
+            <li>API access logs and timestamps</li>
+            <li>Error logs and diagnostic information</li>
+            <li>Application usage statistics</li>
+          </ul>
 
-            {/* Contact Section */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 1 }}
-              className="mt-12 p-6 bg-gradient-to-r from-blue-500/10 to-cyan-500/10 rounded-2xl border border-blue-500/20"
-            >
-              <h3 className="text-xl font-semibold text-blue-400 mb-3">
-                {language === 'es' ? 'Contacto' : 'Contact'}
-              </h3>
-              <p className="text-gray-300">
-                {language === 'es'
-                  ? 'Si tienes preguntas sobre esta política de privacidad, puedes contactarnos en '
-                  : 'If you have questions about this privacy policy, you can contact us at '
-                }
-                <a href="mailto:hello@merktop.com" className="text-blue-400 hover:text-blue-300 transition-colors">
-                  hello@merktop.com
-                </a>
-              </p>
-              <p className="text-sm text-gray-400 mt-4">
-                {language === 'es'
-                  ? 'Última actualización: Enero 2024'
-                  : 'Last updated: January 2024'
-                }
-              </p>
-            </motion.div>
-          </div>
-        </motion.div>
+          <h2 style={{ color: '#E6FF5C', marginTop: '28px' }}>2. How We Use Your Information</h2>
+          <p>We use your information to:</p>
+          <ul style={{ paddingLeft: '20px' }}>
+            <li>Provide and maintain the Application's functionality</li>
+            <li>Process your requests to read, create, update, or delete QuickBooks data</li>
+            <li>Improve and optimize the Application</li>
+            <li>Troubleshoot technical issues</li>
+            <li>Ensure security and prevent fraud</li>
+            <li>Comply with legal obligations</li>
+          </ul>
+          <p><strong>Important:</strong> We only access your QuickBooks data when you explicitly authorize us and only to perform the functions you request.</p>
+
+          <h2 style={{ color: '#E6FF5C', marginTop: '28px' }}>3. Data Storage and Security</h2>
+          <h3 style={{ color: '#E6FF5C', marginTop: '16px' }}>3.1 What We Store</h3>
+          <ul style={{ paddingLeft: '20px' }}>
+            <li>OAuth Tokens: Securely encrypted access and refresh tokens</li>
+            <li>Realm ID: Your QuickBooks company identifier</li>
+            <li>Logs: Temporary logs for debugging (automatically deleted after 30 days)</li>
+          </ul>
+          <h3 style={{ color: '#E6FF5C', marginTop: '16px' }}>3.2 What We Don't Store</h3>
+          <ul style={{ paddingLeft: '20px' }}>
+            <li>Your QuickBooks username or password</li>
+            <li>Complete copies of your financial data</li>
+            <li>Credit card or payment information</li>
+          </ul>
+          <h3 style={{ color: '#E6FF5C', marginTop: '16px' }}>3.3 Security Measures</h3>
+          <ul style={{ paddingLeft: '20px' }}>
+            <li>All data transmission uses HTTPS/TLS encryption</li>
+            <li>OAuth tokens are encrypted at rest</li>
+            <li>Access to systems is restricted and monitored</li>
+            <li>Regular security audits and updates</li>
+          </ul>
+
+          <h2 style={{ color: '#E6FF5C', marginTop: '28px' }}>4. Data Sharing and Disclosure</h2>
+          <p>We do NOT sell, rent, or trade your information. We may share your information only in these limited circumstances:</p>
+          <ul style={{ paddingLeft: '20px' }}>
+            <li>With Your Consent: When you explicitly authorize us to share specific data</li>
+            <li>Service Providers: With trusted third-party services that help us operate the Application (under strict confidentiality agreements)</li>
+            <li>Legal Requirements: When required by law, court order, or government regulation</li>
+            <li>Business Transfers: In connection with a merger, acquisition, or sale of assets (with notice to you)</li>
+          </ul>
+
+          <h2 style={{ color: '#E6FF5C', marginTop: '28px' }}>5. Your Rights and Choices</h2>
+          <p>You have the right to:</p>
+          <ul style={{ paddingLeft: '20px' }}>
+            <li>Access: Request a copy of the data we have about you</li>
+            <li>Correction: Request correction of inaccurate data</li>
+            <li>Deletion: Request deletion of your data (subject to legal obligations)</li>
+            <li>Revocation: Revoke the Application's access to your QuickBooks account at any time</li>
+            <li>Data Portability: Request your data in a portable format</li>
+          </ul>
+
+          <h2 style={{ color: '#E6FF5C', marginTop: '28px' }}>6. Revoking Access</h2>
+          <p>You can revoke the Application's access to your QuickBooks account at any time by:</p>
+          <ul style={{ paddingLeft: '20px' }}>
+            <li>Logging into your QuickBooks Online account</li>
+            <li>Going to Settings → Apps</li>
+            <li>Finding this Application and clicking "Disconnect"</li>
+          </ul>
+          <p>After disconnection, we will no longer have access to your QuickBooks data, and stored tokens will be invalidated.</p>
+
+          <h2 style={{ color: '#E6FF5C', marginTop: '28px' }}>7. Data Retention</h2>
+          <p>We retain your information only as long as necessary to:</p>
+          <ul style={{ paddingLeft: '20px' }}>
+            <li>Provide the Application's services</li>
+            <li>Comply with legal obligations</li>
+            <li>Resolve disputes and enforce agreements</li>
+          </ul>
+          <p>When you disconnect the Application, we delete or anonymize your data within 90 days, except where retention is required by law.</p>
+
+          <h2 style={{ color: '#E6FF5C', marginTop: '28px' }}>8. Third-Party Services</h2>
+          <p>This Application integrates with:</p>
+          <ul style={{ paddingLeft: '20px' }}>
+            <li>QuickBooks Online: Subject to Intuit's Privacy Policy</li>
+            <li>Intuit Platform: Subject to Intuit's Terms of Service</li>
+          </ul>
+          <p>We recommend reviewing Intuit's privacy policies at: <a href="https://www.intuit.com/privacy/" target="_blank" rel="noopener noreferrer" style={{ color: '#B8E92D' }}>https://www.intuit.com/privacy/</a></p>
+
+          <h2 style={{ color: '#E6FF5C', marginTop: '28px' }}>9. International Data Transfers</h2>
+          <p>Your data may be transferred to and processed in countries other than your own. We ensure appropriate safeguards are in place to protect your data in accordance with this Privacy Policy.</p>
+
+          <h2 style={{ color: '#E6FF5C', marginTop: '28px' }}>10. Children's Privacy</h2>
+          <p>The Application is not intended for use by individuals under the age of 18. We do not knowingly collect information from children.</p>
+
+          <h2 style={{ color: '#E6FF5C', marginTop: '28px' }}>11. Changes to This Privacy Policy</h2>
+          <p>We may update this Privacy Policy from time to time. We will notify you of any material changes by:</p>
+          <ul style={{ paddingLeft: '20px' }}>
+            <li>Posting the new Privacy Policy on this page</li>
+            <li>Updating the "Effective Date" at the top</li>
+            <li>Sending you an email notification (if applicable)</li>
+          </ul>
+          <p>Your continued use of the Application after changes constitutes acceptance of the updated policy.</p>
+
+          <h2 style={{ color: '#E6FF5C', marginTop: '28px' }}>12. Contact Us</h2>
+          <p>If you have questions or concerns about this Privacy Policy or our data practices, please contact us:</p>
+          <ul style={{ paddingLeft: '20px' }}>
+            <li>Company: Merktop</li>
+            <li>Website: www.merktop.com</li>
+            <li>Email: privacy@merktop.com</li>
+            <li>Support: support@merktop.com</li>
+          </ul>
+
+          <h2 style={{ color: '#E6FF5C', marginTop: '28px' }}>13. Cookie Policy</h2>
+          <p>The Application may use cookies or similar technologies for:</p>
+          <ul style={{ paddingLeft: '20px' }}>
+            <li>Authentication and session management</li>
+            <li>Security and fraud prevention</li>
+            <li>Application functionality</li>
+          </ul>
+          <p>You can control cookies through your browser settings, but disabling them may affect Application functionality.</p>
+
+          <h2 style={{ color: '#E6FF5C', marginTop: '28px' }}>14. Compliance</h2>
+          <p>We comply with applicable data protection regulations, including:</p>
+          <ul style={{ paddingLeft: '20px' }}>
+            <li>General Data Protection Regulation (GDPR) - for EU users</li>
+            <li>California Consumer Privacy Act (CCPA) - for California residents</li>
+            <li>Other applicable local and international privacy laws</li>
+          </ul>
+
+          <p style={{ marginTop: '24px' }}>© 2025 Merktop. All rights reserved.</p>
+          <p>This Privacy Policy was last updated on October 14, 2025.</p>
+        </div>
       </div>
-    </div>
+    </section>
   )
 }
