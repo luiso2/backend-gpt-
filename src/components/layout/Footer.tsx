@@ -156,6 +156,23 @@ const Footer = () => {
               </ul>
             </div>
 
+            {/* OpenAI Column */}
+            <div className="footer-column">
+              <h4 className="footer-column-title">{t.footer.openai.title}</h4>
+              <ul className="footer-links-list">
+                <li>
+                  <Link href="/openai/terms" className="footer-link">
+                    {t.footer.openai.termsAndConditions}
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/openai/privacy" className="footer-link">
+                    {t.footer.openai.privacyPolicy}
+                  </Link>
+                </li>
+              </ul>
+            </div>
+
             {/* Contact Column */}
             <div className="footer-column">
               <h4 className="footer-column-title">
@@ -252,7 +269,7 @@ const Footer = () => {
 
         .footer-grid {
           display: grid;
-          grid-template-columns: 2fr 1fr 1fr 1.2fr;
+          grid-template-columns: 2fr 1fr 1fr 1fr 1fr 1.2fr;
           gap: 48px;
           align-items: start;
         }
@@ -448,12 +465,23 @@ const Footer = () => {
         /* Responsive Design */
         @media (max-width: 1024px) {
           .footer-grid {
-            grid-template-columns: 1fr 1fr;
-            gap: 48px;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 40px;
           }
 
           .footer-brand-section {
             max-width: 100%;
+            grid-column: span 3;
+          }
+        }
+
+        @media (max-width: 768px) {
+          .footer-grid {
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+          }
+
+          .footer-brand-section {
             grid-column: span 2;
           }
         }

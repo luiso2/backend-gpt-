@@ -212,6 +212,11 @@ export const translations = {
       tagline: "We transform ideas into innovative digital solutions that drive your business growth.",
       contact: {
         location: "Remote - Global"
+      },
+      openai: {
+        title: "OpenAI",
+        termsAndConditions: "Terms & Conditions",
+        privacyPolicy: "Privacy Policy"
       }
     },
     
@@ -696,6 +701,11 @@ export const translations = {
       tagline: "Transformamos ideas en soluciones digitales innovadoras que impulsan el crecimiento de tu negocio.",
       contact: {
         location: "Remoto - Global"
+      },
+      openai: {
+        title: "OpenAI",
+        termsAndConditions: "Términos y Condiciones",
+        privacyPolicy: "Política de Privacidad"
       }
     },
     
