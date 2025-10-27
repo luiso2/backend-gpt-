@@ -59,6 +59,19 @@ export default function OpenAIPrivacyPage() {
                             Doctor Pi
                         </Link>
                     </motion.div>
+
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.6, delay: 0.8 }}
+                    >
+                        <Link
+                            href="/openai/privacy/merktop-assistant"
+                            className="inline-block text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-[#B8E92D] hover:text-[#7FD858] transition-all duration-300 hover:scale-105 break-words"
+                        >
+                            Merktop Assistant
+                        </Link>
+                    </motion.div>
                 </div>
             </div>
         </div>
