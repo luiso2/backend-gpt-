@@ -40,7 +40,11 @@
       "Bash(NEXT_PUBLIC_LIQUID_GLASS=true PORT=3003 npm start)",
       "Bash(npm run glass:audit:*)",
       "Bash(NEXT_PUBLIC_LIQUID_GLASS=true PORT=3003 npm run dev)",
-      "Bash(npm run clean:*)"
+      "Bash(npm run clean:*)",
+      "Read(//Users/josemichaelhernandezvargas/Desktop/**)",
+      "Bash(cat:*)",
+      "Bash(npm init:*)",
+      "Bash(lsof:*)"
     ],
     "deny": []
   }
