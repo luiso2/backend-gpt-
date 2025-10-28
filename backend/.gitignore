@@ -33,3 +33,10 @@ Thumbs.db
 # Testing
 coverage/
 .nyc_output/
+
+# SSL Certificates (sensitive)
+ssl/
+*.pem
+*.key
+*.crt
+*.cert

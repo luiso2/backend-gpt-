@@ -1,0 +1,586 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "MERKTOP Content API",
+    "description": "Public API for managing MERKTOP website content. No authentication required.",
+    "version": "v1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://backend-production-835f.up.railway.app/api"
+    }
+  ],
+  "paths": {
+    "/pages": {
+      "get": {
+        "operationId": "getAllPages",
+        "summary": "Get all pages",
+        "parameters": [
+          {
+            "name": "isPublished",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      },
+      "post": {
+        "operationId": "createPage",
+        "summary": "Create page",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["slug", "title"],
+                "properties": {
+                  "slug": {"type": "string"},
+                  "title": {"type": "string"},
+                  "description": {"type": "string"},
+                  "content": {"type": "object"},
+                  "isPublished": {"type": "boolean"}
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created"
+          }
+        }
+      }
+    },
+    "/pages/{slug}": {
+      "get": {
+        "operationId": "getPageBySlug",
+        "summary": "Get page by slug",
+        "parameters": [
+          {
+            "name": "slug",
+            "in": "path",
+            "required": true,
+            "schema": {"type": "string"}
+          }
+        ],
+        "responses": {
+          "200": {"description": "Success"}
+        }
+      },
+      "put": {
+        "operationId": "updatePage",
+        "summary": "Update page",
+        "parameters": [
+          {
+            "name": "slug",
+            "in": "path",
+            "required": true,
+            "schema": {"type": "string"}
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "title": {"type": "string"},
+                  "description": {"type": "string"},
+                  "content": {"type": "object"},
+                  "isPublished": {"type": "boolean"}
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {"description": "Success"}
+        }
+      },
+      "delete": {
+        "operationId": "deletePage",
+        "summary": "Delete page",
+        "parameters": [
+          {
+            "name": "slug",
+            "in": "path",
+            "required": true,
+            "schema": {"type": "string"}
+          }
+        ],
+        "responses": {
+          "204": {"description": "Deleted"}
+        }
+      }
+    },
+    "/sections": {
+      "get": {
+        "operationId": "getAllSections",
+        "summary": "Get sections",
+        "parameters": [
+          {
+            "name": "pageSlug",
+            "in": "query",
+            "schema": {"type": "string"}
+          },
+          {
+            "name": "isVisible",
+            "in": "query",
+            "schema": {"type": "boolean"}
+          }
+        ],
+        "responses": {
+          "200": {"description": "Success"}
+        }
+      },
+      "post": {
+        "operationId": "createSection",
+        "summary": "Create section",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["pageSlug", "sectionKey", "content"],
+                "properties": {
+                  "pageSlug": {"type": "string"},
+                  "sectionKey": {"type": "string"},
+                  "title": {"type": "string"},
+                  "content": {"type": "object"},
+                  "order": {"type": "integer"},
+                  "isVisible": {"type": "boolean"}
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {"description": "Created"}
+        }
+      }
+    },
+    "/sections/{pageSlug}/{sectionKey}": {
+      "get": {
+        "operationId": "getSection",
+        "summary": "Get section",
+        "parameters": [
+          {
+            "name": "pageSlug",
+            "in": "path",
+            "required": true,
+            "schema": {"type": "string"}
+          },
+          {
+            "name": "sectionKey",
+            "in": "path",
+            "required": true,
+            "schema": {"type": "string"}
+          }
+        ],
+        "responses": {
+          "200": {"description": "Success"}
+        }
+      },
+      "put": {
+        "operationId": "updateSection",
+        "summary": "Update section",
+        "parameters": [
+          {
+            "name": "pageSlug",
+            "in": "path",
+            "required": true,
+            "schema": {"type": "string"}
+          },
+          {
+            "name": "sectionKey",
+            "in": "path",
+            "required": true,
+            "schema": {"type": "string"}
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "content": {"type": "object"},
+                  "title": {"type": "string"},
+                  "isVisible": {"type": "boolean"}
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {"description": "Success"}
+        }
+      },
+      "delete": {
+        "operationId": "deleteSection",
+        "summary": "Delete section",
+        "parameters": [
+          {
+            "name": "pageSlug",
+            "in": "path",
+            "required": true,
+            "schema": {"type": "string"}
+          },
+          {
+            "name": "sectionKey",
+            "in": "path",
+            "required": true,
+            "schema": {"type": "string"}
+          }
+        ],
+        "responses": {
+          "204": {"description": "Deleted"}
+        }
+      }
+    },
+    "/portfolio": {
+      "get": {
+        "operationId": "getAllProjects",
+        "summary": "Get projects",
+        "parameters": [
+          {
+            "name": "category",
+            "in": "query",
+            "schema": {"type": "string"}
+          },
+          {
+            "name": "isFeatured",
+            "in": "query",
+            "schema": {"type": "boolean"}
+          }
+        ],
+        "responses": {
+          "200": {"description": "Success"}
+        }
+      },
+      "post": {
+        "operationId": "createProject",
+        "summary": "Create project",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["title", "description", "category"],
+                "properties": {
+                  "title": {"type": "string"},
+                  "description": {"type": "string"},
+                  "category": {"type": "string"},
+                  "tags": {"type": "array", "items": {"type": "string"}},
+                  "technologies": {"type": "array", "items": {"type": "string"}},
+                  "isFeatured": {"type": "boolean"},
+                  "isPublished": {"type": "boolean"}
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {"description": "Created"}
+        }
+      }
+    },
+    "/portfolio/{id}": {
+      "get": {
+        "operationId": "getProject",
+        "summary": "Get project",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {"type": "string"}
+          }
+        ],
+        "responses": {
+          "200": {"description": "Success"}
+        }
+      },
+      "put": {
+        "operationId": "updateProject",
+        "summary": "Update project",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {"type": "string"}
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "title": {"type": "string"},
+                  "description": {"type": "string"},
+                  "isFeatured": {"type": "boolean"},
+                  "isPublished": {"type": "boolean"}
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {"description": "Success"}
+        }
+      },
+      "delete": {
+        "operationId": "deleteProject",
+        "summary": "Delete project",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {"type": "string"}
+          }
+        ],
+        "responses": {
+          "204": {"description": "Deleted"}
+        }
+      }
+    },
+    "/services": {
+      "get": {
+        "operationId": "getAllServices",
+        "summary": "Get services",
+        "responses": {
+          "200": {"description": "Success"}
+        }
+      },
+      "post": {
+        "operationId": "createService",
+        "summary": "Create service",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["title", "description"],
+                "properties": {
+                  "title": {"type": "string"},
+                  "description": {"type": "string"},
+                  "features": {"type": "array", "items": {"type": "string"}},
+                  "isActive": {"type": "boolean"}
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {"description": "Created"}
+        }
+      }
+    },
+    "/services/{id}": {
+      "put": {
+        "operationId": "updateService",
+        "summary": "Update service",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {"type": "string"}
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "title": {"type": "string"},
+                  "description": {"type": "string"},
+                  "isActive": {"type": "boolean"}
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {"description": "Success"}
+        }
+      }
+    },
+    "/testimonials": {
+      "get": {
+        "operationId": "getAllTestimonials",
+        "summary": "Get testimonials",
+        "responses": {
+          "200": {"description": "Success"}
+        }
+      },
+      "post": {
+        "operationId": "createTestimonial",
+        "summary": "Create testimonial",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["name", "content"],
+                "properties": {
+                  "name": {"type": "string"},
+                  "company": {"type": "string"},
+                  "content": {"type": "string"},
+                  "rating": {"type": "integer"},
+                  "isPublished": {"type": "boolean"}
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {"description": "Created"}
+        }
+      }
+    },
+    "/testimonials/{id}": {
+      "put": {
+        "operationId": "updateTestimonial",
+        "summary": "Update testimonial",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {"type": "string"}
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "content": {"type": "string"},
+                  "isPublished": {"type": "boolean"}
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {"description": "Success"}
+        }
+      }
+    },
+    "/config": {
+      "get": {
+        "operationId": "getAllConfigs",
+        "summary": "Get all configs",
+        "responses": {
+          "200": {"description": "Success"}
+        }
+      }
+    },
+    "/config/{key}": {
+      "get": {
+        "operationId": "getConfig",
+        "summary": "Get config",
+        "parameters": [
+          {
+            "name": "key",
+            "in": "path",
+            "required": true,
+            "schema": {"type": "string"}
+          }
+        ],
+        "responses": {
+          "200": {"description": "Success"}
+        }
+      },
+      "put": {
+        "operationId": "updateConfig",
+        "summary": "Update config",
+        "parameters": [
+          {
+            "name": "key",
+            "in": "path",
+            "required": true,
+            "schema": {"type": "string"}
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["value"],
+                "properties": {
+                  "value": {},
+                  "type": {"type": "string"}
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {"description": "Success"}
+        }
+      }
+    },
+    "/products": {
+      "get": {
+        "operationId": "getAllProducts",
+        "summary": "Get products",
+        "responses": {
+          "200": {"description": "Success"}
+        }
+      },
+      "post": {
+        "operationId": "createProduct",
+        "summary": "Create product",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["name", "description", "price", "category"],
+                "properties": {
+                  "name": {"type": "string"},
+                  "description": {"type": "string"},
+                  "price": {"type": "number"},
+                  "category": {"type": "string"},
+                  "stock": {"type": "integer"}
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {"description": "Created"}
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {}
+  }
+}

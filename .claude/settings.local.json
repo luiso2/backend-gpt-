@@ -44,7 +44,10 @@
       "Read(//Users/josemichaelhernandezvargas/Desktop/**)",
       "Bash(cat:*)",
       "Bash(npm init:*)",
-      "Bash(lsof:*)"
+      "Bash(lsof:*)",
+      "Bash(openssl req:*)",
+      "Bash(sudo npm run dev:*)",
+      "Bash(npm ci:*)"
     ],
     "deny": []
   }

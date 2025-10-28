@@ -5,10 +5,10 @@ export const generateToken = (payload: {
   email: string;
   role: string;
 }): string => {
-  const jwtSecret = process.env.JWT_SECRET || 'your-secret-key';
-  const jwtExpire = process.env.JWT_EXPIRE || '7d';
+  const jwtSecret: string = process.env.JWT_SECRET || 'your-secret-key';
+  const jwtExpire: string = process.env.JWT_EXPIRE || '7d';
 
-  return jwt.sign(payload, jwtSecret, {
+  return jwt.sign(payload, jwtSecret as string, {
     expiresIn: jwtExpire,
   });
 };
