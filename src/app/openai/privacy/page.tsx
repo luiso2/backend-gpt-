@@ -137,6 +137,19 @@ export default function OpenAIPrivacyPage() {
                             Algoritmo
                         </Link>
                     </motion.div>
+
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.6, delay: 2.0 }}
+                    >
+                        <Link
+                            href="/openai/privacy/widget-generator"
+                            className="inline-block text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-[#B8E92D] hover:text-[#7FD858] transition-all duration-300 hover:scale-105 break-words"
+                        >
+                            Merktop Widget Generator
+                        </Link>
+                    </motion.div>
                 </div>
             </div>
         </div>
