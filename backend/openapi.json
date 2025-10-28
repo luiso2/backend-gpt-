@@ -1,24 +1,31 @@
 {
   "openapi": "3.1.0",
   "info": {
-    "title": "MERKTOP Content API",
-    "description": "Public API for managing MERKTOP website content. No authentication required.",
-    "version": "v1.0.0"
+    "title": "MERKTOP Content Management API",
+    "description": "API for managing MERKTOP website content via ChatGPT. Requires API key authentication.",
+    "version": "v2.0.0"
   },
   "servers": [
     {
       "url": "https://backend-production-835f.up.railway.app/api"
     }
   ],
+  "security": [
+    {
+      "apiKeyAuth": []
+    }
+  ],
   "paths": {
     "/pages": {
       "get": {
         "operationId": "getAllPages",
-        "summary": "Get all pages",
+        "summary": "Get all pages from the website",
+        "description": "Returns a list of all pages, optionally filtered by publication status",
         "parameters": [
           {
             "name": "isPublished",
             "in": "query",
+            "description": "Filter by publication status",
             "schema": {
               "type": "boolean"
             }
@@ -26,13 +33,36 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "List of pages retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "_id": { "type": "string" },
+                      "slug": { "type": "string" },
+                      "title": { "type": "string" },
+                      "description": { "type": "string" },
+                      "isPublished": { "type": "boolean" },
+                      "createdAt": { "type": "string" },
+                      "updatedAt": { "type": "string" }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - Invalid or missing API key"
           }
         }
       },
       "post": {
         "operationId": "createPage",
-        "summary": "Create page",
+        "summary": "Create a new page on the website",
+        "description": "Creates a new page with the specified content and metadata",
         "requestBody": {
           "required": true,
           "content": {
@@ -41,11 +71,27 @@
                 "type": "object",
                 "required": ["slug", "title"],
                 "properties": {
-                  "slug": {"type": "string"},
-                  "title": {"type": "string"},
-                  "description": {"type": "string"},
-                  "content": {"type": "object"},
-                  "isPublished": {"type": "boolean"}
+                  "slug": {
+                    "type": "string",
+                    "description": "URL-friendly identifier for the page"
+                  },
+                  "title": {
+                    "type": "string",
+                    "description": "Page title"
+                  },
+                  "description": {
+                    "type": "string",
+                    "description": "Page description for SEO"
+                  },
+                  "content": {
+                    "type": "object",
+                    "description": "Page content in structured format"
+                  },
+                  "isPublished": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Whether the page is published"
+                  }
                 }
               }
             }
@@ -53,7 +99,26 @@
         },
         "responses": {
           "201": {
-            "description": "Created"
+            "description": "Page created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "_id": { "type": "string" },
+                    "slug": { "type": "string" },
+                    "title": { "type": "string" },
+                    "message": { "type": "string" }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request - Invalid data"
+          },
+          "401": {
+            "description": "Unauthorized - Invalid or missing API key"
           }
         }
       }
@@ -61,28 +126,34 @@
     "/pages/{slug}": {
       "get": {
         "operationId": "getPageBySlug",
-        "summary": "Get page by slug",
+        "summary": "Get a specific page by its slug",
         "parameters": [
           {
             "name": "slug",
             "in": "path",
             "required": true,
-            "schema": {"type": "string"}
+            "description": "The slug identifier of the page",
+            "schema": { "type": "string" }
           }
         ],
         "responses": {
-          "200": {"description": "Success"}
+          "200": {
+            "description": "Page retrieved successfully"
+          },
+          "404": {
+            "description": "Page not found"
+          }
         }
       },
       "put": {
         "operationId": "updatePage",
-        "summary": "Update page",
+        "summary": "Update an existing page",
         "parameters": [
           {
             "name": "slug",
             "in": "path",
             "required": true,
-            "schema": {"type": "string"}
+            "schema": { "type": "string" }
           }
         ],
         "requestBody": {
@@ -92,58 +163,62 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "title": {"type": "string"},
-                  "description": {"type": "string"},
-                  "content": {"type": "object"},
-                  "isPublished": {"type": "boolean"}
+                  "title": { "type": "string" },
+                  "description": { "type": "string" },
+                  "content": { "type": "object" },
+                  "isPublished": { "type": "boolean" }
                 }
               }
             }
           }
         },
         "responses": {
-          "200": {"description": "Success"}
+          "200": { "description": "Page updated successfully" },
+          "404": { "description": "Page not found" }
         }
       },
       "delete": {
         "operationId": "deletePage",
-        "summary": "Delete page",
+        "summary": "Delete a page",
         "parameters": [
           {
             "name": "slug",
             "in": "path",
             "required": true,
-            "schema": {"type": "string"}
+            "schema": { "type": "string" }
           }
         ],
         "responses": {
-          "204": {"description": "Deleted"}
+          "204": { "description": "Page deleted successfully" },
+          "404": { "description": "Page not found" }
         }
       }
     },
     "/sections": {
       "get": {
         "operationId": "getAllSections",
-        "summary": "Get sections",
+        "summary": "Get all sections",
         "parameters": [
           {
             "name": "pageSlug",
             "in": "query",
-            "schema": {"type": "string"}
+            "description": "Filter sections by page slug",
+            "schema": { "type": "string" }
           },
           {
             "name": "isVisible",
             "in": "query",
-            "schema": {"type": "boolean"}
+            "description": "Filter by visibility status",
+            "schema": { "type": "boolean" }
           }
         ],
         "responses": {
-          "200": {"description": "Success"}
+          "200": { "description": "Sections retrieved successfully" }
         }
       },
       "post": {
         "operationId": "createSection",
-        "summary": "Create section",
+        "summary": "Create a new section",
         "requestBody": {
           "required": true,
           "content": {
@@ -152,125 +227,51 @@
                 "type": "object",
                 "required": ["pageSlug", "sectionKey", "content"],
                 "properties": {
-                  "pageSlug": {"type": "string"},
-                  "sectionKey": {"type": "string"},
-                  "title": {"type": "string"},
-                  "content": {"type": "object"},
-                  "order": {"type": "integer"},
-                  "isVisible": {"type": "boolean"}
+                  "pageSlug": { 
+                    "type": "string",
+                    "description": "The slug of the page this section belongs to"
+                  },
+                  "sectionKey": { 
+                    "type": "string",
+                    "description": "Unique identifier for the section"
+                  },
+                  "title": { "type": "string" },
+                  "content": { "type": "object" },
+                  "order": { "type": "integer" },
+                  "isVisible": { "type": "boolean", "default": true }
                 }
               }
             }
           }
         },
         "responses": {
-          "201": {"description": "Created"}
-        }
-      }
-    },
-    "/sections/{pageSlug}/{sectionKey}": {
-      "get": {
-        "operationId": "getSection",
-        "summary": "Get section",
-        "parameters": [
-          {
-            "name": "pageSlug",
-            "in": "path",
-            "required": true,
-            "schema": {"type": "string"}
-          },
-          {
-            "name": "sectionKey",
-            "in": "path",
-            "required": true,
-            "schema": {"type": "string"}
-          }
-        ],
-        "responses": {
-          "200": {"description": "Success"}
-        }
-      },
-      "put": {
-        "operationId": "updateSection",
-        "summary": "Update section",
-        "parameters": [
-          {
-            "name": "pageSlug",
-            "in": "path",
-            "required": true,
-            "schema": {"type": "string"}
-          },
-          {
-            "name": "sectionKey",
-            "in": "path",
-            "required": true,
-            "schema": {"type": "string"}
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "content": {"type": "object"},
-                  "title": {"type": "string"},
-                  "isVisible": {"type": "boolean"}
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {"description": "Success"}
-        }
-      },
-      "delete": {
-        "operationId": "deleteSection",
-        "summary": "Delete section",
-        "parameters": [
-          {
-            "name": "pageSlug",
-            "in": "path",
-            "required": true,
-            "schema": {"type": "string"}
-          },
-          {
-            "name": "sectionKey",
-            "in": "path",
-            "required": true,
-            "schema": {"type": "string"}
-          }
-        ],
-        "responses": {
-          "204": {"description": "Deleted"}
+          "201": { "description": "Section created successfully" }
         }
       }
     },
     "/portfolio": {
       "get": {
         "operationId": "getAllProjects",
-        "summary": "Get projects",
+        "summary": "Get all portfolio projects",
         "parameters": [
           {
             "name": "category",
             "in": "query",
-            "schema": {"type": "string"}
+            "schema": { "type": "string" }
           },
           {
             "name": "isFeatured",
             "in": "query",
-            "schema": {"type": "boolean"}
+            "schema": { "type": "boolean" }
           }
         ],
         "responses": {
-          "200": {"description": "Success"}
+          "200": { "description": "Projects retrieved successfully" }
         }
       },
       "post": {
         "operationId": "createProject",
-        "summary": "Create project",
+        "summary": "Create a new portfolio project",
         "requestBody": {
           "required": true,
           "content": {
@@ -279,97 +280,43 @@
                 "type": "object",
                 "required": ["title", "description", "category"],
                 "properties": {
-                  "title": {"type": "string"},
-                  "description": {"type": "string"},
-                  "category": {"type": "string"},
-                  "tags": {"type": "array", "items": {"type": "string"}},
-                  "technologies": {"type": "array", "items": {"type": "string"}},
-                  "isFeatured": {"type": "boolean"},
-                  "isPublished": {"type": "boolean"}
+                  "title": { "type": "string" },
+                  "description": { "type": "string" },
+                  "category": { 
+                    "type": "string",
+                    "enum": ["web", "mobile", "automation", "ai", "ecommerce"]
+                  },
+                  "tags": { 
+                    "type": "array", 
+                    "items": { "type": "string" }
+                  },
+                  "technologies": { 
+                    "type": "array", 
+                    "items": { "type": "string" }
+                  },
+                  "isFeatured": { "type": "boolean", "default": false },
+                  "isPublished": { "type": "boolean", "default": true }
                 }
               }
             }
           }
         },
         "responses": {
-          "201": {"description": "Created"}
-        }
-      }
-    },
-    "/portfolio/{id}": {
-      "get": {
-        "operationId": "getProject",
-        "summary": "Get project",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {"type": "string"}
-          }
-        ],
-        "responses": {
-          "200": {"description": "Success"}
-        }
-      },
-      "put": {
-        "operationId": "updateProject",
-        "summary": "Update project",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {"type": "string"}
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "title": {"type": "string"},
-                  "description": {"type": "string"},
-                  "isFeatured": {"type": "boolean"},
-                  "isPublished": {"type": "boolean"}
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {"description": "Success"}
-        }
-      },
-      "delete": {
-        "operationId": "deleteProject",
-        "summary": "Delete project",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {"type": "string"}
-          }
-        ],
-        "responses": {
-          "204": {"description": "Deleted"}
+          "201": { "description": "Project created successfully" }
         }
       }
     },
     "/services": {
       "get": {
         "operationId": "getAllServices",
-        "summary": "Get services",
+        "summary": "Get all services offered",
         "responses": {
-          "200": {"description": "Success"}
+          "200": { "description": "Services retrieved successfully" }
         }
       },
       "post": {
         "operationId": "createService",
-        "summary": "Create service",
+        "summary": "Create a new service",
         "requestBody": {
           "required": true,
           "content": {
@@ -378,63 +325,35 @@
                 "type": "object",
                 "required": ["title", "description"],
                 "properties": {
-                  "title": {"type": "string"},
-                  "description": {"type": "string"},
-                  "features": {"type": "array", "items": {"type": "string"}},
-                  "isActive": {"type": "boolean"}
+                  "title": { "type": "string" },
+                  "description": { "type": "string" },
+                  "features": { 
+                    "type": "array", 
+                    "items": { "type": "string" },
+                    "description": "List of features included in this service"
+                  },
+                  "isActive": { "type": "boolean", "default": true }
                 }
               }
             }
           }
         },
         "responses": {
-          "201": {"description": "Created"}
-        }
-      }
-    },
-    "/services/{id}": {
-      "put": {
-        "operationId": "updateService",
-        "summary": "Update service",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {"type": "string"}
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "title": {"type": "string"},
-                  "description": {"type": "string"},
-                  "isActive": {"type": "boolean"}
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {"description": "Success"}
+          "201": { "description": "Service created successfully" }
         }
       }
     },
     "/testimonials": {
       "get": {
         "operationId": "getAllTestimonials",
-        "summary": "Get testimonials",
+        "summary": "Get all client testimonials",
         "responses": {
-          "200": {"description": "Success"}
+          "200": { "description": "Testimonials retrieved successfully" }
         }
       },
       "post": {
         "operationId": "createTestimonial",
-        "summary": "Create testimonial",
+        "summary": "Create a new testimonial",
         "requestBody": {
           "required": true,
           "content": {
@@ -443,86 +362,69 @@
                 "type": "object",
                 "required": ["name", "content"],
                 "properties": {
-                  "name": {"type": "string"},
-                  "company": {"type": "string"},
-                  "content": {"type": "string"},
-                  "rating": {"type": "integer"},
-                  "isPublished": {"type": "boolean"}
+                  "name": { 
+                    "type": "string",
+                    "description": "Client's name"
+                  },
+                  "company": { 
+                    "type": "string",
+                    "description": "Client's company"
+                  },
+                  "content": { 
+                    "type": "string",
+                    "description": "Testimonial text"
+                  },
+                  "rating": { 
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 5,
+                    "description": "Rating from 1 to 5 stars"
+                  },
+                  "isPublished": { "type": "boolean", "default": true }
                 }
               }
             }
           }
         },
         "responses": {
-          "201": {"description": "Created"}
-        }
-      }
-    },
-    "/testimonials/{id}": {
-      "put": {
-        "operationId": "updateTestimonial",
-        "summary": "Update testimonial",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {"type": "string"}
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "content": {"type": "string"},
-                  "isPublished": {"type": "boolean"}
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {"description": "Success"}
+          "201": { "description": "Testimonial created successfully" }
         }
       }
     },
     "/config": {
       "get": {
         "operationId": "getAllConfigs",
-        "summary": "Get all configs",
+        "summary": "Get all configuration settings",
         "responses": {
-          "200": {"description": "Success"}
+          "200": { "description": "Configurations retrieved successfully" }
         }
       }
     },
     "/config/{key}": {
       "get": {
         "operationId": "getConfig",
-        "summary": "Get config",
+        "summary": "Get a specific configuration by key",
         "parameters": [
           {
             "name": "key",
             "in": "path",
             "required": true,
-            "schema": {"type": "string"}
+            "schema": { "type": "string" }
           }
         ],
         "responses": {
-          "200": {"description": "Success"}
+          "200": { "description": "Configuration retrieved successfully" }
         }
       },
       "put": {
         "operationId": "updateConfig",
-        "summary": "Update config",
+        "summary": "Update a configuration value",
         "parameters": [
           {
             "name": "key",
             "in": "path",
             "required": true,
-            "schema": {"type": "string"}
+            "schema": { "type": "string" }
           }
         ],
         "requestBody": {
@@ -533,54 +435,41 @@
                 "type": "object",
                 "required": ["value"],
                 "properties": {
-                  "value": {},
-                  "type": {"type": "string"}
+                  "value": {
+                    "description": "The configuration value (can be any type)"
+                  },
+                  "type": { 
+                    "type": "string",
+                    "enum": ["string", "number", "boolean", "object", "array"]
+                  }
                 }
               }
             }
           }
         },
         "responses": {
-          "200": {"description": "Success"}
-        }
-      }
-    },
-    "/products": {
-      "get": {
-        "operationId": "getAllProducts",
-        "summary": "Get products",
-        "responses": {
-          "200": {"description": "Success"}
-        }
-      },
-      "post": {
-        "operationId": "createProduct",
-        "summary": "Create product",
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "required": ["name", "description", "price", "category"],
-                "properties": {
-                  "name": {"type": "string"},
-                  "description": {"type": "string"},
-                  "price": {"type": "number"},
-                  "category": {"type": "string"},
-                  "stock": {"type": "integer"}
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "201": {"description": "Created"}
+          "200": { "description": "Configuration updated successfully" }
         }
       }
     }
   },
   "components": {
-    "schemas": {}
+    "securitySchemes": {
+      "apiKeyAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "X-API-Key",
+        "description": "API key for authentication. Use the value: mkt-gpt-2024-xK9#nR7@pL4*vK8&bT3^wZ5"
+      }
+    },
+    "schemas": {
+      "Error": {
+        "type": "object",
+        "properties": {
+          "message": { "type": "string" },
+          "code": { "type": "string" }
+        }
+      }
+    }
   }
 }

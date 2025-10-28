@@ -1,5 +1,3 @@
-import { Request } from 'express';
-
 declare global {
   namespace Express {
     interface Request {
@@ -8,6 +6,10 @@ declare global {
         email: string;
         role: string;
       };
+      isGPTRequest?: boolean;
+      requestSource?: string;
     }
   }
 }
+
+export {};

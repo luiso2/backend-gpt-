@@ -3,6 +3,15 @@ import User from '../models/User';
 import { generateToken } from '../utils/jwt';
 import { AppError } from '../middleware/errorHandler';
 
+// Extend Express Request type for user property
+interface AuthRequest extends Request {
+  user?: {
+    id: string;
+    email: string;
+    role: string;
+  };
+}
+
 export const register = async (
   req: Request,
   res: Response,
@@ -91,7 +100,7 @@ export const login = async (
 };
 
 export const getProfile = async (
-  req: Request,
+  req: AuthRequest,
   res: Response,
   next: NextFunction
 ): Promise<void> => {
